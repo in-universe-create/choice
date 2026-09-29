@@ -72,9 +72,6 @@ export default function FactionPage() {
       })}
       {!unlocked.length && <div style={{ padding: 20, border: '1px solid #eee', borderRadius: 12, color: '#888', fontSize: 13 }}>현재 선택할 수 있는 진영이 없습니다.</div>}
     </div>
-    {locked.length > 0 && <section style={{ marginTop: 24, padding: 14, border: '1px solid #eee', borderRadius: 12, background: '#fafafa' }}>
-      <strong style={{ fontSize: 13 }}>아직 해금되지 않은 진영</strong>
-      {locked.map(f => <div key={f.id} style={{ marginTop: 9, fontSize: 12, color: '#999' }}><b>{f.name}</b> · {(unlockSummary(f, story).join(', ') || '조건 미설정')}</div>)}
-    </section>}
+    {locked.length > 0}
   </main>;
 }
