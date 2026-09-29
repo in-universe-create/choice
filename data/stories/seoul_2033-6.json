@@ -92,24 +92,6 @@
         "requiredKeywords": []
       }
     },
-    {
-      "id": "faction_1790519498293",
-      "name": "새 진영",
-      "description": "",
-      "startNodeId": "node_001",
-      "startingStats": {
-        "health": 70,
-        "mental": 60,
-        "money": 500
-      },
-      "startingItems": [],
-      "startingAffection": {},
-      "npcIds": [],
-      "unlockConditions": {
-        "requiredFlags": [],
-        "requiredKeywords": []
-      }
-    }
   ],
   "npcs": [
     {
