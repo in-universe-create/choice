@@ -25,14 +25,36 @@ export default function FactionPage() {
   const router = useRouter();
 
   useEffect(() => {
+    let allowed = false;
+
+    const validateEntry = () => {
+      const isNewGame = sessionStorage.getItem('new-game') === '1';
+      const fromPlay = sessionStorage.getItem('faction-selection-return') === 'play';
+      allowed = isNewGame || fromPlay;
+
+      if (!allowed) {
+        router.replace('/play');
+        return false;
+      }
+      return true;
+    };
+
+    // /faction은 새 게임 시작 또는 게임에서 명시적으로 진영 선택을 연 경우에만 접근한다.
+    if (!validateEntry()) return;
+
     const isNewGame = sessionStorage.getItem('new-game') === '1';
     const saved = isNewGame ? null : loadPlayerState();
     const name = sessionStorage.getItem('draft-player-name');
     const id = saved?.storyId || sessionStorage.getItem('play-story-id');
-    if (!id || (!name && !saved)) { router.push('/'); return; }
+    if (!id || (!name && !saved)) { router.replace('/'); return; }
     setPlayer(saved || null);
     setRevisit(!isNewGame && !!saved?.storyId);
     loadStory(id).then(setStory);
+
+    // 브라우저 뒤로가기/앞으로가기로 bfcache에서 복원될 때도 진입 권한을 다시 검사한다.
+    const handlePageShow = () => validateEntry();
+    window.addEventListener('pageshow', handlePageShow);
+    return () => window.removeEventListener('pageshow', handlePageShow);
   }, [router]);
 
   function choose(f) {
@@ -46,6 +68,7 @@ export default function FactionPage() {
     }
     sessionStorage.removeItem('new-game');
     sessionStorage.removeItem('draft-player-name');
+    sessionStorage.removeItem('faction-selection-return');
     sessionStorage.setItem('play-story-id', story.id);
     router.push('/play');
   }
@@ -72,6 +95,9 @@ export default function FactionPage() {
       })}
       {!unlocked.length && <div style={{ padding: 20, border: '1px solid #eee', borderRadius: 12, color: '#888', fontSize: 13 }}>현재 선택할 수 있는 진영이 없습니다.</div>}
     </div>
-    {locked.length > 0}
+    {locked.length > 0 && <section style={{ marginTop: 24, padding: 14, border: '1px solid #eee', borderRadius: 12, background: '#fafafa' }}>
+      <strong style={{ fontSize: 13 }}>아직 해금되지 않은 진영</strong>
+      {locked.map(f => <div key={f.id} style={{ marginTop: 9, fontSize: 12, color: '#999' }}><b>{f.name}</b> · {(unlockSummary(f, story).join(', ') || '조건 미설정')}</div>)}
+    </section>}
   </main>;
 }
