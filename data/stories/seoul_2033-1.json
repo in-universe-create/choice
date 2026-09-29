@@ -9,7 +9,7 @@
     {
       "id": "faction_survivor",
       "name": "Signal",
-      "description": "몸속에 현대 과학으로 분석 불가한 원천을 품고 태어난 사람들",
+      "description": "",
       "startNodeId": "node_001",
       "startingStats": {
         "health": 70,
@@ -35,7 +35,7 @@
     {
       "id": "faction_scavenger",
       "name": "Grounder",
-      "description": "능력이 없는 일반인",
+      "description": "",
       "startNodeId": "node_001",
       "startingStats": {
         "health": 60,
@@ -55,7 +55,7 @@
     {
       "id": "faction_1790517792995",
       "name": "Anchor",
-      "description": "포커서의 출력을 실시간으로 조정하는 사람",
+      "description": "",
       "startNodeId": "node_001",
       "startingStats": {
         "health": 70,
