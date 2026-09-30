@@ -1094,6 +1094,9 @@
             "unlockStats": [
               "stat_oxygen"
             ],
+            "addItems": [
+              "item_oxygen"
+            ],
             "addFlags": [
               "flag_a_took_oxygen"
             ]
