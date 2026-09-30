@@ -41,7 +41,8 @@
         "money": 100
       },
       "startingItems": [
-        "item_keycard_b"
+        "item_keycard_b",
+        "item_radio"
       ],
       "startingAffection": {},
       "npcIds": [
@@ -183,7 +184,7 @@
     {
       "id": "item_radio",
       "name": "사내 무전기",
-      "description": "배터리가 무한하지 않다. 채널은 공용이다."
+      "description": "배터리 100에서 시작합니다. 무전기 관련 선택을 사용할 때마다 배터리 5가 소모됩니다. 분실하거나 배터리가 0이 되면 사용할 수 없습니다."
     },
     {
       "id": "item_keycard_b",
@@ -198,7 +199,7 @@
     {
       "id": "item_oxygen",
       "name": "휴대 산소 캐니스터",
-      "description": "오래 버티진 못한다."
+      "description": "사용하면 산소 +25. 한 번 사용하면 소모됩니다. 산소가 100을 넘지는 않습니다."
     },
     {
       "id": "item_keycard_a",
@@ -317,7 +318,14 @@
         {
           "id": "choice_pre_a04",
           "text": "무전기와 배양기 로그를 한 번 더 확인한다.",
-          "conditions": {},
+          "conditions": {
+            "requiredItems": [
+              "item_radio"
+            ],
+            "minStats": {
+              "money": 5
+            }
+          },
           "effects": {
             "randomEffects": [
               {
@@ -361,7 +369,10 @@
                   }
                 ]
               }
-            ]
+            ],
+            "stats": {
+              "money": -1
+            }
           },
           "nextNodeId": "node_a01"
         }
@@ -713,7 +724,7 @@
               "mental": 3
             }
           },
-          "nextNodeId": "node_a02"
+          "nextNodeId": "node_a01_recheck"
         }
       ],
       "position": {
@@ -736,7 +747,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\n\n배양실 안은 유난히 차갑습니다. 온도계는 정상인데도 그렇습니다.",
+          "text": "\\n\\n배양실 안은 유난히 차갑습니다. 온도계는 정상인데도 그렇습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_a_temp"
@@ -748,7 +759,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\n\n벽시계의 초침이 한 번 멈췄다가 다시 움직입니다. 배양기 로그의 빈 한 줄이 떠오릅니다.",
+          "text": "\\n\\n벽시계의 초침이 한 번 멈췄다가 다시 움직입니다. 배양기 로그의 빈 한 줄이 떠오릅니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_a_clock"
@@ -760,7 +771,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\n\n당신이 조금 전 확인해 둔 기록 한 줄이 머릿속에 남아 있습니다. 지금 보니 그 빈 시간이 이상하게 신경 쓰입니다.",
+          "text": "\\n\\n당신이 조금 전 확인해 둔 기록 한 줄이 머릿속에 남아 있습니다. 지금 보니 그 빈 시간이 이상하게 신경 쓰입니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_a_second"
@@ -770,6 +781,47 @@
           "priority": 2
         }
       ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a01_recheck",
+      "text": "당신은 배양기의 측정 절차를 다시 처음부터 밟습니다. 센서를 한 번 분리했다가 다시 연결하고, 수동 측정값과 화면의 값을 대조합니다.\n\n첫 번째 측정값과 큰 차이는 없습니다. 다만 신호가 끝난 뒤에도 수치가 평소보다 오래 남아 있습니다.\n\n당신은 결국 무전기를 집어 듭니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_a_recheck_01",
+          "text": "재측정 결과를 그대로 보고한다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_a_rechecked"
+            ]
+          },
+          "nextNodeId": "node_a02"
+        },
+        {
+          "id": "choice_a_recheck_02",
+          "text": "지속 시간이 길었다는 점을 함께 보고한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 2
+            },
+            "addFlags": [
+              "flag_a_rechecked",
+              "flag_a_recheck_duration"
+            ]
+          },
+          "nextNodeId": "node_a02"
+        }
+      ],
+      "position": {
+        "x": 0,
+        "y": -180
+      },
+      "conditionalFragments": [],
       "conditionalRoutes": []
     },
     {
@@ -790,6 +842,9 @@
             },
             "unlockStats": [
               "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_a_checked_door"
             ]
           },
           "nextNodeId": "node_a03"
@@ -797,15 +852,19 @@
         {
           "id": "choice_005",
           "text": "무전기에 대고 안에 사람이 있다고 소리친다.",
-          "conditions": {},
+          "conditions": {
+            "requiredItems": [
+              "item_radio"
+            ],
+            "minStats": {
+              "money": 5
+            }
+          },
           "effects": {
             "stats": {
-              "money": -5,
-              "stat_oxygen": 100
+              "money": -5
             },
-            "unlockStats": [
-              "stat_oxygen"
-            ],
+            "unlockStats": [],
             "addFlags": [
               "flag_a_called_out"
             ]
@@ -825,6 +884,9 @@
             },
             "unlockStats": [
               "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_a_checked_culture"
             ]
           },
           "nextNodeId": "node_a03"
@@ -834,7 +896,18 @@
         "x": 280,
         "y": 0
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "id": "radio_dead_notice",
+          "position": "append",
+          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "conditions": {
+            "maxStats": {
+              "money": 0
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -917,7 +990,8 @@
               "npc_seongpae": -3
             },
             "addFlags": [
-              "flag_a_defied"
+              "flag_a_defied",
+              "flag_a_hatch"
             ]
           },
           "nextNodeId": "node_a04"
@@ -927,7 +1001,59 @@
         "x": 560,
         "y": 0
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "출입 패드에는 손을 대자마자 잠금 해제 표시가 잠깐 떴다가 사라집니다. 화면에는 짧게 `LOCKDOWN ACTIVE`가 남습니다. 문은 열리지 않았습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_checked_door"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a03_flag_a_checked_door",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "무전기에 소리치자 몇 초 동안 아무 대답도 없습니다. 대신 관측실 채널에서 아주 짧은 숨소리 같은 잡음이 돌아옵니다. 누군가는 듣고 있는 모양입니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_called_out"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a03_flag_a_called_out",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "배양기를 다시 확인하자 유리 안쪽의 조직이 조금 전보다 벽면 가까이 붙어 있습니다. 수치보다 먼저 눈에 들어오는 변화입니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_checked_culture"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a03_flag_a_checked_culture",
+          "priority": 3
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -950,6 +1076,17 @@
             ],
             "addFlags": [
               "flag_a_contact_b"
+            ],
+            "randomEffects": [
+              {
+                "chance": 18,
+                "addFlags": [
+                  "flag_a_second_contact"
+                ],
+                "removeFlags": [],
+                "unlockStats": [],
+                "stats": {}
+              }
             ]
           },
           "nextNodeId": "node_a05"
@@ -968,6 +1105,9 @@
             ],
             "addItems": [
               "item_oxygen"
+            ],
+            "addFlags": [
+              "flag_a_canister"
             ]
           },
           "nextNodeId": "node_a05"
@@ -983,6 +1123,9 @@
             },
             "unlockStats": [
               "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_a_vent"
             ]
           },
           "nextNodeId": "node_a05"
@@ -1043,13 +1186,107 @@
           },
           "id": "node_a04_frag_3",
           "priority": 3
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "채취한 시료 튜브가 품 안에서 미세하게 떨립니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_sample"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a04_flag_a_sample",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "기록해 둔 반응이 떠오릅니다. 소리가 커질 때마다 조직의 표면이 미세하게 수축했습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_obs_culture"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a04_flag_a_obs_culture",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "비상 폐기 밸브를 연 대가 컸습니다. 방 안에는 소독약 같은 냄새와 희미한 증기가 남아 있습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_purge"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a04_flag_a_purge",
+          "priority": 3
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "정비용 해치 쪽으로 향했지만 잠금 상태입니다. 손잡이를 당겨 본 흔적만 남습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_hatch"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a04_flag_a_hatch",
+          "priority": 4
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
     },
     {
       "id": "node_a05",
-      "text": "저층 배관실. 벽 너머의 두드림은 이제 목소리가 되어 배관 속으로 울립니다.\n\n**윤서**  ······선배? 이든 선배 맞죠? 저 중층 폐기 통로에 갇혔어요. 소각동 쪽 게이트만 열리면 나갈 수 있다고 했는데, 열리는 건지 모르겠어요. 열이 좀 나요.\n\n숨소리 사이로 떨림이 느껴집니다.",
+      "text": "저층 배양실.\n\n벽 너머의 두드림은 잠시 멎었다가, 이번에는 배관 속을 타고 사람의 목소리처럼 울립니다.\n\n**윤서**  ······선배? 이든 선배 맞죠? 저 중층 폐기 통로에 갇혔어요. 소각동 쪽 게이트만 열리면 나갈 수 있다고 했는데, 열리는 건지 모르겠어요. 열이 좀 나요.\n\n숨소리 사이로 떨림이 느껴집니다.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -1104,12 +1341,96 @@
         "x": 0,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "position": "prepend",
+          "text": "캐비닛을 뒤진 뒤 숨이 더 가빠집니다. 손에 잡힌 휴대 산소 캐니스터는 아직 밀봉되어 있습니다.\\n\\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_canister"
+            ]
+          }
+        },
+        {
+          "position": "prepend",
+          "text": "환기구 쪽으로 몸을 옮긴 뒤, 배관 너머의 목소리가 조금 더 선명하게 들립니다. 환기음이 바뀌었습니다.\\n\\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_vent"
+            ]
+          }
+        },
+        {
+          "position": "prepend",
+          "text": "배관을 두드려 답한 뒤 한동안 아무 대답도 없습니다. 그리고 윤서의 목소리가 들립니다.\\n\\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_contact_b"
+            ],
+            "excludedFlags": [
+              "flag_a_second_contact"
+            ]
+          }
+        },
+        {
+          "position": "prepend",
+          "text": "배관을 두드려 답한 적이 없습니다. 그런데 당신이 멈춰 선 직후, 안쪽에서 같은 박자가 한 번 더 울립니다. 톡, 톡톡.\\n\\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_second_contact"
+            ]
+          }
+        },
+        {
+          "position": "append",
+          "text": "\\n\\n무전기를 쥐고 있다면 윤서의 마지막 문장이 끝나자 채널 표시등이 한 번 깜빡입니다.",
+          "conditions": {
+            "requiredItems": [
+              "item_radio"
+            ]
+          }
+        },
+        {
+          "position": "append",
+          "text": "\\n\\n무전기를 찾으려 손을 더듬지만, 손목에 걸린 장치가 없습니다. 배관 너머의 목소리만 남습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_radio_lost"
+            ]
+          }
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
       "id": "node_a06",
-      "text": "무전기에서 낮게 떨리는 숨소리가 섞여 나옵니다.\n\n**김대영**  ······이든이냐? 거기 몇 명이야. 다친 데는. ······아니, 그것보다 R-11 지금 상태부터 말해. 3단계 신호가 내가 아는 수치보다 왜 이렇게 높은 건데. 대체 누가 조건을 건드렸어? 젠장, 내가 승인한 적 없는—\n\n말끝이 흐려지다 끊깁니다. 채널은 열려 있습니다. 관측실도 듣고 있을 것입니다.",
+      "text": "무전기에서 낮게 떨리는 숨소리가 섞여 나옵니다.\n\n**김대영**  ······이든이냐? 거기 몇 명이야. 다친 데는. ······아니, 그것보다 R-11 지금 상태부터 말해. 3단계 신호가 내가 아는 수치보다 왜 이렇게 높은 건데. 대체 누가 조건을 건드렸어? 젠장, 내가 승인한 적 없는—\n\n말끝이 흐려지다 끊깁니다. 채널은 열려 있습니다. 관측실도 듣고 있을 것입니다.\n\n무전이 잠깐 끊깁니다. 그 순간, 배관실 안쪽에서 금속이 눌리는 소리가 납니다. 사람의 발소리보다 무겁고, 배관을 타고 가까워지는 소리입니다. 당신은 소리가 난 쪽으로 몸을 돌립니다.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -1174,7 +1495,146 @@
         "x": 280,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "방금 전 배관 너머로 나누었던 약속이 머릿속에 남습니다. 상대도 게이트에서 기다릴지 모릅니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_promise_b"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a06_flag_a_promise_b",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "당신은 서로의 생존을 우선하기로 했습니다. 배관 너머에서는 잠시 아무 소리도 들리지 않습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_split"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a06_flag_a_split",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "성패에게 도움을 청하겠다는 말이 끝나자 무전 채널이 잠깐 조용해집니다. 대답은 없습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_asked_seongpae"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a06_flag_a_asked_seongpae",
+          "priority": 3
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "배관 너머에서 윤서가 짧게 숨을 들이쉽니다.\n**윤서**  알겠어요. 게이트에서 봐요.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_promise_b"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a06_fix_4",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "잠시 정적이 흐릅니다. 윤서도 더 붙잡지 않습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_split"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a06_fix_5",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "당신이 성패를 부르려는 순간, 배관 너머의 윤서가 먼저 말합니다.\n**윤서**  성패 선임이요? ……그 사람, 여기까지 들을 수 있을까요?\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_asked_seongpae"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a06_fix_6",
+          "priority": 3
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "radio_missing_notice",
+          "position": "append",
+          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "conditions": {
+            "excludedItems": [
+              "item_radio"
+            ]
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -1211,13 +1671,38 @@
           "id": "choice_021",
           "text": "시선을 피하고 벽만 보며 다가간다.",
           "conditions": {},
-          "effects": {},
+          "effects": {
+            "addFlags": [
+              "flag_a_avoided_eye"
+            ],
+            "randomEffects": [
+              {
+                "id": "radio_loss",
+                "chance": 10,
+                "addFlags": [
+                  "flag_a_radio_lost"
+                ],
+                "removeItems": [
+                  "item_radio"
+                ],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
           "nextNodeId": "node_a08"
         },
         {
           "id": "choice_022",
           "text": "무전기로 발견 사실을 즉시 보고한다.",
-          "conditions": {},
+          "conditions": {
+            "requiredItems": [
+              "item_radio"
+            ],
+            "minStats": {
+              "money": 5
+            }
+          },
           "effects": {
             "stats": {
               "money": -5
@@ -1233,7 +1718,54 @@
         "x": 560,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "radio_dead_notice",
+          "position": "append",
+          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "conditions": {
+            "maxStats": {
+              "money": 0
+            }
+          }
+        },
+        {
+          "id": "radio_missing_notice",
+          "position": "append",
+          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "conditions": {
+            "excludedItems": [
+              "item_radio"
+            ]
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -1254,6 +1786,20 @@
             },
             "unlockStats": [
               "stat_oxygen"
+            ],
+            "randomEffects": [
+              {
+                "id": "radio_loss",
+                "chance": 8,
+                "addFlags": [
+                  "flag_a_radio_lost"
+                ],
+                "removeItems": [
+                  "item_radio"
+                ],
+                "unlockStats": [],
+                "stats": {}
+              }
             ]
           },
           "nextNodeId": "node_a09"
@@ -1293,7 +1839,14 @@
         {
           "id": "choice_026",
           "text": "무전기로 성패에게 보고하며 이동한다.",
-          "conditions": {},
+          "conditions": {
+            "requiredItems": [
+              "item_radio"
+            ],
+            "minStats": {
+              "money": 5
+            }
+          },
           "effects": {
             "stats": {
               "money": -5
@@ -1309,7 +1862,80 @@
         "x": 840,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "당신은 미완체의 시선을 끝까지 피합니다. 이상하게도 그것은 당신을 쫓지 않습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_avoided_eye"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a08_flag_a_avoided_eye",
+          "priority": 1
+        },
+        {
+          "position": "append",
+          "text": "\\n\\n손목에 걸어 두었던 무전기의 무게가 느껴지지 않습니다. 끈이 끊어진 모양입니다. 바닥을 내려다보지만, 어둠 속에서는 아무것도 보이지 않습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_radio_lost"
+            ]
+          }
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "radio_dead_notice",
+          "position": "append",
+          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "conditions": {
+            "maxStats": {
+              "money": 0
+            }
+          }
+        },
+        {
+          "id": "radio_missing_notice",
+          "position": "append",
+          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "conditions": {
+            "excludedItems": [
+              "item_radio"
+            ]
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -1450,12 +2076,39 @@
         "x": 280,
         "y": 380
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
       "id": "node_a10",
-      "text": "천장 스피커가 켜집니다.\n\n**진성패**  채 연구원. 위치와 상태. ······그리고 준비실 단말 접속 기록이 올라왔습니다. 열람 목적.",
+      "text": "천장 스피커가 켜집니다.\n\n**진성패**  채 연구원. 위치와 상태. ······그리고 준비실 단말 접속 기록이 올라왔습니다. 열람 목적.\n\n잠시 정적이 흐른 뒤, 진성패가 덧붙입니다.\n\n**진성패**  보고 확인했습니다. 준비실에 계속 머물지 마십시오. 통제 연결로를 통해 관측실 방향으로 이동하십시오.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -1557,6 +2210,32 @@
           },
           "id": "node_a10_frag_1",
           "priority": 1
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
@@ -1595,6 +2274,9 @@
             "unlockStats": [
               "stat_oxygen",
               "stat_contam"
+            ],
+            "addFlags": [
+              "flag_a_waste_route"
             ]
           },
           "nextNodeId": "node_a12"
@@ -1639,6 +2321,32 @@
           },
           "id": "node_a11_frag_2",
           "priority": 2
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
@@ -1747,34 +2455,99 @@
         "x": 0,
         "y": 570
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "통제 연결로를 택해 비교적 곧은 복도로 들어옵니다. 공기는 차갑지만 산소 경고가 한 단계 낮아집니다.\n\n",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [
+              "flag_a_waste_route"
+            ],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a12_fix_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "폐기 경로로 우회한 대가로 열기가 먼저 밀려옵니다. 소각동 외곽을 돌아 같은 3번 게이트 측면으로 합류하지만, 숨이 더 거칠어집니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_waste_route"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a12_fix_2",
+          "priority": 2
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
       "id": "node_a13",
-      "text": "잠금 장치가 움직이기까지 걸리는 몇 초가 몇 분처럼 흐릅니다. 귀에서 피가 도는 소리만 들립니다.",
+      "text": "잠금 장치가 움직이기까지 걸리는 몇 초가 몇 분처럼 흐릅니다. 귀에서 피가 도는 소리만 들립니다.\n\n손잡이에 손을 대자 차가운 진동이 손바닥으로 올라옵니다. 잠금이 풀리는 소리는 아직 없습니다.",
       "bgm": {
         "youtubeUrl": ""
       },
       "choices": [
         {
           "id": "choice_042",
-          "text": "……",
+          "text": "문 앞에서 잠시 기다린다.",
           "conditions": {
             "requiredFlags": [
               "flag_a_survive"
-            ]
+            ],
+            "minStats": {
+              "stat_oxygen": 1
+            }
           },
           "effects": {
             "addFlags": [
-              "flag_run1_done"
+              "flag_run1_done",
+              "flag_a_waited"
             ]
           },
           "nextNodeId": "node_a14"
         },
         {
           "id": "choice_043",
-          "text": "……",
+          "text": "문 손잡이를 한 번 돌려 본다.",
           "conditions": {
             "excludedFlags": [
               "flag_a_survive"
@@ -1782,7 +2555,8 @@
           },
           "effects": {
             "addFlags": [
-              "flag_run1_done"
+              "flag_run1_done",
+              "flag_a_checked_handle"
             ]
           },
           "nextNodeId": "node_a15"
@@ -1910,7 +2684,8 @@
               "npc_seongpae": 2
             },
             "addFlags": [
-              "flag_b_lotcheck"
+              "flag_b_lotcheck",
+              "flag_b_checked_labels"
             ]
           },
           "nextNodeId": "node_b02"
@@ -1919,7 +2694,11 @@
           "id": "choice_045",
           "text": "“네.”",
           "conditions": {},
-          "effects": {},
+          "effects": {
+            "addFlags": [
+              "flag_b_agreed"
+            ]
+          },
           "nextNodeId": "node_b02"
         },
         {
@@ -1929,7 +2708,10 @@
           "effects": {
             "affection": {
               "npc_seongpae": -3
-            }
+            },
+            "addFlags": [
+              "flag_b_rushed"
+            ]
           },
           "nextNodeId": "node_b02"
         }
@@ -1942,7 +2724,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\n\n스캐너 화면이 다시 한 번 깜빡입니다. 이번에는 숫자를 세지 않았는데도 12가 찍혔다가 11로 돌아옵니다.",
+          "text": "\\n\\n스캐너 화면이 다시 한 번 깜빡입니다. 이번에는 숫자를 세지 않았는데도 12가 찍혔다가 11로 돌아옵니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_scan"
@@ -1954,7 +2736,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\n\n카트 위 밀폐 상자 중 하나에서 미세한 온기가 느껴집니다. 폐기물실의 온도는 평소와 같습니다.",
+          "text": "\\n\\n카트 위 밀폐 상자 중 하나에서 미세한 온기가 느껴집니다. 폐기물실의 온도는 평소와 같습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_box"
@@ -1966,7 +2748,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\n\n복도 끝 자동문이 닫힌 뒤에도 센서등 하나가 한동안 켜져 있습니다.",
+          "text": "\\n\\n복도 끝 자동문이 닫힌 뒤에도 센서등 하나가 한동안 켜져 있습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_light"
@@ -1978,7 +2760,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\n\n조금 전 저장해 둔 화면 캡처가 떠오릅니다. 다시 생각해 보면, 단순한 스캐너 오류치고는 이상합니다.",
+          "text": "\\n\\n조금 전 저장해 둔 화면 캡처가 떠오릅니다. 다시 생각해 보면, 단순한 스캐너 오류치고는 이상합니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_second"
@@ -2008,6 +2790,9 @@
             },
             "unlockStats": [
               "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_b_knocked"
             ]
           },
           "nextNodeId": "node_b03"
@@ -2023,6 +2808,9 @@
             },
             "unlockStats": [
               "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_b_reported"
             ]
           },
           "nextNodeId": "node_b03"
@@ -2038,6 +2826,9 @@
             },
             "unlockStats": [
               "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_b_hid"
             ]
           },
           "nextNodeId": "node_b03"
@@ -2047,12 +2838,64 @@
         "x": 1680,
         "y": 0
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "라벨을 하나씩 대조하는 동안 한 상자의 봉인 번호가 목록과 아주 조금 다릅니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_checked_labels"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b02_flag_b_checked_labels",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "대답만 하고 넘어갑니다. 뒤에서 카트의 바퀴 하나가 짧게 삐걱거립니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_agreed"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b02_flag_b_agreed",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "대조를 건너뛰고 카트를 밀자 뒤쪽 상자 하나가 다른 상자와 부딪혀 둔탁한 소리를 냅니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_rushed"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b02_flag_b_rushed",
+          "priority": 3
+        }
+      ],
       "conditionalRoutes": []
     },
     {
       "id": "node_b03",
-      "text": "셔터 옆 배관에서 톡, 톡톡 소리가 납니다. 당신도 모르게 귀를 갖다 댑니다.",
+      "text": "셔터 옆 배관에서 톡, 톡톡 소리가 납니다. 당신도 모르게 귀를 갖다 댑니다.\n\n셔터는 열리지 않습니다. 소각동 쪽 문만 붉게 켜져 있습니다. 당신은 결국 그 방향으로 몸을 돌립니다.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -2078,7 +2921,10 @@
           "effects": {
             "stats": {
               "money": -5
-            }
+            },
+            "addFlags": [
+              "flag_b_reported_again"
+            ]
           },
           "nextNodeId": "node_b04"
         },
@@ -2092,6 +2938,9 @@
             },
             "unlockStats": [
               "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_b_moved_incinerator"
             ]
           },
           "nextNodeId": "node_b04"
@@ -2171,13 +3020,64 @@
           },
           "id": "node_b03_frag_4",
           "priority": 4
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "셔터를 두드리자 안쪽에서 한 번, 당신이 두드린 것과 똑같은 간격으로 소리가 돌아옵니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_knocked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b03_flag_b_knocked",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "스피커로 보고하자 응답 대신 전기 잡음이 먼저 돌아옵니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_reported"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b03_flag_b_reported",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "카트 뒤에 몸을 숨기자 시야 아래쪽으로 무언가가 지나가는 그림자가 보입니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_hid"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b03_flag_b_hid",
+          "priority": 3
         }
       ],
       "conditionalRoutes": []
     },
     {
       "id": "node_b04",
-      "text": "소각동 방향 복도에서 카트 상자 하나의 이음새가 벌어집니다. 안쪽에서 반투명한 결절 덩어리가 맥동합니다. 젖은 심장처럼 일정한 박자로. 결절 표면 아래에 무언가 접혀 있습니다. 손가락 마디 같은.\n\n**진성패**  결절 한 점 채취하십시오. 이송 경로는 관제 소관. ······윤 연구원, 손 떨지 말고.",
+      "text": "소각동 방향 복도.\n\n셔터 쪽에서 물러나 몇 걸음 옮기는 순간, 카트 위 상자 하나의 이음새가 벌어집니다. 안쪽에서 반투명한 결절 덩어리가 맥동합니다. 젖은 심장처럼 일정한 박자로. 결절 표면 아래에 무언가 접혀 있습니다. 손가락 마디 같은.\n\n**진성패**  결절 한 점 채취하십시오. 이송 경로는 관제 소관. ······윤 연구원, 손 떨지 말고.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -2287,13 +3187,90 @@
           },
           "id": "node_b04_frag_1",
           "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "배관 너머에서 당신의 두드림과 비슷한 리듬이 다시 들립니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_answered"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b04_flag_b_answered",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "스피커는 잠깐 켜졌다가 꺼집니다. 누군가 채널을 열었다 닫은 것 같습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_reported_again"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b04_flag_b_reported_again",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "소각동 쪽으로 움직이자 자동문 센서가 당신보다 먼저 반응합니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_moved_incinerator"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b04_flag_b_moved_incinerator",
+          "priority": 3
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
     },
     {
       "id": "node_b05",
-      "text": "무전기가 거칠게 울립니다.\n\n**김대영**  ······윤서야? 살아 있냐. 거기 폐기 통로지. 폐기 로트에 3단계 시료 섞였는지 확인했어? ······누가 내 승인 없이 로트를 돌렸어. 젠장. 아는 대로 말해.\n\n채널은 열려 있습니다. 관측실도 듣고 있을 것입니다.",
+      "text": "무전기가 거칠게 울립니다.\n\n**김대영**  ······윤서야? 살아 있냐. 거기 폐기 통로지. 폐기 로트에 3단계 시료 섞였는지 확인했어? ······누가 내 승인 없이 로트를 돌렸어. 젠장. 아는 대로 말해.\n\n채널은 열려 있습니다. 관측실도 듣고 있을 것입니다.\n\n무전이 끊긴 뒤, 복도 끝의 폐기 관리 단말에서 화면이 한 번 깜빡입니다. 당신은 그쪽으로 시선을 돌립니다.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -2352,7 +3329,34 @@
         "x": 1400,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -2381,7 +3385,8 @@
               "item_log_del"
             ],
             "addFlags": [
-              "flag_b_log"
+              "flag_b_log",
+              "flag_b_read_log"
             ]
           },
           "nextNodeId": "node_b07"
@@ -2396,6 +3401,9 @@
             },
             "unlockStats": [
               "stat_insight"
+            ],
+            "addFlags": [
+              "flag_b_checked_disposal"
             ]
           },
           "nextNodeId": "node_b07"
@@ -2404,7 +3412,11 @@
           "id": "choice_062",
           "text": "화면을 외면하고 앞으로 간다.",
           "conditions": {},
-          "effects": {},
+          "effects": {
+            "addFlags": [
+              "flag_b_ignored_terminal"
+            ]
+          },
           "nextNodeId": "node_b07"
         },
         {
@@ -2420,6 +3432,9 @@
             ],
             "addItems": [
               "item_oxygen"
+            ],
+            "addFlags": [
+              "flag_b_searched_oxygen"
             ]
           },
           "nextNodeId": "node_b07"
@@ -2429,7 +3444,34 @@
         "x": 1680,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -2466,7 +3508,22 @@
           "id": "choice_065",
           "text": "카트 뒤로 몸을 숙인 채 이동한다.",
           "conditions": {},
-          "effects": {},
+          "effects": {
+            "randomEffects": [
+              {
+                "id": "radio_loss",
+                "chance": 10,
+                "addFlags": [
+                  "flag_b_radio_lost"
+                ],
+                "removeItems": [
+                  "item_radio"
+                ],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
           "nextNodeId": "node_b08"
         },
         {
@@ -2485,7 +3542,111 @@
         "x": 1960,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "사진을 남긴 로그의 마지막 줄이 계속 머릿속에 남습니다. **DEL-0713 — 24시간 후 실행.** 화면을 닫았는데도 글자가 눈앞에 남아 있는 것 같습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_read_log"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b07_fix_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "폐기 내역만 확인했지만, 마지막 줄의 **관측실 이송**이라는 문구가 이상하게 눈에 걸립니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_checked_disposal"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b07_fix_2",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "단말을 외면하고 앞으로 나아갑니다. 뒤에서 화면이 혼자 한 번 꺼졌다 켜집니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_ignored_terminal"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b07_fix_3",
+          "priority": 3
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "산소 캐니스터를 찾는 동안 걸음이 늦어졌습니다. 손에 잡힌 것은 비어 있는 통뿐입니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_searched_oxygen"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b07_fix_4",
+          "priority": 4
+        },
+        {
+          "position": "append",
+          "text": "\\n\\n허리 쪽에서 무전기가 부딪히는 소리가 한 번 납니다. 그 뒤로 아무 소리도 나지 않습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_radio_lost"
+            ]
+          }
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -2568,7 +3729,34 @@
         "x": 2240,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -2645,7 +3833,7 @@
     },
     {
       "id": "node_b09",
-      "text": "통로 끝, 천장 배관에 또 다른 붉은 조직이 감겨 있습니다. 바닥에는 누군가 떨어뜨린 출입증이 놓여 있습니다.",
+      "text": "통로 끝, 천장 배관에 또 다른 붉은 조직이 감겨 있습니다. 바닥에는 누군가 떨어뜨린 출입증이 놓여 있습니다.\n\n그때 배관 안쪽에서 목소리가 들립니다.\n\n**??**  ······윤서 씨?\n\n당신을 부르는 목소리입니다. 그런데 목소리가 너무 늦게 따라옵니다. 마치 방금 전에 당신이 한 말을 듣고서야 흉내 내는 것처럼.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -2675,7 +3863,21 @@
           "effects": {
             "stats": {
               "mental": -5
-            }
+            },
+            "randomEffects": [
+              {
+                "id": "radio_loss",
+                "chance": 7,
+                "addFlags": [
+                  "flag_b_radio_lost"
+                ],
+                "removeItems": [
+                  "item_radio"
+                ],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
           },
           "nextNodeId": "node_b10"
         },
@@ -2746,13 +3948,48 @@
           },
           "id": "node_b09_frag_3",
           "priority": 3
+        },
+        {
+          "position": "append",
+          "text": "\\n\\n무전기를 확인하려 손을 가져가지만, 손에 잡히는 것은 끊어진 끈뿐입니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_radio_lost"
+            ]
+          }
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
     },
     {
       "id": "node_b10",
-      "text": "스피커가 켜집니다.\n\n**진성패**  윤 연구원. 위치와 상태 보고하십시오. 결절 접촉 이후 체온 변화, 있으면 시간 단위로.",
+      "text": "스피커가 켜집니다.\n\n**진성패**  윤 연구원. 위치와 상태 보고하십시오. 결절 접촉 이후 체온 변화, 있으면 시간 단위로. ······그리고 폐기 관리 단말에 접속했습니까? 열람했다면 목적도 말하십시오.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -2876,13 +4113,49 @@
           },
           "id": "node_b10_frag_2",
           "priority": 2
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "radio_missing_notice",
+          "position": "append",
+          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "conditions": {
+            "excludedItems": [
+              "item_radio"
+            ]
+          }
         }
       ],
       "conditionalRoutes": []
     },
     {
       "id": "node_b11",
-      "text": "소각동으로 이어지는 마지막 복도. 벽 곳곳에서 사람만 한 형상이 돋아 있습니다. 젖은 피막이 어깨와 팔의 모양으로 굳어 가다 만 것들. 얼굴 자리는 비어 있습니다. 그중 몇몇은 당신의 걸음에 맞춰 아주 조금씩 고개를 기울입니다. 이것들은 개체가 아니라 아직 개체가 되지 못한 것들입니다. 밟는 바닥은 젖은 살처럼 미끈합니다.",
+      "text": "소각동으로 이어지는 마지막 복도. 벽 곳곳에서 사람만 한 형상이 돋아 있습니다. 젖은 피막이 어깨와 팔의 모양으로 굳어 가다 만 것들. 얼굴 자리는 비어 있습니다. 그중 몇몇은 당신의 걸음에 맞춰 아주 조금씩 고개를 기울입니다. 이것들은 개체가 아니라 아직 개체가 되지 못한 것들입니다. 밟는 바닥은 젖은 살처럼 미끈합니다.\n\n형상들이 늘어선 복도의 끝에서 소각동 게이트의 붉은 표시등이 보입니다. 당신은 그쪽으로 향합니다.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -2973,6 +4246,32 @@
           },
           "id": "node_b11_frag_2",
           "priority": 2
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
@@ -3012,7 +4311,7 @@
         },
         {
           "id": "choice_084",
-          "text": "스피커를 올려다본다.",
+          "text": "시선을 내리고 지나간다.",
           "conditions": {
             "minStats": {
               "stat_oxygen": 20
@@ -3041,7 +4340,7 @@
         },
         {
           "id": "choice_085",
-          "text": "스피커를 올려다본다.",
+          "text": "스피커를 올려다보지 않는다.",
           "conditions": {
             "minStats": {
               "stat_oxygen": 20
@@ -3081,7 +4380,85 @@
         "x": 1400,
         "y": 570
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "스피커를 올려다보자 잡음이 한 박자 늦게 멈춥니다. 카메라가 있는 방향과 정확히 겹칩니다.\n\n",
+          "conditions": {
+            "requiredChoices": [
+              "choice_083"
+            ],
+            "excludedFlags": [],
+            "requiredFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "excludedChoices": []
+          },
+          "id": "node_b12_fix_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "시선을 내리고 지나가려 하자 스피커에서 당신의 발걸음이 한 번 더 재생됩니다.\n\n",
+          "conditions": {
+            "requiredChoices": [
+              "choice_084"
+            ],
+            "excludedFlags": [],
+            "requiredFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "excludedChoices": []
+          },
+          "id": "node_b12_fix_2",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "스피커를 보지 않으려 했지만, 유리문에 비친 반사면에서 붉은 점이 당신을 따라 움직이는 것이 보입니다.\n\n",
+          "conditions": {
+            "requiredChoices": [
+              "choice_085"
+            ],
+            "excludedFlags": [],
+            "requiredFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "excludedChoices": []
+          },
+          "id": "node_b12_fix_3",
+          "priority": 3
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -3093,11 +4470,14 @@
       "choices": [
         {
           "id": "choice_087",
-          "text": "……",
+          "text": "게이트가 열리기를 기다린다.",
           "conditions": {
             "requiredFlags": [
               "flag_b_survive"
-            ]
+            ],
+            "minStats": {
+              "stat_oxygen": 1
+            }
           },
           "effects": {
             "addFlags": [
@@ -3108,7 +4488,7 @@
         },
         {
           "id": "choice_088",
-          "text": "……",
+          "text": "잠금 해제음을 확인하며 기다린다.",
           "conditions": {
             "excludedFlags": [
               "flag_b_survive"
@@ -3223,7 +4603,8 @@
           "conditions": {},
           "effects": {
             "addFlags": [
-              "flag_d_trusted"
+              "flag_d_trusted",
+              "flag_d_delegated"
             ]
           },
           "nextNodeId": "node_d02"
@@ -3240,7 +4621,8 @@
               "stat_insight"
             ],
             "addFlags": [
-              "flag_d_checked"
+              "flag_d_checked",
+              "flag_d_checked_graph"
             ]
           },
           "nextNodeId": "node_d02"
@@ -3329,7 +4711,8 @@
               "mental": -5
             },
             "addFlags": [
-              "flag_d_protest"
+              "flag_d_protest",
+              "flag_d_report_people"
             ]
           },
           "nextNodeId": "node_d03"
@@ -3340,7 +4723,8 @@
           "conditions": {},
           "effects": {
             "addFlags": [
-              "flag_d_delay"
+              "flag_d_delay",
+              "flag_d_recheck_time"
             ]
           },
           "nextNodeId": "node_d03"
@@ -3354,7 +4738,8 @@
               "mental": -10
             },
             "addFlags": [
-              "flag_d_obey"
+              "flag_d_obey",
+              "flag_d_ack"
             ]
           },
           "nextNodeId": "node_d03"
@@ -3364,7 +4749,59 @@
         "x": 3080,
         "y": 0
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "당신은 직접 확인하지 않고 판단을 넘깁니다. 그 말이 끝나자 무전기 너머에서 짧은 침묵이 흐릅니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_delegated"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d02_flag_d_delegated",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "그래프를 직접 확인하자 기준선 아래로 아주 짧은 꺾임이 보입니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_checked_graph"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d02_flag_d_checked_graph",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "임원 핫라인을 열자 연결음만 길게 울립니다. 응답은 없습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_hotline"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d02_flag_d_hotline",
+          "priority": 3
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -3377,15 +4814,20 @@
         {
           "id": "choice_095",
           "text": "LAB-B 전원에게 무전으로 알린다.",
-          "conditions": {},
+          "conditions": {
+            "requiredItems": [
+              "item_radio"
+            ],
+            "minStats": {
+              "money": 5
+            }
+          },
           "effects": {
             "stats": {
               "mental": -10,
-              "stat_oxygen": 100
+              "money": -5
             },
-            "unlockStats": [
-              "stat_oxygen"
-            ],
+            "unlockStats": [],
             "addItems": [
               "item_recording"
             ],
@@ -3398,14 +4840,12 @@
         {
           "id": "choice_096",
           "text": "무전을 끄고 로그부터 확인한다.",
-          "conditions": {},
+          "conditions": {
+            "requiredItems": []
+          },
           "effects": {
-            "stats": {
-              "stat_oxygen": 100
-            },
-            "unlockStats": [
-              "stat_oxygen"
-            ],
+            "stats": {},
+            "unlockStats": [],
             "addFlags": [
               "flag_d_silent"
             ]
@@ -3423,6 +4863,9 @@
             },
             "unlockStats": [
               "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_d_frozen"
             ]
           },
           "nextNodeId": "node_d04"
@@ -3449,6 +4892,57 @@
           },
           "id": "node_d03_frag_1",
           "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "사람이 있다고 알리자 무전 채널 전체에 잠깐 정적이 흐릅니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_report_people"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d03_flag_d_report_people",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "인원 재확인 시간을 요구하자 출입 로그가 한 줄 갱신됩니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_recheck_time"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d03_flag_d_recheck_time",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "짧게 알겠다고 답합니다. 그 순간 스피커에서 낮은 전기 잡음이 한 번 납니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_ack"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d03_flag_d_ack",
+          "priority": 3
         }
       ],
       "conditionalRoutes": []
@@ -3469,7 +4963,8 @@
               "item_log_copy"
             ],
             "addFlags": [
-              "flag_d_log"
+              "flag_d_log",
+              "flag_d_saved_log"
             ]
           },
           "nextNodeId": "node_d05"
@@ -3487,7 +4982,8 @@
               "stat_insight"
             ],
             "addFlags": [
-              "flag_d_del"
+              "flag_d_del",
+              "flag_d_searched_logs"
             ]
           },
           "nextNodeId": "node_d05"
@@ -3499,7 +4995,10 @@
           "effects": {
             "stats": {
               "mental": 5
-            }
+            },
+            "addFlags": [
+              "flag_d_closed_screen"
+            ]
           },
           "nextNodeId": "node_d05"
         }
@@ -3542,6 +5041,83 @@
           },
           "id": "node_d04_frag_2",
           "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "무전으로 전원을 알린 뒤, 스피커에 자신의 목소리가 짧게 되돌아옵니다. 누군가 이미 녹음하고 있던 것처럼.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_announced"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d04_fix_3",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "무전을 끄자 통제실은 지나치게 조용해집니다. 로그 화면의 커서만 혼자 깜빡입니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_silent"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d04_fix_4",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "입을 열지 못한 채 서 있는 동안, 무전기에서 당신이 말하지 않은 한숨 소리가 한 번 들립니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_frozen"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d04_fix_5",
+          "priority": 3
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
@@ -3626,7 +5202,85 @@
         "x": 2800,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "복사해 둔 로그 파일의 생성 시간이 이상하게 최근으로 찍혀 있습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_saved_log"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d05_flag_d_saved_log",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "다른 로그까지 뒤지자 봉쇄 예약과 관련된 접근 기록 하나가 눈에 들어옵니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_searched_logs"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d05_flag_d_searched_logs",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "화면을 닫고 숨을 고르는 동안 통제실 스피커에서 짧은 잡음이 납니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_closed_screen"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d05_flag_d_closed_screen",
+          "priority": 3
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -3716,6 +5370,32 @@
           },
           "id": "node_d06_frag_4",
           "priority": 4
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
@@ -3734,7 +5414,10 @@
           "effects": {
             "stats": {
               "mental": -5
-            }
+            },
+            "addFlags": [
+              "flag_d_remote_gate"
+            ]
           },
           "nextNodeId": "node_d08"
         },
@@ -3742,7 +5425,11 @@
           "id": "choice_107",
           "text": "화면을 녹화한다.",
           "conditions": {},
-          "effects": {},
+          "effects": {
+            "addFlags": [
+              "flag_d_recorded_cctv"
+            ]
+          },
           "nextNodeId": "node_d08"
         },
         {
@@ -3755,6 +5442,9 @@
             },
             "unlockStats": [
               "stat_insight"
+            ],
+            "addFlags": [
+              "flag_d_server_search"
             ]
           },
           "nextNodeId": "node_d08"
@@ -3849,6 +5539,32 @@
           },
           "id": "node_d07_frag_5",
           "priority": 5
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
@@ -3922,7 +5638,85 @@
         "x": 3640,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "원격 개방 명령을 보내자 화면에 **권한 없음**이 뜹니다. 바로 다음 순간, 게이트 카메라가 잠깐 켜졌다 꺼집니다. 당신은 결국 서버 단말로 시선을 돌립니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_remote_gate"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d08_fix_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "CCTV 녹화를 시작합니다. 파일명이 생성되는 순간, 녹화 화면의 타임코드가 실제 시각보다 11초 늦어집니다. 당신은 기록을 남긴 뒤 서버 폴더를 엽니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_recorded_cctv"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d08_fix_2",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "CCTV에서 눈을 돌리고 곧바로 서버 단말 깊은 폴더를 뒤집니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_server_search"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d08_fix_3",
+          "priority": 3
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -4013,6 +5807,32 @@
           },
           "id": "node_d09_frag_2",
           "priority": 2
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
@@ -4069,7 +5889,34 @@
         "x": 3080,
         "y": 380
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -4125,6 +5972,20 @@
             },
             "addFlags": [
               "flag_d_noticed_run"
+            ],
+            "randomEffects": [
+              {
+                "id": "radio_loss",
+                "chance": 10,
+                "addFlags": [
+                  "flag_d_radio_lost"
+                ],
+                "removeItems": [
+                  "item_radio"
+                ],
+                "unlockStats": [],
+                "stats": {}
+              }
             ]
           },
           "nextNodeId": "node_d11x"
@@ -4132,7 +5993,14 @@
         {
           "id": "choice_121",
           "text": "무전기로 성패를 호출한다.",
-          "conditions": {},
+          "conditions": {
+            "requiredItems": [
+              "item_radio"
+            ],
+            "minStats": {
+              "money": 5
+            }
+          },
           "effects": {
             "stats": {
               "money": -5
@@ -4148,7 +6016,54 @@
         "x": 3360,
         "y": 380
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "radio_dead_notice",
+          "position": "append",
+          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "conditions": {
+            "maxStats": {
+              "money": 0
+            }
+          }
+        },
+        {
+          "id": "radio_missing_notice",
+          "position": "append",
+          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "conditions": {
+            "excludedItems": [
+              "item_radio"
+            ]
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -4250,13 +6165,22 @@
         {
           "id": "choice_123",
           "text": "로그와 무전 음성을 외부로 전송한다.",
-          "conditions": {},
+          "conditions": {
+            "requiredItems": [
+              "item_radio"
+            ],
+            "minStats": {
+              "money": 5
+            }
+          },
           "effects": {
             "stats": {
-              "mental": -5
+              "mental": -5,
+              "money": -5
             },
             "addFlags": [
-              "flag_d_leak"
+              "flag_d_leak",
+              "flag_d_leak_seen"
             ]
           },
           "nextNodeId": "node_d13"
@@ -4267,7 +6191,8 @@
           "conditions": {},
           "effects": {
             "addFlags": [
-              "flag_d_delay_del"
+              "flag_d_delay_del",
+              "flag_d_delay_seen"
             ]
           },
           "nextNodeId": "node_d13"
@@ -4284,7 +6209,8 @@
               "stat_oxygen"
             ],
             "addFlags": [
-              "flag_d_restore"
+              "flag_d_restore",
+              "flag_d_restore_seen"
             ]
           },
           "nextNodeId": "node_d13"
@@ -4294,7 +6220,63 @@
         "x": 2800,
         "y": 570
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "position": "append",
+          "text": "\\n\\n무전기를 확인하려는 순간, 손에 잡히는 것은 빈 고리뿐입니다. 언제 떨어뜨렸는지 기억나지 않습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_radio_lost"
+            ]
+          }
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "radio_dead_notice",
+          "position": "append",
+          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "conditions": {
+            "maxStats": {
+              "money": 0
+            }
+          }
+        },
+        {
+          "id": "radio_missing_notice",
+          "position": "append",
+          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "conditions": {
+            "excludedItems": [
+              "item_radio"
+            ]
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -4330,6 +6312,23 @@
             "unlockStats": [
               "stat_oxygen",
               "stat_contam"
+            ],
+            "addFlags": [
+              "flag_d_masked"
+            ],
+            "randomEffects": [
+              {
+                "id": "radio_loss",
+                "chance": 8,
+                "addFlags": [
+                  "flag_d_radio_lost"
+                ],
+                "removeItems": [
+                  "item_radio"
+                ],
+                "unlockStats": [],
+                "stats": {}
+              }
             ]
           },
           "nextNodeId": "node_d14"
@@ -4346,6 +6345,9 @@
             "unlockStats": [
               "stat_oxygen",
               "stat_contam"
+            ],
+            "addFlags": [
+              "flag_d_blocked_vent"
             ]
           },
           "nextNodeId": "node_d14"
@@ -4407,6 +6409,92 @@
           },
           "id": "node_d13_frag_3",
           "priority": 3
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "전송 진행률이 3%에서 멈춥니다. 외부 회선은 살아 있지만, 수신처가 비어 있습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_leak_seen"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d13_fix_4",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "삭제 예약을 늦추자 화면의 실행 시각이 한 번 뒤로 밀렸다가 원래 시각으로 돌아옵니다. 누군가 다시 덮어쓴 것 같습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_delay_seen"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d13_fix_5",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "복원한 원본 파일에는 방금 전까지 없던 음성 파일 하나가 함께 생성되어 있습니다. 파일명은 당신의 이름입니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_restore_seen"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d13_fix_6",
+          "priority": 3
+        },
+        {
+          "position": "append",
+          "text": "\\n\\n무전기가 사라졌다는 사실이 뒤늦게 실감납니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_radio_lost"
+            ]
+          }
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
         }
       ],
       "conditionalRoutes": []
@@ -4440,16 +6528,19 @@
                 "unlockStats": [],
                 "stats": {}
               }
+            ],
+            "addFlags": [
+              "flag_d_knocked"
             ]
           },
           "nextNodeId": "node_d15"
         },
         {
           "id": "choice_130",
-          "text": "문을 두드린다.",
+          "text": "문에 손을 대고 기다린다.",
           "conditions": {
             "minStats": {
-              "stat_oxygen": 20
+              "stat_oxygen": 1
             },
             "minAffection": {
               "npc_seongpae": 7
@@ -4469,20 +6560,23 @@
                 "unlockStats": [],
                 "stats": {}
               }
+            ],
+            "addFlags": [
+              "flag_d_touched_door"
             ]
           },
           "nextNodeId": "node_d15"
         },
         {
           "id": "choice_131",
-          "text": "문을 두드린다.",
+          "text": "무전기를 든 채 문 앞에 선다.",
           "conditions": {
-            "minStats": {
-              "stat_oxygen": 20
-            },
             "maxAffection": {
               "npc_seongpae": 6
-            }
+            },
+            "requiredItems": [
+              "item_radio"
+            ]
           },
           "effects": {
             "randomEffects": [
@@ -4495,7 +6589,11 @@
                 "unlockStats": [],
                 "stats": {}
               }
-            ]
+            ],
+            "addFlags": [
+              "flag_d_waited_radio"
+            ],
+            "stats": {}
           },
           "nextNodeId": "node_d15"
         },
@@ -4515,7 +6613,85 @@
         "x": 3360,
         "y": 570
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "성패에게 문을 열어 달라고 부탁했지만, 문 너머에서는 대답 대신 무전기 잡음만 들립니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_begged"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d14_fix_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "마스크 안쪽으로 숨을 고릅니다. 문틈의 그림자가 잠깐 멈춥니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_masked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d14_fix_2",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "통풍구를 막은 뒤 문 앞까지 이동합니다. 실내의 웅웅거림이 한층 낮아집니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_blocked_vent"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d14_fix_3",
+          "priority": 3
+        },
+        {
+          "id": "oxygen_low",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 20
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        },
+        {
+          "id": "oxygen_critical",
+          "position": "append",
+          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 10
+            },
+            "minStats": {
+              "stat_oxygen": 1
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -4527,7 +6703,7 @@
       "choices": [
         {
           "id": "choice_133",
-          "text": "……",
+          "text": "문이 열리기를 기다린다.",
           "conditions": {
             "requiredFlags": [
               "flag_d_survive"
@@ -4542,16 +6718,18 @@
         },
         {
           "id": "choice_134",
-          "text": "……",
+          "text": "무전기 소리가 멎기를 기다린다.",
           "conditions": {
             "excludedFlags": [
               "flag_d_survive"
-            ]
+            ],
+            "requiredItems": []
           },
           "effects": {
             "addFlags": [
               "flag_run3_done"
-            ]
+            ],
+            "stats": {}
           },
           "nextNodeId": "node_d17"
         }
@@ -4560,7 +6738,120 @@
         "x": 3640,
         "y": 570
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "문을 두드린 뒤 안쪽에서 똑같은 횟수로 두드리는 소리가 돌아옵니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_knocked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d15_flag_d_knocked",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "문에 손을 대고 기다리자 손바닥 너머로 아주 약한 진동이 느껴집니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_touched_door"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d15_flag_d_touched_door",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "무전기를 든 채 기다리자 수신 표시등이 켜지지만 아무도 말하지 않습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_waited_radio"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d15_flag_d_waited_radio",
+          "priority": 3
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "문을 두드린 뒤 안쪽에서 똑같은 횟수의 두드림이 돌아옵니다. 마지막 한 번만 늦습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_knocked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d15_fix_4",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "문에 손을 대자 반대편에서 손바닥을 대는 듯한 미세한 진동이 느껴집니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_touched_door"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d15_fix_5",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "무전기를 든 채 기다리자 스피커에서 당신 자신의 목소리로 이름이 한 번 호출됩니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_waited_radio"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d15_fix_6",
+          "priority": 3
+        },
+        {
+          "id": "radio_dead_notice",
+          "position": "append",
+          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "conditions": {
+            "maxStats": {
+              "money": 0
+            }
+          }
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -4883,7 +7174,59 @@
         "x": 4480,
         "y": 0
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "당신은 자극 반응 데이터부터 먼저 정리합니다. 소리·열·호흡이 각각 어떤 방식으로 채집되었는지 표를 맞춰 봅니다.\n\n",
+          "conditions": {
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "requiredFlags": [
+              "flag_e_focus_stim"
+            ]
+          },
+          "id": "node_e02_e_fix_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "접촉자 개체별 경과를 시간순으로 정리합니다. 각 접촉 뒤 변화가 거의 같은 간격으로 반복된다는 사실이 눈에 들어옵니다.\n\n",
+          "conditions": {
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "requiredFlags": [
+              "flag_e_focus_case"
+            ]
+          },
+          "id": "node_e02_e_fix_2",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "형태 모방 사례부터 모아 봅니다. 서로 다른 개체가 같은 방식으로 사람의 반응을 흉내 내고 있습니다.\n\n",
+          "conditions": {
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "requiredFlags": [
+              "flag_e_focus_mimic"
+            ]
+          },
+          "id": "node_e02_e_fix_3",
+          "priority": 3
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -5004,6 +7347,57 @@
           },
           "id": "node_e04_frag_3",
           "priority": 3
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "당신이 작성한 원인란에는 이미 문장이 들어가 있습니다. **국소적 실험 이상. 관리 절차상 문제 없음.** 수정 요청은 그 문장을 조금 더 매끈하게 만들라는 내용입니다.\n\n",
+          "conditions": {
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "requiredFlags": [
+              "flag_e_conceal"
+            ]
+          },
+          "id": "node_e04_e_fix_4",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "원인란에는 비인가 재생 지속화 조건과 승인 공란이 그대로 적혀 있습니다. 수정 요청은 그 부분을 빼 달라는 내용입니다.\n\n",
+          "conditions": {
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "requiredFlags": [
+              "flag_e_confess"
+            ]
+          },
+          "id": "node_e04_e_fix_5",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "삭제를 선택한 순간 화면에서 보고서 내용이 사라집니다. 그러나 삭제 진행률은 0%에서 움직이지 않습니다.\n\n",
+          "conditions": {
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "requiredFlags": [
+              "flag_e_delete"
+            ]
+          },
+          "id": "node_e04_e_fix_6",
+          "priority": 3
         }
       ],
       "conditionalRoutes": []
@@ -5027,7 +7421,59 @@
         "x": 4200,
         "y": 190
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "수정 요청을 받아들이자 결재 화면의 상태가 곧바로 **승인 대기**에서 **처리 완료**로 바뀝니다. 다음으로 올라온 것은 당신의 해임 통보문입니다.\n\n",
+          "conditions": {
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "requiredFlags": [
+              "flag_e_conceal"
+            ]
+          },
+          "id": "node_e05_e_fix_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "수정 요청을 받아들이지 않고 싶었지만, 선택할 수 있는 것은 그것뿐이었습니다. 화면은 잠시 멈췄다가 다음 문서를 띄웁니다.\n\n",
+          "conditions": {
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "requiredFlags": [
+              "flag_e_confess"
+            ]
+          },
+          "id": "node_e05_e_fix_2",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "삭제되지 않은 보고서 사본이 하나 더 생성되어 있습니다. 파일명 끝에 **_AUTO**가 붙어 있습니다.\n\n",
+          "conditions": {
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "requiredFlags": [
+              "flag_e_delete"
+            ]
+          },
+          "id": "node_e05_e_fix_3",
+          "priority": 3
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -5104,6 +7550,20 @@
         }
       ],
       "conditionalRoutes": []
+    },
+    {
+      "id": "node_oxygen_death",
+      "text": "산소 표시가 0으로 떨어집니다.\\n\\n숨을 들이쉬려 하지만 공기가 들어오지 않습니다. 시야 가장자리가 빠르게 어두워지고, 무전기의 잡음도 멀어집니다.\\n\\n더 이상 움직일 수 없습니다.\\n\\n**[END · 산소 고갈]**",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [],
+      "position": {
+        "x": -900,
+        "y": 900
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
     }
   ],
   "stats": [
@@ -5138,11 +7598,11 @@
     {
       "id": "money",
       "name": "무전 배터리",
-      "description": "무전기 사용 시 소모",
+      "description": "무전기 사용 시 5씩 소모됩니다. 0이면 무전기 관련 선택을 사용할 수 없습니다.",
       "min": 0,
       "max": 100,
       "isBase": true,
-      "initialValue": 0,
+      "initialValue": 100,
       "unlockConditions": {
         "requiredFlags": [],
         "requiredKeywords": [],
@@ -5663,6 +8123,288 @@
       "id": "flag_pre_d_second",
       "name": "D 사전 이상 - 이중 기록",
       "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_canister",
+      "name": "A: 산소 캐니스터 확보",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_vent",
+      "name": "A: 환기구 쪽으로 이동",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_second_contact",
+      "name": "A: 배관에서 예상 밖의 응답",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_waste_route",
+      "name": "A: 폐기 경로 우회",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_read_log",
+      "name": "B: 폐기 로그 상세 열람",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_checked_disposal",
+      "name": "B: 폐기 내역만 확인",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_ignored_terminal",
+      "name": "B: 단말을 외면",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_searched_oxygen",
+      "name": "B: 산소 캐니스터 탐색",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_frozen",
+      "name": "D: 봉쇄 직후 말하지 못함",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_remote_gate",
+      "name": "D: CCTV에서 게이트 원격 개방 시도",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_recorded_cctv",
+      "name": "D: CCTV 녹화",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_server_search",
+      "name": "D: CCTV 대신 서버 검색",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_leak_seen",
+      "name": "D: 외부 전송 시도 결과 확인",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_delay_seen",
+      "name": "D: 삭제 예약 지연 시도",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_restore_seen",
+      "name": "D: 원본 복원 시도",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_masked",
+      "name": "D: 마스크 착용",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_blocked_vent",
+      "name": "D: 통풍구 차단",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_avoided_eye",
+      "name": "a avoided eye",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_checked_culture",
+      "name": "a checked culture",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_checked_door",
+      "name": "a checked door",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_checked_handle",
+      "name": "a checked handle",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_hatch",
+      "name": "a hatch",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_recheck_duration",
+      "name": "a recheck duration",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_rechecked",
+      "name": "a rechecked",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_waited",
+      "name": "a waited",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_agreed",
+      "name": "b agreed",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_checked_labels",
+      "name": "b checked labels",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_hid",
+      "name": "b hid",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_knocked",
+      "name": "b knocked",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_moved_incinerator",
+      "name": "b moved incinerator",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_reported",
+      "name": "b reported",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_reported_again",
+      "name": "b reported again",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_rushed",
+      "name": "b rushed",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_ack",
+      "name": "d ack",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_checked_graph",
+      "name": "d checked graph",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_closed_screen",
+      "name": "d closed screen",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_delegated",
+      "name": "d delegated",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_knocked",
+      "name": "d knocked",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_recheck_time",
+      "name": "d recheck time",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_report_people",
+      "name": "d report people",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_saved_log",
+      "name": "d saved log",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_searched_logs",
+      "name": "d searched logs",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_touched_door",
+      "name": "d touched door",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_waited_radio",
+      "name": "d waited radio",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_a_radio_lost",
+      "name": "무전기 분실",
+      "description": "A 루트에서 무전기를 잃어버림.",
+      "hidden": true
+    },
+    {
+      "id": "flag_b_radio_lost",
+      "name": "무전기 분실",
+      "description": "B 루트에서 무전기를 잃어버림.",
+      "hidden": true
+    },
+    {
+      "id": "flag_d_radio_lost",
+      "name": "무전기 분실",
+      "description": "D 루트에서 무전기를 잃어버림.",
       "hidden": true
     }
   ],
