@@ -29,7 +29,6 @@ function effectMessages(before, after, story) {
   const nameItem = id => story.items?.find(x => x.id === id)?.name || id;
   const nameFlag = id => story.flags?.find(x => x.id === id)?.name || id;
   const nameKeyword = id => story.keywords?.find(x => x.id === id)?.name || id;
-  const nameNpc = id => story.npcs?.find(x => x.id === id)?.name || id;
 
   for (const [id, value] of Object.entries(after.stats || {})) {
     const delta = Number(value || 0) - Number(before.stats?.[id] || 0);
@@ -44,11 +43,6 @@ function effectMessages(before, after, story) {
   for (const id of before.flags || []) if (!(after.flags || []).includes(id)) messages.push(`[기록: '${nameFlag(id)}' 해제!]`);
   const unlockedBefore = before.unlockedStats || [];
   for (const id of after.unlockedStats || []) if (!unlockedBefore.includes(id)) messages.push(`[새 스탯: '${nameStat(id)}' 해금!]`);
-  for (const [id, value] of Object.entries(after.affection || {})) {
-    const delta = Number(value || 0) - Number(before.affection?.[id] || 0);
-    if (!delta) continue;
-    messages.push(`[${nameNpc(id)} 호감도 ${delta > 0 ? "상승" : "감소"}!]`);
-  }
   return messages;
 }
 
