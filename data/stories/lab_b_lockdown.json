@@ -125,7 +125,7 @@
               "item_sample"
             ]
           },
-          "reaction": "시료 이야기가 나오자 성패는 잠깐 말을 멈춘다. 그리고 아무 감정 없이 다음 지시를 내린다.",
+          "reaction": "시료 이야기가 나오자 진 연구원은 잠깐 말을 멈춘다. 그리고 아무 감정 없이 다음 지시를 내린다.",
           "affection": 0,
           "notes": "연출 전용. 호감도는 선택지 effects에서 처리."
         },
@@ -270,7 +270,7 @@
     },
     {
       "id": "node_a02",
-      "text": "00시 42분. 천장 스피커에서 짧은 경보음이 세 번 울리더니 끊깁니다. 육중한 소리와 함께 배양실 출입문의 잠금 장치가 내려앉습니다. 환기구의 소리가 달라집니다. 공기를 빨아들이는 음압 전환음. 형광등이 한 차례 깜빡이고, 그 뒤로 조금 더 어두워집니다.\n\n벽걸이 무전기가 거칠게 지직거립니다.\n\n**김대영**  ······제기랄. LAB-B 봉쇄한다! 안에 누가 있든 지금은—\n\n말이 끊깁니다. 다시 이어진 목소리는 아까와 전혀 다르게 가라앉아 있습니다.\n\n**김대영**  ······미안하다.",
+      "text": "00시 42분. 천장 스피커에서 짧은 경보음이 세 번 울리더니 끊깁니다. 육중한 소리와 함께 배양실 출입문의 잠금 장치가 내려앉습니다. 환기구의 소리가 달라집니다. 공기를 빨아들이는 음압 전환음. 형광등이 한 차례 깜빡이고, 그 뒤로 조금 더 어두워집니다.\n\n벽걸이 무전기가 거칠게 지직거립니다.\n\n**김대영**  ······제기랄. LAB-B 봉쇄한다! 안에 누가 있다면—\n\n말이 끊깁니다. 다시 이어진 목소리는 아까와 전혀 다르게 가라앉아 있습니다.\n\n**김대영**  ······미안하다.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -338,7 +338,7 @@
         {
           "mode": "prepend",
           "anchor": "",
-          "text": "지속 시간이 길다는 말에 성패는 잠깐 말이 없다가 ‘기록하겠다’고만 했습니다.",
+          "text": "지속 시간이 길다는 말에 진 연구원은 잠깐 말이 없다가 ‘기록하겠다’고만 했습니다.",
           "conditions": {
             "requiredFlags": [],
             "excludedFlags": [],
@@ -355,7 +355,7 @@
         {
           "mode": "prepend",
           "anchor": "",
-          "text": "재측정에 예상보다 오래 걸렸습니다. 성패는 이유를 묻지 않고 ‘보고 지연. 기록함.’이라고만 했습니다.",
+          "text": "재측정에 예상보다 오래 걸렸습니다. 진 연구원은 이유를 묻지 않고 ‘보고 지연. 기록함.’이라고만 했습니다.",
           "conditions": {
             "requiredFlags": [],
             "excludedFlags": [],
@@ -554,7 +554,7 @@
         },
         {
           "id": "a04_3",
-          "text": "“성패 선임께 도움을 청해 볼게.”",
+          "text": "“진 선임께 도움을 청해 볼게.”",
           "conditions": {},
           "effects": {
             "affection": {
@@ -751,7 +751,7 @@
         {
           "mode": "prepend",
           "anchor": "",
-          "text": "윤서가 작게 말합니다. ‘성패 선임이요? ······그 사람, 여기까지 들을 수 있을까요.’",
+          "text": "윤서가 작게 말합니다. ‘진성패 연구원님이요? ······그 사람, 여기까지 들을 수 있을까요.’",
           "conditions": {
             "requiredFlags": [],
             "excludedFlags": [],
@@ -1296,23 +1296,6 @@
           },
           "id": "node_a09_f2",
           "priority": 2
-        },
-        {
-          "mode": "append",
-          "anchor": "",
-          "text": "\n\n**진성패**  ······음성 채집 사례. 기록한다.",
-          "conditions": {
-            "requiredFlags": [
-              "flag_a_marked"
-            ],
-            "excludedFlags": [],
-            "requiredKeywords": [],
-            "excludedKeywords": [],
-            "requiredChoices": [],
-            "excludedChoices": []
-          },
-          "id": "node_a09_f3",
-          "priority": 3
         }
       ],
       "conditionalRoutes": []
@@ -1423,7 +1406,7 @@
       },
       "conditionalFragments": [
         {
-          "mode": "append",
+          "mode": "prepend",
           "anchor": "",
           "text": "\n\n귓가에서 누군가 당신의 목소리로 속삭입니다. ······이 길이 아니야.",
           "conditions": {
@@ -1441,7 +1424,7 @@
           "priority": 1
         },
         {
-          "mode": "append",
+          "mode": "prepend",
           "anchor": "",
           "text": "\n\n갈라진 목소리의 당신에게 벽의 박동이 조금씩 박자를 맞춥니다.",
           "conditions": {
@@ -1537,7 +1520,9 @@
           "id": "a12_end",
           "text": "캐릭터 선택 화면으로 돌아간다.",
           "conditions": {},
-          "effects": {}
+          "effects": {
+            "openFactionSelection": true
+          }
         }
       ],
       "position": {
@@ -1576,7 +1561,9 @@
           "id": "a13_end",
           "text": "캐릭터 선택 화면으로 돌아간다.",
           "conditions": {},
-          "effects": {}
+          "effects": {
+            "openFactionSelection": true
+          }
         }
       ],
       "position": {
@@ -1779,7 +1766,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\n\n**이든**  성패 선임께 부탁해 볼게요. 조금만 기다려요.",
+          "text": "\n\n**이든** 진 선임께 부탁해 볼게요. 조금만 기다려요.",
           "conditions": {
             "requiredFlags": [
               "flag_a_asked_seongpae"
@@ -2021,7 +2008,7 @@
         },
         {
           "id": "b04_3",
-          "text": "“성패 선임께 여쭤보세요.”",
+          "text": "진 선임에게 물어보세요.”",
           "conditions": {
             "requiredItems": [
               "item_radio"
@@ -3010,7 +2997,9 @@
           "id": "b12_end",
           "text": "캐릭터 선택 화면으로 돌아간다.",
           "conditions": {},
-          "effects": {}
+          "effects": {
+            "openFactionSelection": true
+          }
         }
       ],
       "position": {
@@ -3049,7 +3038,9 @@
           "id": "b13_end",
           "text": "캐릭터 선택 화면으로 돌아간다.",
           "conditions": {},
-          "effects": {}
+          "effects": {
+            "openFactionSelection": true
+          }
         }
       ],
       "position": {
@@ -4800,7 +4791,9 @@
           "id": "d14_end",
           "text": "캐릭터 선택 화면으로 돌아간다.",
           "conditions": {},
-          "effects": {}
+          "effects": {
+            "openFactionSelection": true
+          }
         }
       ],
       "position": {
@@ -4839,7 +4832,9 @@
           "id": "d15_end",
           "text": "캐릭터 선택 화면으로 돌아간다.",
           "conditions": {},
-          "effects": {}
+          "effects": {
+            "openFactionSelection": true
+          }
         }
       ],
       "position": {
@@ -5334,7 +5329,9 @@
           "id": "e06_end",
           "text": "캐릭터 선택 화면으로 돌아간다.",
           "conditions": {},
-          "effects": {}
+          "effects": {
+            "openFactionSelection": true
+          }
         }
       ],
       "position": {
