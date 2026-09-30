@@ -724,7 +724,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n방금 전 무전기에서 들렸던 딸깍 소리가 정말 버튼 소리였는지 생각해 보지만, 지금 확인할 이유는 없습니다.",
+          "text": "\n\n방금 전 무전기에서 들렸던 딸깍 소리가 정말 버튼 소리였는지 생각해 보지만, 지금 확인할 이유는 없습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_a_sound"
@@ -736,7 +736,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n배양실 안은 유난히 차갑습니다. 온도계는 정상인데도 그렇습니다.",
+          "text": "\n\n배양실 안은 유난히 차갑습니다. 온도계는 정상인데도 그렇습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_a_temp"
@@ -748,7 +748,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n벽시계의 초침이 한 번 멈췄다가 다시 움직입니다. 배양기 로그의 빈 한 줄이 떠오릅니다.",
+          "text": "\n\n벽시계의 초침이 한 번 멈췄다가 다시 움직입니다. 배양기 로그의 빈 한 줄이 떠오릅니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_a_clock"
@@ -760,7 +760,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n당신이 조금 전 확인해 둔 기록 한 줄이 머릿속에 남아 있습니다. 지금 보니 그 빈 시간이 이상하게 신경 쓰입니다.",
+          "text": "\n\n당신이 조금 전 확인해 둔 기록 한 줄이 머릿속에 남아 있습니다. 지금 보니 그 빈 시간이 이상하게 신경 쓰입니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_a_second"
@@ -1942,7 +1942,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n스캐너 화면이 다시 한 번 깜빡입니다. 이번에는 숫자를 세지 않았는데도 12가 찍혔다가 11로 돌아옵니다.",
+          "text": "\n\n스캐너 화면이 다시 한 번 깜빡입니다. 이번에는 숫자를 세지 않았는데도 12가 찍혔다가 11로 돌아옵니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_scan"
@@ -1954,7 +1954,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n카트 위 밀폐 상자 중 하나에서 미세한 온기가 느껴집니다. 폐기물실의 온도는 평소와 같습니다.",
+          "text": "\n\n카트 위 밀폐 상자 중 하나에서 미세한 온기가 느껴집니다. 폐기물실의 온도는 평소와 같습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_box"
@@ -1966,7 +1966,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n복도 끝 자동문이 닫힌 뒤에도 센서등 하나가 한동안 켜져 있습니다.",
+          "text": "\n\n복도 끝 자동문이 닫힌 뒤에도 센서등 하나가 한동안 켜져 있습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_light"
@@ -1978,7 +1978,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n조금 전 저장해 둔 화면 캡처가 떠오릅니다. 다시 생각해 보면, 단순한 스캐너 오류치고는 이상합니다.",
+          "text": "\n\n조금 전 저장해 둔 화면 캡처가 떠오릅니다. 다시 생각해 보면, 단순한 스캐너 오류치고는 이상합니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_second"
