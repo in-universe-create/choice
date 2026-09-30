@@ -12,11 +12,6 @@ function loadStory(id) {
     .catch(() => null);
 }
 
-function unlockSummary(f, story) {
-  const flags = (f.unlockConditions?.requiredFlags || []).map(id => story.flags?.find(x => x.id === id)?.name || id);
-  const keywords = (f.unlockConditions?.requiredKeywords || []).map(id => story.keywords?.find(x => x.id === id)?.name || id);
-  return [...flags.map(x => `플래그: ${x}`), ...keywords.map(x => `키워드: ${x}`)];
-}
 
 export default function FactionPage() {
   const [story, setStory] = useState(null);
@@ -76,7 +71,6 @@ export default function FactionPage() {
   if (!story) return <p style={{ textAlign: 'center', marginTop: 100 }}>불러오는 중...</p>;
   const currentState = revisit && player ? player : { flags: [], keywords: [], stats: {}, inventory: [], abilities: [], affection: {}, faction: null };
   const unlocked = (story.factions || []).filter(f => checkCondition(f.unlockConditions || {}, currentState));
-  const locked = (story.factions || []).filter(f => !checkCondition(f.unlockConditions || {}, currentState));
 
   return <main className="playMain" style={{ paddingTop: 60 }}>
     <h1 style={{ fontSize: 20, marginBottom: 8, textAlign: 'center' }}>
@@ -89,12 +83,10 @@ export default function FactionPage() {
         const current = revisit && player?.faction === f.id;
         return <button key={f.id} disabled={current} onClick={() => choose(f)} style={{ padding: 17, textAlign: 'left', opacity: current ? .65 : 1 }}>
           <strong>{f.name} {current ? '· 현재 진영' : ''}</strong>
-          <p style={{ fontSize: 13, margin: '7px 0 0', opacity: .7 }}>{f.description}</p>
           {!current && revisit && <small style={{ display: 'block', marginTop: 8, color: '#666' }}>이 진영으로 전환 → {f.startNodeId}</small>}
         </button>;
       })}
       {!unlocked.length && <div style={{ padding: 20, border: '1px solid #eee', borderRadius: 12, color: '#888', fontSize: 13 }}>현재 선택할 수 있는 진영이 없습니다.</div>}
     </div>
-    {locked.length > 0 }
   </main>;
 }
