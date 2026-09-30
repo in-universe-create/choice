@@ -10,7 +10,7 @@
       "id": "faction_a",
       "name": "연구보조원 A",
       "description": "저층 배양실 담당 연구보조원. 튜토리얼 회차.",
-      "startNodeId": "node_a01",
+      "startNodeId": "node_a_pre01",
       "startingStats": {
         "health": 70,
         "mental": 60,
@@ -34,7 +34,7 @@
       "id": "faction_b",
       "name": "연구보조원 B",
       "description": "중층 폐기 경로 담당 연구보조원. A의 흔적과 교차하는 회차.",
-      "startNodeId": "node_b01",
+      "startNodeId": "node_b_pre01",
       "startingStats": {
         "health": 70,
         "mental": 60,
@@ -50,9 +50,7 @@
         "npc_a"
       ],
       "unlockConditions": {
-        "requiredFlags": [
-          "flag_run1_done"
-        ],
+        "requiredFlags": [],
         "requiredKeywords": []
       }
     },
@@ -60,7 +58,7 @@
       "id": "faction_daeyoung",
       "name": "김대영 책임",
       "description": "통제실·서버실 회차. 연구의 실체에 가장 가까이 다가간다.",
-      "startNodeId": "node_d01",
+      "startNodeId": "node_d_pre01",
       "startingStats": {
         "health": 60,
         "mental": 50,
@@ -76,10 +74,7 @@
         "npc_b"
       ],
       "unlockConditions": {
-        "requiredFlags": [
-          "flag_run1_done",
-          "flag_run2_done"
-        ],
+        "requiredFlags": [],
         "requiredKeywords": []
       }
     },
@@ -229,8 +224,458 @@
   "abilities": [],
   "nodes": [
     {
+      "id": "node_a_pre01",
+      "text": "23시 58분. 우성제약 비르고 첨단생명연구소 LAB-B 저층 배양실.\n\n야간 근무는 늘 비슷합니다. 배양기 수치를 확인하고, 기록지를 넘기고, 다음 교대자가 보기 좋게 책상 위를 정리합니다. 냉각팬 소리도 평소와 같습니다. 커피는 이미 식었습니다.\n\n당신은 R-11 배양기의 로그를 마지막으로 확인합니다. 수치 자체는 정상 범위입니다. 다만 자정 직전 센서 기록 한 줄이 비어 있습니다. 이런 건 드물게 생기는 통신 지연일 수도 있습니다.\n\n벽걸이 무전기에서는 아무 말도 들리지 않습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_pre_a01",
+          "text": "기록을 그대로 넘기고 다음 점검으로 넘어간다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_a_pre02"
+        },
+        {
+          "id": "choice_pre_a02",
+          "text": "비어 있는 한 줄을 다시 확인해 둔다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_pre_a_second"
+            ]
+          },
+          "nextNodeId": "node_a_pre02"
+        }
+      ],
+      "position": {
+        "x": -900,
+        "y": -900
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a_pre02",
+      "text": "00시 09분.\n\n저층 복도의 형광등이 한 번 꺼졌다 켜집니다. 오래된 안정기의 흔한 증상입니다. 누군가 복도를 지나간 것 같기도 하지만, CCTV 화면에는 아무도 잡히지 않습니다.\n\n그때 배양실 안쪽에서 아주 짧은 소리가 납니다.\n\n딸깍.\n\n무전기 버튼을 누르는 소리와 비슷하지만, 아무도 채널을 열지 않았습니다.\n\n별일 아닙니다. 적어도 지금까지는.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_pre_a03",
+          "text": "남은 점검을 마치고 업무를 계속한다.",
+          "conditions": {},
+          "effects": {
+            "randomEffects": [
+              {
+                "id": "a_secondary",
+                "chance": 18,
+                "addFlags": [
+                  "flag_pre_a_second"
+                ]
+              }
+            ],
+            "randomTables": [
+              {
+                "id": "a_unease",
+                "outcomes": [
+                  {
+                    "id": "a_clock",
+                    "chance": 35,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_a_clock"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "a_sound",
+                    "chance": 30,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_a_sound"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "a_temp",
+                    "chance": 20,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_a_temp"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "nextNodeId": "node_a01"
+        },
+        {
+          "id": "choice_pre_a04",
+          "text": "무전기와 배양기 로그를 한 번 더 확인한다.",
+          "conditions": {},
+          "effects": {
+            "randomEffects": [
+              {
+                "id": "a_secondary",
+                "chance": 18,
+                "addFlags": [
+                  "flag_pre_a_second"
+                ]
+              }
+            ],
+            "randomTables": [
+              {
+                "id": "a_unease",
+                "outcomes": [
+                  {
+                    "id": "a_clock",
+                    "chance": 35,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_a_clock"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "a_sound",
+                    "chance": 30,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_a_sound"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "a_temp",
+                    "chance": 20,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_a_temp"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "nextNodeId": "node_a01"
+        }
+      ],
+      "position": {
+        "x": -300,
+        "y": -900
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b_pre01",
+      "text": "23시 47분. LAB-B 중층 폐기 경로.\n\n오늘 마지막 소각 이송 전 점검입니다. 폐기물 목록과 카트 수량을 맞추고, 밀폐 상자의 봉인 상태를 확인합니다. 특별할 것 없는 일입니다. 반복해서 하다 보면 숫자와 라벨이 눈에 들어오는 것보다 손에 먼저 익습니다.\n\n스캐너가 오늘 처리한 상자 수를 표시합니다.\n\n11개.\n\n잠시 뒤 12개.\n\n당신이 세어 본 실제 상자는 11개입니다. 화면을 새로고침하자 다시 11개로 돌아옵니다.\n\n오류일 겁니다. 이런 시스템 오류는 가끔 있습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_pre_b01",
+          "text": "스캐너 오류로 기록하고 작업을 계속한다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_b_pre02"
+        },
+        {
+          "id": "choice_pre_b02",
+          "text": "화면을 캡처해 두고 작업을 계속한다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_pre_b_second"
+            ]
+          },
+          "nextNodeId": "node_b_pre02"
+        }
+      ],
+      "position": {
+        "x": -900,
+        "y": -500
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b_pre02",
+      "text": "00시 03분.\n\n소각동으로 이어지는 복도의 자동문이 열렸다 닫힙니다. 앞에 사람이 서 있지 않은데도 센서가 한 번 반응합니다.\n\n문이 닫힌 뒤, 안쪽에서 카트 바퀴가 한 바퀴 굴러가는 소리가 납니다.\n\n당신이 밀고 있는 카트는 움직이지 않았습니다.\n\n복도는 다시 조용해집니다. 폐기 경로의 밤은 원래 조용합니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_pre_b03",
+          "text": "문제없다고 판단하고 마지막 이송을 준비한다.",
+          "conditions": {},
+          "effects": {
+            "randomEffects": [
+              {
+                "id": "b_secondary",
+                "chance": 18,
+                "addFlags": [
+                  "flag_pre_b_second"
+                ]
+              }
+            ],
+            "randomTables": [
+              {
+                "id": "b_unease",
+                "outcomes": [
+                  {
+                    "id": "b_scan",
+                    "chance": 35,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_b_scan"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "b_box",
+                    "chance": 30,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_b_box"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "b_light",
+                    "chance": 20,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_b_light"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "nextNodeId": "node_b01"
+        },
+        {
+          "id": "choice_pre_b04",
+          "text": "자동문과 카트 위치를 다시 확인한다.",
+          "conditions": {},
+          "effects": {
+            "randomEffects": [
+              {
+                "id": "b_secondary",
+                "chance": 18,
+                "addFlags": [
+                  "flag_pre_b_second"
+                ]
+              }
+            ],
+            "randomTables": [
+              {
+                "id": "b_unease",
+                "outcomes": [
+                  {
+                    "id": "b_scan",
+                    "chance": 35,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_b_scan"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "b_box",
+                    "chance": 30,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_b_box"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "b_light",
+                    "chance": 20,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_b_light"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "nextNodeId": "node_b01"
+        }
+      ],
+      "position": {
+        "x": -300,
+        "y": -500
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d_pre01",
+      "text": "00시 04분. LAB-B 통제실.\n\n야간 당직의 첫 한 시간은 지루할 정도로 평온합니다. 서버 상태 정상, 출입문 정상, 음압 정상. 모니터 오른쪽 아래에는 사내 표준시가 떠 있습니다.\n\n당신은 식어 버린 커피를 한 모금 마시고 당직 인수인계서를 확인합니다.\n\n특이사항 없음.\n\n그런데 서버실 시계와 통제실 시계가 11초 정도 어긋나 있습니다. 통제실 시계를 보고 다시 보면 서버 시계도 어느새 같은 시간을 가리킵니다.\n\n착각이었을 수도 있습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_pre_d01",
+          "text": "인수인계서에 적힌 대로 당직을 이어간다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_d_pre02"
+        },
+        {
+          "id": "choice_pre_d02",
+          "text": "시간 오차를 메모해 둔다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_pre_d_second"
+            ]
+          },
+          "nextNodeId": "node_d_pre02"
+        }
+      ],
+      "position": {
+        "x": -900,
+        "y": -100
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d_pre02",
+      "text": "00시 18분.\n\n통제실 스피커에서 짧은 전기 잡음이 흘러나옵니다. 안내 방송을 시작할 때 나는 잡음과 비슷합니다. 그러나 방송은 나오지 않습니다.\n\n당신이 화면을 확인하자 출입 통제 로그 하나가 잠깐 새로고침됩니다.\n\n정상.\n\n변경 사항 없음.\n\n몇 초 뒤 원래 화면으로 돌아옵니다. 굳이 보고할 정도의 일은 아닙니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_pre_d03",
+          "text": "대수롭지 않게 넘기고 모니터를 계속 본다.",
+          "conditions": {},
+          "effects": {
+            "randomEffects": [
+              {
+                "id": "d_secondary",
+                "chance": 18,
+                "addFlags": [
+                  "flag_pre_d_second"
+                ]
+              }
+            ],
+            "randomTables": [
+              {
+                "id": "d_unease",
+                "outcomes": [
+                  {
+                    "id": "d_clock",
+                    "chance": 35,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_d_clock"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "d_graph",
+                    "chance": 30,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_d_graph"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "d_audio",
+                    "chance": 20,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_d_audio"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "nextNodeId": "node_d01"
+        },
+        {
+          "id": "choice_pre_d04",
+          "text": "로그와 스피커 상태를 한 번 더 확인한다.",
+          "conditions": {},
+          "effects": {
+            "randomEffects": [
+              {
+                "id": "d_secondary",
+                "chance": 18,
+                "addFlags": [
+                  "flag_pre_d_second"
+                ]
+              }
+            ],
+            "randomTables": [
+              {
+                "id": "d_unease",
+                "outcomes": [
+                  {
+                    "id": "d_clock",
+                    "chance": 35,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_d_clock"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "d_graph",
+                    "chance": 30,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_d_graph"
+                      ]
+                    }
+                  },
+                  {
+                    "id": "d_audio",
+                    "chance": 20,
+                    "effects": {
+                      "addFlags": [
+                        "flag_pre_d_audio"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "nextNodeId": "node_d01"
+        }
+      ],
+      "position": {
+        "x": -300,
+        "y": -100
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
       "id": "node_a01",
-      "text": "새벽 00시 31분. 우성제약 비르고 첨단생명연구소, LAB-B 저층 배양실입니다. 야근 사흘째. 연구보조원인 당신은 R-11 배양기 앞에서 3단계 신호 수치를 기록하고 있습니다. 유리 너머의 R-11은 오후보다 아주 조금 더 붉어 보입니다. 배양액 온도 표시는 36.5도에서 움직이지 않습니다.\n\n벽걸이 무전기에서 관측실의 선임연구원이 건조하게 말합니다.\n\n**진성패**  채이든 씨. 3단계 수치 보고하십시오. 신호 지속 시간부터.\n\n인사도 없습니다. 언제나 그렇습니다.",
+      "text": "새벽 00시 31분. 우성제약 비르고 첨단생명연구소, LAB-B 저층 배양실입니다. 야근 사흘째. 연구보조원인 당신은 R-11 배양기 앞에서 3단계 신호 수치를 기록하고 있습니다. 유리 너머의 R-11은 오후보다 아주 조금 더 붉어 보입니다. 배양액 온도 표시는 36.5도에서 움직이지 않습니다.\n\n벽걸이 무전기에서 관측실의 선임연구원이 건조하게 말합니다.\n\n**진성패**  채 연구원. 3단계 수치 보고하십시오. 신호 지속 시간부터.\n\n인사도 없습니다. 언제나 그렇습니다.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -239,14 +684,7 @@
           "id": "choice_001",
           "text": "읽히는 수치를 그대로 보고한다.",
           "conditions": {},
-          "effects": {
-            "stats": {
-              "stat_favor": 0
-            },
-            "unlockStats": [
-              "stat_favor"
-            ]
-          },
+          "effects": {},
           "nextNodeId": "node_a02"
         },
         {
@@ -257,12 +695,6 @@
             "affection": {
               "npc_seongpae": 3
             },
-            "stats": {
-              "stat_favor": 3
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_a_reported"
             ]
@@ -278,12 +710,8 @@
               "npc_seongpae": -2
             },
             "stats": {
-              "mental": 3,
-              "stat_favor": -2
-            },
-            "unlockStats": [
-              "stat_favor"
-            ]
+              "mental": 3
+            }
           },
           "nextNodeId": "node_a02"
         }
@@ -292,7 +720,56 @@
         "x": 0,
         "y": 0
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n방금 전 무전기에서 들렸던 딸깍 소리가 정말 버튼 소리였는지 생각해 보지만, 지금 확인할 이유는 없습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_a_sound"
+            ]
+          },
+          "id": "node_a01_prefrag_sound",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n배양실 안은 유난히 차갑습니다. 온도계는 정상인데도 그렇습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_a_temp"
+            ]
+          },
+          "id": "node_a01_prefrag_temp",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n벽시계의 초침이 한 번 멈췄다가 다시 움직입니다. 배양기 로그의 빈 한 줄이 떠오릅니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_a_clock"
+            ]
+          },
+          "id": "node_a01_prefrag_clock",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n당신이 조금 전 확인해 둔 기록 한 줄이 머릿속에 남아 있습니다. 지금 보니 그 빈 시간이 이상하게 신경 쓰입니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_a_second"
+            ]
+          },
+          "id": "node_a01_prefrag_second",
+          "priority": 2
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -344,12 +821,10 @@
               "npc_seongpae": 2
             },
             "stats": {
-              "stat_oxygen": 100,
-              "stat_favor": 2
+              "stat_oxygen": 100
             },
             "unlockStats": [
-              "stat_oxygen",
-              "stat_favor"
+              "stat_oxygen"
             ]
           },
           "nextNodeId": "node_a03"
@@ -379,12 +854,10 @@
             },
             "stats": {
               "mental": -5,
-              "stat_contam": 10,
-              "stat_favor": 3
+              "stat_contam": 10
             },
             "unlockStats": [
-              "stat_contam",
-              "stat_favor"
+              "stat_contam"
             ],
             "addItems": [
               "item_sample"
@@ -405,13 +878,11 @@
             },
             "stats": {
               "stat_oxygen": -5,
-              "stat_insight": 1,
-              "stat_favor": 6
+              "stat_insight": 1
             },
             "unlockStats": [
               "stat_oxygen",
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_a_obs_culture",
@@ -429,12 +900,8 @@
               "npc_seongpae": -4
             },
             "stats": {
-              "health": -5,
-              "stat_favor": -4
+              "health": -5
             },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_a_purge"
             ]
@@ -449,12 +916,6 @@
             "affection": {
               "npc_seongpae": -3
             },
-            "stats": {
-              "stat_favor": -3
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_a_defied"
             ]
@@ -630,12 +1091,8 @@
               "npc_seongpae": -2
             },
             "stats": {
-              "money": -5,
-              "stat_favor": -2
+              "money": -5
             },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_a_asked_seongpae"
             ]
@@ -667,12 +1124,10 @@
             },
             "stats": {
               "money": -5,
-              "stat_insight": 1,
-              "stat_favor": 5
+              "stat_insight": 1
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_a_detail"
@@ -689,12 +1144,8 @@
               "npc_seongpae": -3
             },
             "stats": {
-              "mental": -5,
-              "stat_favor": -3
-            },
-            "unlockStats": [
-              "stat_favor"
-            ]
+              "mental": -5
+            }
           },
           "nextNodeId": "node_a07"
         },
@@ -707,12 +1158,10 @@
               "npc_seongpae": -2
             },
             "stats": {
-              "stat_insight": 1,
-              "stat_favor": -2
+              "stat_insight": 1
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_a_doubt"
@@ -746,13 +1195,11 @@
             "stats": {
               "stat_oxygen": -5,
               "mental": -5,
-              "stat_insight": 1,
-              "stat_favor": 4
+              "stat_insight": 1
             },
             "unlockStats": [
               "stat_oxygen",
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_a_know_sound"
@@ -823,12 +1270,6 @@
             "affection": {
               "npc_seongpae": 3
             },
-            "stats": {
-              "stat_favor": 3
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_a_lure"
             ]
@@ -889,12 +1330,10 @@
             "stats": {
               "health": -15,
               "mental": -10,
-              "stat_contam": 15,
-              "stat_favor": 6
+              "stat_contam": 15
             },
             "unlockStats": [
-              "stat_contam",
-              "stat_favor"
+              "stat_contam"
             ],
             "addFlags": [
               "flag_a_marked"
@@ -961,12 +1400,10 @@
               "npc_seongpae": -3
             },
             "stats": {
-              "stat_insight": 2,
-              "stat_favor": -3
+              "stat_insight": 2
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_a_saw_protocol"
@@ -997,12 +1434,10 @@
               "npc_seongpae": 5
             },
             "stats": {
-              "stat_insight": 2,
-              "stat_favor": 5
+              "stat_insight": 2
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_a_hypothesis"
@@ -1020,7 +1455,7 @@
     },
     {
       "id": "node_a10",
-      "text": "천장 스피커가 켜집니다.\n\n**진성패**  채이든 씨. 위치와 상태. ······그리고 준비실 단말 접속 기록이 올라왔습니다. 열람 목적.",
+      "text": "천장 스피커가 켜집니다.\n\n**진성패**  채 연구원. 위치와 상태. ······그리고 준비실 단말 접속 기록이 올라왔습니다. 열람 목적.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -1039,12 +1474,10 @@
             },
             "stats": {
               "money": -5,
-              "stat_insight": 1,
-              "stat_favor": 5
+              "stat_insight": 1
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ]
           },
           "nextNodeId": "node_a11"
@@ -1062,12 +1495,8 @@
               "npc_seongpae": 5
             },
             "stats": {
-              "money": -5,
-              "stat_favor": 5
-            },
-            "unlockStats": [
-              "stat_favor"
-            ]
+              "money": -5
+            }
           },
           "nextNodeId": "node_a11"
         },
@@ -1079,12 +1508,6 @@
             "affection": {
               "npc_seongpae": -2
             },
-            "stats": {
-              "stat_favor": -2
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_a_honest"
             ]
@@ -1099,12 +1522,6 @@
             "affection": {
               "npc_seongpae": -4
             },
-            "stats": {
-              "stat_favor": -4
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_a_lied"
             ]
@@ -1238,8 +1655,10 @@
           "text": "카메라를 똑바로 바라본다.",
           "conditions": {
             "minStats": {
-              "stat_favor": 22,
               "stat_oxygen": 20
+            },
+            "minAffection": {
+              "npc_seongpae": 22
             }
           },
           "effects": {
@@ -1262,11 +1681,13 @@
           "text": "카메라를 똑바로 바라본다.",
           "conditions": {
             "minStats": {
-              "stat_favor": 9,
               "stat_oxygen": 20
             },
-            "maxStats": {
-              "stat_favor": 21
+            "minAffection": {
+              "npc_seongpae": 9
+            },
+            "maxAffection": {
+              "npc_seongpae": 21
             }
           },
           "effects": {
@@ -1291,8 +1712,8 @@
             "minStats": {
               "stat_oxygen": 20
             },
-            "maxStats": {
-              "stat_favor": 8
+            "maxAffection": {
+              "npc_seongpae": 8
             }
           },
           "effects": {
@@ -1380,7 +1801,16 @@
       "bgm": {
         "youtubeUrl": ""
       },
-      "choices": [],
+      "choices": [
+        {
+          "id": "node_a14_return",
+          "text": "캐릭터 선택 화면으로 돌아간다.",
+          "conditions": {},
+          "effects": {
+            "openFactionSelection": true
+          }
+        }
+      ],
       "position": {
         "x": 560,
         "y": 570
@@ -1447,7 +1877,16 @@
       "bgm": {
         "youtubeUrl": ""
       },
-      "choices": [],
+      "choices": [
+        {
+          "id": "node_a15_return",
+          "text": "캐릭터 선택 화면으로 돌아간다.",
+          "conditions": {},
+          "effects": {
+            "openFactionSelection": true
+          }
+        }
+      ],
       "position": {
         "x": 840,
         "y": 570
@@ -1457,7 +1896,7 @@
     },
     {
       "id": "node_b01",
-      "text": "00시 20분. LAB-B 중층 폐기 경로. 연구보조원인 당신은 오늘 마지막 소각 이송 작업을 밀고 있습니다. 폐기 카트 위 밀폐 상자들은 오늘따라 유난히 미지근합니다.\n\n벽 스피커에서 선임연구원의 목소리가 떨어집니다.\n\n**진성패**  윤서 씨. 소각 전에 로트 목록 대조하십시오. 이상 로트는 개봉하지 말고 보고. ······알아들었으면 대답.",
+      "text": "00시 20분. LAB-B 중층 폐기 경로. 연구보조원인 당신은 오늘 마지막 소각 이송 작업을 밀고 있습니다. 폐기 카트 위 밀폐 상자들은 오늘따라 유난히 미지근합니다.\n\n벽 스피커에서 선임연구원의 목소리가 떨어집니다.\n\n**진성패**  윤 연구원. 소각 전에 로트 목록 대조하십시오. 이상 로트는 개봉하지 말고 보고. ······알아들었으면 대답.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -1470,12 +1909,6 @@
             "affection": {
               "npc_seongpae": 2
             },
-            "stats": {
-              "stat_favor": 2
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_b_lotcheck"
             ]
@@ -1486,14 +1919,7 @@
           "id": "choice_045",
           "text": "“네.”",
           "conditions": {},
-          "effects": {
-            "stats": {
-              "stat_favor": 0
-            },
-            "unlockStats": [
-              "stat_favor"
-            ]
-          },
+          "effects": {},
           "nextNodeId": "node_b02"
         },
         {
@@ -1503,13 +1929,7 @@
           "effects": {
             "affection": {
               "npc_seongpae": -3
-            },
-            "stats": {
-              "stat_favor": -3
-            },
-            "unlockStats": [
-              "stat_favor"
-            ]
+            }
           },
           "nextNodeId": "node_b02"
         }
@@ -1518,7 +1938,56 @@
         "x": 1400,
         "y": 0
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n스캐너 화면이 다시 한 번 깜빡입니다. 이번에는 숫자를 세지 않았는데도 12가 찍혔다가 11로 돌아옵니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_b_scan"
+            ]
+          },
+          "id": "node_b01_prefrag_scan",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n카트 위 밀폐 상자 중 하나에서 미세한 온기가 느껴집니다. 폐기물실의 온도는 평소와 같습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_b_box"
+            ]
+          },
+          "id": "node_b01_prefrag_box",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n복도 끝 자동문이 닫힌 뒤에도 센서등 하나가 한동안 켜져 있습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_b_light"
+            ]
+          },
+          "id": "node_b01_prefrag_light",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n조금 전 저장해 둔 화면 캡처가 떠오릅니다. 다시 생각해 보면, 단순한 스캐너 오류치고는 이상합니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_b_second"
+            ]
+          },
+          "id": "node_b01_prefrag_second",
+          "priority": 2
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -1708,7 +2177,7 @@
     },
     {
       "id": "node_b04",
-      "text": "소각동 방향 복도에서 카트 상자 하나의 이음새가 벌어집니다. 안쪽에서 반투명한 결절 덩어리가 맥동합니다. 젖은 심장처럼 일정한 박자로. 결절 표면 아래에 무언가 접혀 있습니다. 손가락 마디 같은.\n\n**진성패**  결절 한 점 채취하십시오. 이송 경로는 관제 소관. ······윤서 씨, 손 떨지 말고.",
+      "text": "소각동 방향 복도에서 카트 상자 하나의 이음새가 벌어집니다. 안쪽에서 반투명한 결절 덩어리가 맥동합니다. 젖은 심장처럼 일정한 박자로. 결절 표면 아래에 무언가 접혀 있습니다. 손가락 마디 같은.\n\n**진성패**  결절 한 점 채취하십시오. 이송 경로는 관제 소관. ······윤 연구원, 손 떨지 말고.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -1723,12 +2192,10 @@
             },
             "stats": {
               "mental": -5,
-              "stat_contam": 10,
-              "stat_favor": 3
+              "stat_contam": 10
             },
             "unlockStats": [
-              "stat_contam",
-              "stat_favor"
+              "stat_contam"
             ],
             "addItems": [
               "item_sample"
@@ -1749,13 +2216,11 @@
             },
             "stats": {
               "stat_oxygen": -5,
-              "stat_insight": 1,
-              "stat_favor": 6
+              "stat_insight": 1
             },
             "unlockStats": [
               "stat_oxygen",
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_b_obs_nodule"
@@ -1772,12 +2237,10 @@
               "npc_seongpae": -2
             },
             "stats": {
-              "stat_insight": 1,
-              "stat_favor": -2
+              "stat_insight": 1
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_b_asked"
@@ -1794,12 +2257,8 @@
               "npc_seongpae": -4
             },
             "stats": {
-              "health": -5,
-              "stat_favor": -4
+              "health": -5
             },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_b_burn"
             ]
@@ -1849,12 +2308,10 @@
             },
             "stats": {
               "money": -5,
-              "stat_insight": 1,
-              "stat_favor": 4
+              "stat_insight": 1
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_b_detail"
@@ -1871,12 +2328,8 @@
               "npc_seongpae": -3
             },
             "stats": {
-              "mental": -5,
-              "stat_favor": -3
-            },
-            "unlockStats": [
-              "stat_favor"
-            ]
+              "mental": -5
+            }
           },
           "nextNodeId": "node_b06"
         },
@@ -1888,12 +2341,6 @@
             "affection": {
               "npc_seongpae": -2
             },
-            "stats": {
-              "stat_favor": -2
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_b_deflect"
             ]
@@ -1925,12 +2372,10 @@
             },
             "stats": {
               "mental": -5,
-              "stat_insight": 2,
-              "stat_favor": -3
+              "stat_insight": 2
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addItems": [
               "item_log_del"
@@ -2005,13 +2450,11 @@
             "stats": {
               "stat_oxygen": -5,
               "mental": -5,
-              "stat_insight": 1,
-              "stat_favor": 4
+              "stat_insight": 1
             },
             "unlockStats": [
               "stat_oxygen",
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_b_know_heat"
@@ -2065,12 +2508,8 @@
               "npc_seongpae": 3
             },
             "stats": {
-              "health": -5,
-              "stat_favor": 3
+              "health": -5
             },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_b_cooled"
             ]
@@ -2089,12 +2528,6 @@
             "affection": {
               "npc_seongpae": -1
             },
-            "stats": {
-              "stat_favor": -1
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "removeItems": [
               "item_sample"
             ],
@@ -2156,12 +2589,10 @@
             "stats": {
               "health": -15,
               "mental": -10,
-              "stat_contam": 15,
-              "stat_favor": 6
+              "stat_contam": 15
             },
             "unlockStats": [
-              "stat_contam",
-              "stat_favor"
+              "stat_contam"
             ],
             "addFlags": [
               "flag_b_marked"
@@ -2321,7 +2752,7 @@
     },
     {
       "id": "node_b10",
-      "text": "스피커가 켜집니다.\n\n**진성패**  윤서 씨. 위치와 상태 보고하십시오. 결절 접촉 이후 체온 변화, 있으면 시간 단위로.",
+      "text": "스피커가 켜집니다.\n\n**진성패**  윤 연구원. 위치와 상태 보고하십시오. 결절 접촉 이후 체온 변화, 있으면 시간 단위로.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -2340,12 +2771,10 @@
             },
             "stats": {
               "money": -5,
-              "stat_insight": 1,
-              "stat_favor": 5
+              "stat_insight": 1
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ]
           },
           "nextNodeId": "node_b11"
@@ -2363,12 +2792,8 @@
               "npc_seongpae": 5
             },
             "stats": {
-              "money": -5,
-              "stat_favor": 5
-            },
-            "unlockStats": [
-              "stat_favor"
-            ]
+              "money": -5
+            }
           },
           "nextNodeId": "node_b11"
         },
@@ -2383,13 +2808,7 @@
           "effects": {
             "affection": {
               "npc_seongpae": -2
-            },
-            "stats": {
-              "stat_favor": -2
-            },
-            "unlockStats": [
-              "stat_favor"
-            ]
+            }
           },
           "nextNodeId": "node_b11"
         },
@@ -2405,12 +2824,6 @@
             "affection": {
               "npc_seongpae": -4
             },
-            "stats": {
-              "stat_favor": -4
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_b_lied"
             ]
@@ -2486,14 +2899,12 @@
               "mental": -10,
               "stat_oxygen": -5,
               "stat_contam": 5,
-              "stat_insight": 1,
-              "stat_favor": 4
+              "stat_insight": 1
             },
             "unlockStats": [
               "stat_oxygen",
               "stat_contam",
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_b_obs_forms"
@@ -2578,8 +2989,10 @@
           "text": "스피커를 올려다본다.",
           "conditions": {
             "minStats": {
-              "stat_favor": 22,
               "stat_oxygen": 20
+            },
+            "minAffection": {
+              "npc_seongpae": 22
             }
           },
           "effects": {
@@ -2602,11 +3015,13 @@
           "text": "스피커를 올려다본다.",
           "conditions": {
             "minStats": {
-              "stat_favor": 9,
               "stat_oxygen": 20
             },
-            "maxStats": {
-              "stat_favor": 21
+            "minAffection": {
+              "npc_seongpae": 9
+            },
+            "maxAffection": {
+              "npc_seongpae": 21
             }
           },
           "effects": {
@@ -2631,8 +3046,8 @@
             "minStats": {
               "stat_oxygen": 20
             },
-            "maxStats": {
-              "stat_favor": 8
+            "maxAffection": {
+              "npc_seongpae": 8
             }
           },
           "effects": {
@@ -2720,7 +3135,16 @@
       "bgm": {
         "youtubeUrl": ""
       },
-      "choices": [],
+      "choices": [
+        {
+          "id": "node_b14_return",
+          "text": "캐릭터 선택 화면으로 돌아간다.",
+          "conditions": {},
+          "effects": {
+            "openFactionSelection": true
+          }
+        }
+      ],
       "position": {
         "x": 1960,
         "y": 570
@@ -2769,7 +3193,16 @@
       "bgm": {
         "youtubeUrl": ""
       },
-      "choices": [],
+      "choices": [
+        {
+          "id": "node_b15_return",
+          "text": "캐릭터 선택 화면으로 돌아간다.",
+          "conditions": {},
+          "effects": {
+            "openFactionSelection": true
+          }
+        }
+      ],
       "position": {
         "x": 2240,
         "y": 570
@@ -2789,12 +3222,6 @@
           "text": "“그래, 네가 알아서 해.”",
           "conditions": {},
           "effects": {
-            "stats": {
-              "stat_favor": 0
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_d_trusted"
             ]
@@ -2807,11 +3234,9 @@
           "conditions": {},
           "effects": {
             "stats": {
-              "stat_favor": 0,
               "stat_insight": 1
             },
             "unlockStats": [
-              "stat_favor",
               "stat_insight"
             ],
             "addFlags": [
@@ -2825,12 +3250,6 @@
           "text": "임원 핫라인에 먼저 보고한다.",
           "conditions": {},
           "effects": {
-            "stats": {
-              "stat_favor": 0
-            },
-            "unlockStats": [
-              "stat_favor"
-            ],
             "addFlags": [
               "flag_d_hotline"
             ]
@@ -2842,7 +3261,56 @@
         "x": 2800,
         "y": 0
       },
-      "conditionalFragments": [],
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n서버 시각이 다시 한 번 11초 정도 늦어졌다가 정상으로 돌아옵니다. 통제실 시계는 움직이지 않았습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_d_clock"
+            ]
+          },
+          "id": "node_d01_prefrag_clock",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n그래프가 갱신되는 순간, 아주 짧게 기준선 아래로 내려갔다가 돌아오는 흔적이 보입니다. 오류일 수도 있습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_d_graph"
+            ]
+          },
+          "id": "node_d01_prefrag_graph",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n스피커에서 아까 들었던 것과 같은 전기 잡음이 한 번 더 납니다. 이번에도 방송은 없습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_d_audio"
+            ]
+          },
+          "id": "node_d01_prefrag_audio",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\\n\\n당직 인수인계서의 시간 오차 메모가 신경 쓰입니다. 지워 버릴 정도는 아니지만, 그냥 넘기기에도 찜찜합니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_pre_d_second"
+            ]
+          },
+          "id": "node_d01_prefrag_second",
+          "priority": 2
+        }
+      ],
       "conditionalRoutes": []
     },
     {
@@ -3080,7 +3548,7 @@
     },
     {
       "id": "node_d05",
-      "text": "무전 채널을 엽니다.\n\n**김대영**  성패. 현 상황 보고해. R-11 3단계 신호, 누가 조건을 바꿨어.\n\n**진성패**  현재 LAB-B 내부 인원은 전원 확인됩니다. 연구 상황은 신호 지속 시간이 계획 범위를 벗어난 상태입니다. 조건 변경 이력은 확인 중입니다.\n\n대답은 매끄럽습니다. 질문에 답한 것처럼 보이지만 어느 하나도 답하지 않았습니다.",
+      "text": "무전 채널을 엽니다.\n\n**김대영**  진 선임. 현 상황 보고해. R-11 3단계 신호, 누가 조건을 바꿨어.\n\n**진성패**  현재 LAB-B 내부 인원은 전원 확인됩니다. 연구 상황은 신호 지속 시간이 계획 범위를 벗어난 상태입니다. 조건 변경 이력은 확인 중입니다.\n\n대답은 매끄럽습니다. 질문에 답한 것처럼 보이지만 어느 하나도 답하지 않았습니다.",
       "bgm": {
         "youtubeUrl": ""
       },
@@ -3131,12 +3599,10 @@
             },
             "stats": {
               "money": -5,
-              "stat_insight": 1,
-              "stat_favor": 4
+              "stat_insight": 1
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_d_analysis"
@@ -3490,12 +3956,10 @@
             },
             "stats": {
               "money": -5,
-              "stat_insight": 1,
-              "stat_favor": 4
+              "stat_insight": 1
             },
             "unlockStats": [
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_d_answer"
@@ -3570,13 +4034,11 @@
             },
             "stats": {
               "stat_oxygen": -10,
-              "stat_insight": 1,
-              "stat_favor": 4
+              "stat_insight": 1
             },
             "unlockStats": [
               "stat_oxygen",
-              "stat_insight",
-              "stat_favor"
+              "stat_insight"
             ],
             "addFlags": [
               "flag_d_know_breath"
@@ -3630,12 +4092,10 @@
               "npc_seongpae": 3
             },
             "stats": {
-              "stat_oxygen": -15,
-              "stat_favor": 3
+              "stat_oxygen": -15
             },
             "unlockStats": [
-              "stat_oxygen",
-              "stat_favor"
+              "stat_oxygen"
             ]
           },
           "nextNodeId": "node_d12"
@@ -3709,12 +4169,10 @@
             "stats": {
               "health": -15,
               "mental": -10,
-              "stat_contam": 15,
-              "stat_favor": 4
+              "stat_contam": 15
             },
             "unlockStats": [
-              "stat_contam",
-              "stat_favor"
+              "stat_contam"
             ],
             "addFlags": [
               "flag_d_marked"
@@ -3965,8 +4423,10 @@
           "text": "문을 두드린다.",
           "conditions": {
             "minStats": {
-              "stat_favor": 16,
               "stat_oxygen": 20
+            },
+            "minAffection": {
+              "npc_seongpae": 16
             }
           },
           "effects": {
@@ -3989,11 +4449,13 @@
           "text": "문을 두드린다.",
           "conditions": {
             "minStats": {
-              "stat_favor": 7,
               "stat_oxygen": 20
             },
-            "maxStats": {
-              "stat_favor": 15
+            "minAffection": {
+              "npc_seongpae": 7
+            },
+            "maxAffection": {
+              "npc_seongpae": 15
             }
           },
           "effects": {
@@ -4018,8 +4480,8 @@
             "minStats": {
               "stat_oxygen": 20
             },
-            "maxStats": {
-              "stat_favor": 6
+            "maxAffection": {
+              "npc_seongpae": 6
             }
           },
           "effects": {
@@ -4107,7 +4569,16 @@
       "bgm": {
         "youtubeUrl": ""
       },
-      "choices": [],
+      "choices": [
+        {
+          "id": "node_d16_return",
+          "text": "캐릭터 선택 화면으로 돌아간다.",
+          "conditions": {},
+          "effects": {
+            "openFactionSelection": true
+          }
+        }
+      ],
       "position": {
         "x": 2800,
         "y": 760
@@ -4156,7 +4627,16 @@
       "bgm": {
         "youtubeUrl": ""
       },
-      "choices": [],
+      "choices": [
+        {
+          "id": "node_d17_return",
+          "text": "캐릭터 선택 화면으로 돌아간다.",
+          "conditions": {},
+          "effects": {
+            "openFactionSelection": true
+          }
+        }
+      ],
       "position": {
         "x": 3080,
         "y": 760
@@ -4556,7 +5036,16 @@
       "bgm": {
         "youtubeUrl": ""
       },
-      "choices": [],
+      "choices": [
+        {
+          "id": "node_e06_return",
+          "text": "캐릭터 선택 화면으로 돌아간다.",
+          "conditions": {},
+          "effects": {
+            "openFactionSelection": true
+          }
+        }
+      ],
       "position": {
         "x": 4480,
         "y": 190
@@ -4692,20 +5181,6 @@
       "id": "stat_insight",
       "name": "연구 이해도",
       "description": "연구 문서를 읽을수록 오른다",
-      "min": 0,
-      "max": 100,
-      "isBase": false,
-      "initialValue": 0,
-      "unlockConditions": {
-        "requiredFlags": [],
-        "requiredKeywords": [],
-        "requiredFaction": []
-      }
-    },
-    {
-      "id": "stat_favor",
-      "name": "성패 호감(미러)",
-      "description": "npc_seongpae 호감도의 미러. 엔딩 분기 판정용.",
       "min": 0,
       "max": 100,
       "isBase": false,
@@ -5117,6 +5592,78 @@
       "id": "flag_e_delete",
       "name": "종장: 전부 삭제",
       "description": ""
+    },
+    {
+      "id": "flag_pre_a_clock",
+      "name": "A 사전 이상 - 시계",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_a_sound",
+      "name": "A 사전 이상 - 무전",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_a_temp",
+      "name": "A 사전 이상 - 온도",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_a_second",
+      "name": "A 사전 이상 - 이중 기록",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_b_scan",
+      "name": "B 사전 이상 - 스캔",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_b_box",
+      "name": "B 사전 이상 - 상자",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_b_light",
+      "name": "B 사전 이상 - 조명",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_b_second",
+      "name": "B 사전 이상 - 이중 기록",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_d_clock",
+      "name": "D 사전 이상 - 시계",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_d_graph",
+      "name": "D 사전 이상 - 그래프",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_d_audio",
+      "name": "D 사전 이상 - 음성",
+      "description": "",
+      "hidden": true
+    },
+    {
+      "id": "flag_pre_d_second",
+      "name": "D 사전 이상 - 이중 기록",
+      "description": "",
+      "hidden": true
     }
   ],
   "keywords": []
