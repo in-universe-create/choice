@@ -1,0 +1,5123 @@
+{
+  "id": "lab_b_lockdown",
+  "name": "LAB-B 봉쇄",
+  "description": "",
+  "accessCodes": [
+    "labb"
+  ],
+  "factions": [
+    {
+      "id": "faction_a",
+      "name": "연구보조원 A",
+      "description": "저층 배양실 담당 연구보조원. 튜토리얼 회차.",
+      "startNodeId": "node_a01",
+      "startingStats": {
+        "health": 70,
+        "mental": 60,
+        "money": 100
+      },
+      "startingItems": [
+        "item_radio"
+      ],
+      "startingAffection": {},
+      "npcIds": [
+        "npc_seongpae",
+        "npc_daeyoung",
+        "npc_b"
+      ],
+      "unlockConditions": {
+        "requiredFlags": [],
+        "requiredKeywords": []
+      }
+    },
+    {
+      "id": "faction_b",
+      "name": "연구보조원 B",
+      "description": "중층 폐기 경로 담당 연구보조원. A의 흔적과 교차하는 회차.",
+      "startNodeId": "node_b01",
+      "startingStats": {
+        "health": 70,
+        "mental": 60,
+        "money": 100
+      },
+      "startingItems": [
+        "item_keycard_b"
+      ],
+      "startingAffection": {},
+      "npcIds": [
+        "npc_seongpae",
+        "npc_daeyoung",
+        "npc_a"
+      ],
+      "unlockConditions": {
+        "requiredFlags": [
+          "flag_run1_done"
+        ],
+        "requiredKeywords": []
+      }
+    },
+    {
+      "id": "faction_daeyoung",
+      "name": "김대영 책임",
+      "description": "통제실·서버실 회차. 연구의 실체에 가장 가까이 다가간다.",
+      "startNodeId": "node_d01",
+      "startingStats": {
+        "health": 60,
+        "mental": 50,
+        "money": 100
+      },
+      "startingItems": [
+        "item_radio"
+      ],
+      "startingAffection": {},
+      "npcIds": [
+        "npc_seongpae",
+        "npc_a",
+        "npc_b"
+      ],
+      "unlockConditions": {
+        "requiredFlags": [
+          "flag_run1_done",
+          "flag_run2_done"
+        ],
+        "requiredKeywords": []
+      }
+    },
+    {
+      "id": "faction_seongpae",
+      "name": "진성패",
+      "description": "종장 해금. 지켜본 자의 기록.",
+      "startNodeId": "node_e01",
+      "startingStats": {
+        "health": 80,
+        "mental": 70,
+        "money": 100
+      },
+      "startingItems": [],
+      "startingAffection": {},
+      "npcIds": [
+        "npc_daeyoung",
+        "npc_a",
+        "npc_b"
+      ],
+      "unlockConditions": {
+        "requiredFlags": [
+          "flag_run3_done"
+        ],
+        "requiredKeywords": []
+      }
+    }
+  ],
+  "npcs": [
+    {
+      "id": "npc_seongpae",
+      "name": "진성패",
+      "defaultAffection": 0,
+      "description": "선임연구원. 관측실에서 무전·스피커·모니터로만 등장한다. 상급자에게는 싹싹하고 공손하나 속으로 낮춰 보고, 하급자에게는 예민하고 딱딱한 다나까체(가끔 반말)로 대한다. 누구에게도 의도를 드러내지 않고 무감하다. 호감도는 잘 오르지 않으며 ‘흥미로운 관찰·연구 결과’를 내놓을 때만 오른다.",
+      "tags": [
+        "npc",
+        "observer"
+      ],
+      "factions": [],
+      "appearanceConditions": {},
+      "reactions": [
+        {
+          "id": "reaction_sample",
+          "name": "시료를 가지고 있을 때",
+          "conditions": {
+            "requiredItems": [
+              "item_sample"
+            ]
+          },
+          "reaction": "시료 이야기가 나오자 성패는 잠깐 말을 멈춘다. 그리고 아무 감정 없이 다음 지시를 내린다.",
+          "affection": 0,
+          "notes": "연출 전용. 호감도는 선택지 effects에서 처리(미러 스탯 동기화)."
+        },
+        {
+          "id": "reaction_log_del",
+          "name": "삭제 예약 로그를 가지고 있을 때",
+          "conditions": {
+            "requiredItems": [
+              "item_log_del"
+            ]
+          },
+          "reaction": "무전 너머의 타이핑 소리가 잠깐 멈춘다. 그뿐이다.",
+          "affection": 0,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "npc_daeyoung",
+      "name": "김대영",
+      "defaultAffection": 0,
+      "description": "책임연구원. 봉쇄 명령권자로 기록되었으나, 그 명령은 그의 손으로 내려지지 않았다. 말투가 거칠지만 부하 직원은 챙긴다.",
+      "tags": [
+        "npc"
+      ],
+      "factions": [],
+      "appearanceConditions": {},
+      "reactions": []
+    },
+    {
+      "id": "npc_a",
+      "name": "채이든",
+      "defaultAffection": 0,
+      "description": "연구보조원 A. (이름은 임시. 문서상 비식별 처리됨.)",
+      "tags": [
+        "npc"
+      ],
+      "factions": [],
+      "appearanceConditions": {},
+      "reactions": []
+    },
+    {
+      "id": "npc_b",
+      "name": "윤서",
+      "defaultAffection": 0,
+      "description": "연구보조원 B. (이름은 임시. 문서상 비식별 처리됨.)",
+      "tags": [
+        "npc"
+      ],
+      "factions": [],
+      "appearanceConditions": {},
+      "reactions": []
+    }
+  ],
+  "items": [
+    {
+      "id": "item_radio",
+      "name": "사내 무전기",
+      "description": "배터리가 무한하지 않다. 채널은 공용이다."
+    },
+    {
+      "id": "item_keycard_b",
+      "name": "폐기 경로 출입카드",
+      "description": "중층 폐기 경로용."
+    },
+    {
+      "id": "item_sample",
+      "name": "R-11 시료",
+      "description": "체온보다 뜨겁다."
+    },
+    {
+      "id": "item_oxygen",
+      "name": "휴대 산소 캐니스터",
+      "description": "오래 버티진 못한다."
+    },
+    {
+      "id": "item_keycard_a",
+      "name": "이든의 출입증",
+      "description": "누군가 떨어뜨린 것."
+    },
+    {
+      "id": "item_log_del",
+      "name": "삭제 예약 로그 조각",
+      "description": "DEL-0713."
+    },
+    {
+      "id": "item_log_copy",
+      "name": "로그·계획서 사본",
+      "description": "봉쇄 예약 계정과 프로젝트 계획서."
+    },
+    {
+      "id": "item_recording",
+      "name": "무전 녹음 파일",
+      "description": "미안하다는 말이 담겨 있다."
+    }
+  ],
+  "abilities": [],
+  "nodes": [
+    {
+      "id": "node_a01",
+      "text": "새벽 00시 31분. 우성제약 비르고 첨단생명연구소, LAB-B 저층 배양실입니다. 야근 사흘째. 연구보조원인 당신은 R-11 배양기 앞에서 3단계 신호 수치를 기록하고 있습니다. 유리 너머의 R-11은 오후보다 아주 조금 더 붉어 보입니다. 배양액 온도 표시는 36.5도에서 움직이지 않습니다.\n\n벽걸이 무전기에서 관측실의 선임연구원이 건조하게 말합니다.\n\n**진성패**  채이든 씨. 3단계 수치 보고하십시오. 신호 지속 시간부터.\n\n인사도 없습니다. 언제나 그렇습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_001",
+          "text": "읽히는 수치를 그대로 보고한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_favor": 0
+            },
+            "unlockStats": [
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_a02"
+        },
+        {
+          "id": "choice_002",
+          "text": "지속 시간이 평소보다 길다는 점을 덧붙여 보고한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 3
+            },
+            "stats": {
+              "stat_favor": 3
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_reported"
+            ]
+          },
+          "nextNodeId": "node_a02"
+        },
+        {
+          "id": "choice_003",
+          "text": "재측정 후 보고하겠다고 한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -2
+            },
+            "stats": {
+              "mental": 3,
+              "stat_favor": -2
+            },
+            "unlockStats": [
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_a02"
+        }
+      ],
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a02",
+      "text": "00시 42분. 천장 스피커에서 짧은 경보음이 세 번 울리더니 끊깁니다. 육중한 소리와 함께 배양실 출입문의 잠금 장치가 내려앉습니다. 환기구의 소리가 달라집니다. 공기를 빨아들이는 음압 전환음. 형광등이 한 차례 깜빡이고, 그 뒤로 조금 더 어두워집니다.\n\n벽걸이 무전기가 거칠게 지직거립니다.\n\n**김대영**  ······제기랄. LAB-B 봉쇄한다! 안에 누가 있든 지금은—\n\n말이 끊깁니다. 다시 이어진 목소리는 아까와 전혀 다르게 가라앉아 있습니다.\n\n**김대영**  ······미안하다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_004",
+          "text": "출입구 패드를 눌러본다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -5,
+              "stat_oxygen": 100
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_a03"
+        },
+        {
+          "id": "choice_005",
+          "text": "무전기에 대고 안에 사람이 있다고 소리친다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "money": -5,
+              "stat_oxygen": 100
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_a_called_out"
+            ]
+          },
+          "nextNodeId": "node_a03"
+        },
+        {
+          "id": "choice_006",
+          "text": "배양기를 돌아본다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 2
+            },
+            "stats": {
+              "stat_oxygen": 100,
+              "stat_favor": 2
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_a03"
+        }
+      ],
+      "position": {
+        "x": 280,
+        "y": 0
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a03",
+      "text": "배양기 유리에 물방울이 맺힙니다. 안쪽에서 젖은 천을 찢는 소리가 납니다. R-11이 벽면을 밀어내듯 부풀어 오르고, 표면에는 핏줄 같은 실 조직이 그물처럼 번집니다.\n\n**진성패**  R-11 상태 보고. ······그리고 채취 튜브로 시료 한 점 확보하십시오. 폐기 금지.\n\n지시는 짧고 정확합니다. 목소리에는 걱정도 두려움도 없습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_007",
+          "text": "시료 한 점을 채취한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 3
+            },
+            "stats": {
+              "mental": -5,
+              "stat_contam": 10,
+              "stat_favor": 3
+            },
+            "unlockStats": [
+              "stat_contam",
+              "stat_favor"
+            ],
+            "addItems": [
+              "item_sample"
+            ],
+            "addFlags": [
+              "flag_a_sample"
+            ]
+          },
+          "nextNodeId": "node_a04"
+        },
+        {
+          "id": "choice_008",
+          "text": "채취 전에 배양체의 반응을 관찰해 기록한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 6
+            },
+            "stats": {
+              "stat_oxygen": -5,
+              "stat_insight": 1,
+              "stat_favor": 6
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_obs_culture",
+              "flag_a_know_sound"
+            ]
+          },
+          "nextNodeId": "node_a04"
+        },
+        {
+          "id": "choice_009",
+          "text": "비상 폐기 밸브를 연다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -4
+            },
+            "stats": {
+              "health": -5,
+              "stat_favor": -4
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_purge"
+            ]
+          },
+          "nextNodeId": "node_a04"
+        },
+        {
+          "id": "choice_010",
+          "text": "지시를 무시하고 정비용 해치 쪽으로 향한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -3
+            },
+            "stats": {
+              "stat_favor": -3
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_defied"
+            ]
+          },
+          "nextNodeId": "node_a04"
+        }
+      ],
+      "position": {
+        "x": 560,
+        "y": 0
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a04",
+      "text": "공기가 미지근하게 끈적입니다. 코끝이 아리고 숨을 들이쉴 때마다 가슴이 얕게 걸립니다. 산소 표시등이 노란색으로 바뀝니다. 벽 타일 틈에서 머리카락처럼 가는 실이 자라 나와 있습니다. 밟으면 미지근하게 눌립니다.\n\n그때 벽 너머에서 규칙적인 두드림이 들려옵니다. 톡, 톡톡. 사람의 손이 배관을 두드리는 소리입니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_011",
+          "text": "두드림에 두드림으로 답한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": -10
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_a_contact_b"
+            ]
+          },
+          "nextNodeId": "node_a05"
+        },
+        {
+          "id": "choice_012",
+          "text": "캐비닛을 뒤져 산소 캐니스터를 찾는다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "health": -5,
+              "stat_oxygen": -5
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ],
+            "addItems": [
+              "item_oxygen"
+            ]
+          },
+          "nextNodeId": "node_a05"
+        },
+        {
+          "id": "choice_013",
+          "text": "숨을 참고 환기구 쪽으로 이동한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": 3,
+              "stat_oxygen": -20
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_a05"
+        }
+      ],
+      "position": {
+        "x": 840,
+        "y": 0
+      },
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "폐기 밸브에서 뿜어져 나온 증기가 방 안에 뿌옇게 깔려 있습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_purge"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a04_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "품속의 시료 튜브가 체온보다 뜨겁습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_sample"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a04_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "관찰 메모를 되짚어 봅니다. R-11 표면의 실 조직은 주변 소리가 커질 때마다 굵어졌습니다. 아주 미세하게, 그러나 분명하게.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_obs_culture"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a04_frag_3",
+          "priority": 3
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a05",
+      "text": "저층 배관실. 벽 너머의 두드림은 이제 목소리가 되어 배관 속으로 울립니다.\n\n**윤서**  ······선배? 이든 선배 맞죠? 저 중층 폐기 통로에 갇혔어요. 소각동 쪽 게이트만 열리면 나갈 수 있다고 했는데, 열리는 건지 모르겠어요. 열이 좀 나요.\n\n숨소리 사이로 떨림이 느껴집니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_014",
+          "text": "“같이 나가자. 게이트에서 만나.”",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": 5
+            },
+            "addFlags": [
+              "flag_a_promise_b"
+            ]
+          },
+          "nextNodeId": "node_a06"
+        },
+        {
+          "id": "choice_015",
+          "text": "“우선 각자 살아남는 게 먼저야.”",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -5
+            },
+            "addFlags": [
+              "flag_a_split"
+            ]
+          },
+          "nextNodeId": "node_a06"
+        },
+        {
+          "id": "choice_016",
+          "text": "“성패 선임께 도움을 청해 볼게.”",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -2
+            },
+            "stats": {
+              "money": -5,
+              "stat_favor": -2
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_asked_seongpae"
+            ]
+          },
+          "nextNodeId": "node_a06"
+        }
+      ],
+      "position": {
+        "x": 0,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a06",
+      "text": "무전기에서 낮게 떨리는 숨소리가 섞여 나옵니다.\n\n**김대영**  ······이든이냐? 거기 몇 명이야. 다친 데는. ······아니, 그것보다 R-11 지금 상태부터 말해. 3단계 신호가 내가 아는 수치보다 왜 이렇게 높은 건데. 대체 누가 조건을 건드렸어? 젠장, 내가 승인한 적 없는—\n\n말끝이 흐려지다 끊깁니다. 채널은 열려 있습니다. 관측실도 듣고 있을 것입니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_017",
+          "text": "배양체의 반응과 수치 변화를 순서대로 상세히 보고한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 5
+            },
+            "stats": {
+              "money": -5,
+              "stat_insight": 1,
+              "stat_favor": 5
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_detail"
+            ]
+          },
+          "nextNodeId": "node_a07"
+        },
+        {
+          "id": "choice_018",
+          "text": "무서워서 제대로 말하지 못한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -3
+            },
+            "stats": {
+              "mental": -5,
+              "stat_favor": -3
+            },
+            "unlockStats": [
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_a07"
+        },
+        {
+          "id": "choice_019",
+          "text": "3단계 조건이 지시서와 다른 것 같다고 말한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -2
+            },
+            "stats": {
+              "stat_insight": 1,
+              "stat_favor": -2
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_doubt"
+            ]
+          },
+          "nextNodeId": "node_a07"
+        }
+      ],
+      "position": {
+        "x": 280,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a07",
+      "text": "저층 배관실 안쪽. 천장 파이프에 회색이 도는 붉은 조직이 감겨 있습니다. 배관과 전선을 삼키며 자란 덩어리 끝에서 팔 같은 것이 세 마디, 네 마디로 접혀 있습니다. 관절 수가 맞지 않습니다. 얼굴이 있어야 할 자리는 젖은 피막으로 덮여 있고 눈도 입도 없습니다.\n\n연구실에서는 이런 것을 ‘미완’이라 분류했습니다. 형태를 갖추려다 멈춘 개체. 그것이 당신을 보지 못한 채 고개 아닌 고개를 갸웃합니다. 벽 스피커의 잡음이 지직거릴 때마다 피막이 그쪽으로 움찔합니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_020",
+          "text": "숨을 참고 반응을 관찰한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 4
+            },
+            "stats": {
+              "stat_oxygen": -5,
+              "mental": -5,
+              "stat_insight": 1,
+              "stat_favor": 4
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_know_sound"
+            ]
+          },
+          "nextNodeId": "node_a08"
+        },
+        {
+          "id": "choice_021",
+          "text": "시선을 피하고 벽만 보며 다가간다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_a08"
+        },
+        {
+          "id": "choice_022",
+          "text": "무전기로 발견 사실을 즉시 보고한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "money": -5
+            },
+            "addFlags": [
+              "flag_a_noticed_radio"
+            ]
+          },
+          "nextNodeId": "node_a08x"
+        }
+      ],
+      "position": {
+        "x": 560,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a08",
+      "text": "미완체가 통로 한가운데로 몸을 내립니다. 지나가려면 그 아래를 통과해야 합니다. 배관에서 물 떨어지는 소리, 당신의 숨, 천장 스피커의 잡음. 미완체는 그 소리들 사이를 더듬고 있습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_023",
+          "text": "발소리를 죽이고 벽을 따라 통과한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": -15,
+              "mental": -5
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_a09"
+        },
+        {
+          "id": "choice_024",
+          "text": "배관 밸브를 열어 물소리로 유인한다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_know_sound"
+            ]
+          },
+          "effects": {
+            "affection": {
+              "npc_seongpae": 3
+            },
+            "stats": {
+              "stat_favor": 3
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_lure"
+            ]
+          },
+          "nextNodeId": "node_a09"
+        },
+        {
+          "id": "choice_025",
+          "text": "전력으로 달린다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "health": -5
+            },
+            "addFlags": [
+              "flag_a_noticed_run"
+            ]
+          },
+          "nextNodeId": "node_a08x"
+        },
+        {
+          "id": "choice_026",
+          "text": "무전기로 성패에게 보고하며 이동한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "money": -5
+            },
+            "addFlags": [
+              "flag_a_noticed_radio"
+            ]
+          },
+          "nextNodeId": "node_a08x"
+        }
+      ],
+      "position": {
+        "x": 840,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a08x",
+      "text": "쿵. 조직이 천장에서 풀려 내립니다. 몸이 그대로 붙잡힙니다. 죽일 생각이 없는 손입니다. 젖은 피막이 당신의 입가에 닿고, 숨을 훔쳐 가듯 오래 빨아들입니다. 귀에서 방금 당신이 낸 소리가 되돌아옵니다. 한 글자씩, 더듬더듬, 어색한 억양으로.\n\n몇 초 뒤, 미완체는 당신을 놓아줍니다. 필요한 만큼 가져갔다는 듯이. 목이 쓰라리고 목소리가 조금 낮게 갈라져 있습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_027",
+          "text": "······일어난다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 6
+            },
+            "stats": {
+              "health": -15,
+              "mental": -10,
+              "stat_contam": 15,
+              "stat_favor": 6
+            },
+            "unlockStats": [
+              "stat_contam",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_marked"
+            ]
+          },
+          "nextNodeId": "node_a09"
+        }
+      ],
+      "position": {
+        "x": 0,
+        "y": 380
+      },
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "달리는 발소리가 통로 전체에 울렸습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_noticed_run"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a08x_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "무전기에서 당신의 보고 음성이 지직 울렸습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_noticed_radio"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a08x_frag_2",
+          "priority": 2
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a09",
+      "text": "저층 준비실. 잠금은 걸리지 않은 채입니다. 전원이 반쯤 죽은 단말과 종이 지시서 파일이 놓여 있습니다.\n\n공유 폴더의 개요 문서는 짧습니다. **‘A■■■ 프로젝트: 만성 괴사·중증 화상 조직의 재생 촉진제 개발. 목표 재생률 82.4%’.**\n\n그런데 책상 위 수기 지시서는 이상합니다. 3단계 항목에 ‘신호 종료 조건: 해제(임원 승인)’, ‘숙주 세포군: 인체 유래 P-계열’, ‘관찰 항목: 신경 반응 및 형태 유도’.\n\n치료제라면 신호를 왜 끄지 않는가. 조직의 형태를 왜 유도하는가. 당신이 알고 있던 연구 개요와 이 지시서 사이에는 건널 수 없는 간격이 있습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_028",
+          "text": "지시서를 사진으로 저장한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -3
+            },
+            "stats": {
+              "stat_insight": 2,
+              "stat_favor": -3
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_saw_protocol"
+            ]
+          },
+          "nextNodeId": "node_a10"
+        },
+        {
+          "id": "choice_029",
+          "text": "개요만 확인하고 지시서는 덮는다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_insight": 1
+            },
+            "unlockStats": [
+              "stat_insight"
+            ]
+          },
+          "nextNodeId": "node_a10"
+        },
+        {
+          "id": "choice_030",
+          "text": "‘형태 유도’ 항목을 근거로 미완체의 행동을 해석해 본다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 5
+            },
+            "stats": {
+              "stat_insight": 2,
+              "stat_favor": 5
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_hypothesis"
+            ]
+          },
+          "nextNodeId": "node_a10"
+        }
+      ],
+      "position": {
+        "x": 280,
+        "y": 380
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a10",
+      "text": "천장 스피커가 켜집니다.\n\n**진성패**  채이든 씨. 위치와 상태. ······그리고 준비실 단말 접속 기록이 올라왔습니다. 열람 목적.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_031",
+          "text": "미완체의 소리 반응을 관찰한 대로 진술한다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_know_sound"
+            ]
+          },
+          "effects": {
+            "affection": {
+              "npc_seongpae": 5
+            },
+            "stats": {
+              "money": -5,
+              "stat_insight": 1,
+              "stat_favor": 5
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_a11"
+        },
+        {
+          "id": "choice_032",
+          "text": "접촉 당시의 반응을 순서대로 진술한다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_marked"
+            ]
+          },
+          "effects": {
+            "affection": {
+              "npc_seongpae": 5
+            },
+            "stats": {
+              "money": -5,
+              "stat_favor": 5
+            },
+            "unlockStats": [
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_a11"
+        },
+        {
+          "id": "choice_033",
+          "text": "연구 내용을 이해하고 싶어서 열람했다고 답한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -2
+            },
+            "stats": {
+              "stat_favor": -2
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_honest"
+            ]
+          },
+          "nextNodeId": "node_a11"
+        },
+        {
+          "id": "choice_034",
+          "text": "열람하지 않았다고 부인한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -4
+            },
+            "stats": {
+              "stat_favor": -4
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_a_lied"
+            ]
+          },
+          "nextNodeId": "node_a11"
+        },
+        {
+          "id": "choice_035",
+          "text": "위치와 상태만 짧게 보고한다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_a11"
+        }
+      ],
+      "position": {
+        "x": 560,
+        "y": 380
+      },
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "**진성패**  ······방금 개체와 접촉했지. 접촉 순서대로 말하십시오. 반응 하나도 빼지 말고.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a10_frag_1",
+          "priority": 1
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a11",
+      "text": "저층에서 중층 방향으로 이어지는 복도. 유도등의 초록색 사람 그림이 달리는 자세에서 조금씩 팔이 길어지고 있습니다. 문 번호는 B-07, B-07, B-07. 같은 번호가 반복됩니다. 벽 마감재가 젖은 종이처럼 처지고 그 안쪽에서 일정한 박동이 느껴집니다. 당신의 심장이 뛰는 속도와 똑같습니다.\n\n갈림길입니다. 왼쪽은 열기가 밀려오는 폐기 경로, INC-2 소각동 방향. 오른쪽은 관측실로 이어지는 통제 연결로.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_036",
+          "text": "통제 연결로로 간다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": -5
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_a12"
+        },
+        {
+          "id": "choice_037",
+          "text": "폐기 경로로 우회한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "health": -10,
+              "stat_oxygen": -10,
+              "stat_contam": 5
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_contam"
+            ]
+          },
+          "nextNodeId": "node_a12"
+        }
+      ],
+      "position": {
+        "x": 840,
+        "y": 380
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n귓가에서 누군가 당신의 목소리로 속삭입니다. ······이 길이 아니야.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "minStats": {
+              "stat_contam": 30
+            }
+          },
+          "id": "node_a11_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n갈라진 목소리의 당신에게 벽의 박동이 조금씩 박자를 맞춥니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a11_frag_2",
+          "priority": 2
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a12",
+      "text": "3번 게이트 앞입니다. 강화 유리 너머 격리 구역의 불빛이 붉습니다. 문 위 감시 카메라의 붉은 점이 당신을 향해 천천히 깜빡입니다. 게이트 개방은 관제 판단이라고, 언젠가 교육에서 들었습니다. 관제가 누구를 뜻하는지는 그때도 지금도 알 수 없습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_038",
+          "text": "카메라를 똑바로 바라본다.",
+          "conditions": {
+            "minStats": {
+              "stat_favor": 22,
+              "stat_oxygen": 20
+            }
+          },
+          "effects": {
+            "randomEffects": [
+              {
+                "chance": 80,
+                "addFlags": [
+                  "flag_a_survive"
+                ],
+                "removeFlags": [],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
+          "nextNodeId": "node_a13"
+        },
+        {
+          "id": "choice_039",
+          "text": "카메라를 똑바로 바라본다.",
+          "conditions": {
+            "minStats": {
+              "stat_favor": 9,
+              "stat_oxygen": 20
+            },
+            "maxStats": {
+              "stat_favor": 21
+            }
+          },
+          "effects": {
+            "randomEffects": [
+              {
+                "chance": 50,
+                "addFlags": [
+                  "flag_a_survive"
+                ],
+                "removeFlags": [],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
+          "nextNodeId": "node_a13"
+        },
+        {
+          "id": "choice_040",
+          "text": "카메라를 똑바로 바라본다.",
+          "conditions": {
+            "minStats": {
+              "stat_oxygen": 20
+            },
+            "maxStats": {
+              "stat_favor": 8
+            }
+          },
+          "effects": {
+            "randomEffects": [
+              {
+                "chance": 20,
+                "addFlags": [
+                  "flag_a_survive"
+                ],
+                "removeFlags": [],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
+          "nextNodeId": "node_a13"
+        },
+        {
+          "id": "choice_041",
+          "text": "숨이 끊어질 것 같다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 19
+            }
+          },
+          "effects": {},
+          "nextNodeId": "node_a13"
+        }
+      ],
+      "position": {
+        "x": 0,
+        "y": 570
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a13",
+      "text": "잠금 장치가 움직이기까지 걸리는 몇 초가 몇 분처럼 흐릅니다. 귀에서 피가 도는 소리만 들립니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_042",
+          "text": "……",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_survive"
+            ]
+          },
+          "effects": {
+            "addFlags": [
+              "flag_run1_done"
+            ]
+          },
+          "nextNodeId": "node_a14"
+        },
+        {
+          "id": "choice_043",
+          "text": "……",
+          "conditions": {
+            "excludedFlags": [
+              "flag_a_survive"
+            ]
+          },
+          "effects": {
+            "addFlags": [
+              "flag_run1_done"
+            ]
+          },
+          "nextNodeId": "node_a15"
+        }
+      ],
+      "position": {
+        "x": 280,
+        "y": 570
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a14",
+      "text": "철컥. 문이 열립니다. 방호복 차림의 구조대원이 당신의 팔을 잡아 끌어냅니다. 눈부신 조명. 누군가 산소마스크를 얼굴에 씌우며 큰 소리로 묻습니다.\n\n**??**  의식 있습니까! 이름 말할 수 있습니까!\n\n들것 위에서 천장이 빠르게 흘러갑니다. 구급차 사이렌, 그리고 응급실의 하얀 조명. 살았다는 사실이 아직 실감나지 않습니다.\n\n**[엔딩 A-1  ‘응급실’]**",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [],
+      "position": {
+        "x": 560,
+        "y": 570
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n체온계는 정상이라고 하는데, 손끝만 이상하게 뜨겁습니다.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "minStats": {
+              "stat_contam": 40
+            }
+          },
+          "id": "node_a14_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n들것 위에서 윤서를 찾아 두리번거리지만 어디에서도 목소리는 들리지 않습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_promise_b"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a14_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n목소리는 여전히 조금 낮게 갈라져 있습니다. 의사는 연기 흡입 때문일 거라고 합니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_a14_frag_3",
+          "priority": 3
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_a15",
+      "text": "문은 열리지 않습니다. 카메라의 붉은 점이 깜빡임을 멈춥니다. 마치 관찰을 마쳤다는 듯이. 시야 가장자리가 어두워지고 귓가에서 누군가 당신의 목소리로 속삭입니다.\n\n**??**  ······같이 나가자.\n\n**[엔딩 A-2  ‘관찰 종료’]**",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [],
+      "position": {
+        "x": 840,
+        "y": 570
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b01",
+      "text": "00시 20분. LAB-B 중층 폐기 경로. 연구보조원인 당신은 오늘 마지막 소각 이송 작업을 밀고 있습니다. 폐기 카트 위 밀폐 상자들은 오늘따라 유난히 미지근합니다.\n\n벽 스피커에서 선임연구원의 목소리가 떨어집니다.\n\n**진성패**  윤서 씨. 소각 전에 로트 목록 대조하십시오. 이상 로트는 개봉하지 말고 보고. ······알아들었으면 대답.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_044",
+          "text": "상자 라벨을 하나씩 대조한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 2
+            },
+            "stats": {
+              "stat_favor": 2
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_lotcheck"
+            ]
+          },
+          "nextNodeId": "node_b02"
+        },
+        {
+          "id": "choice_045",
+          "text": "“네.”",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_favor": 0
+            },
+            "unlockStats": [
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_b02"
+        },
+        {
+          "id": "choice_046",
+          "text": "대조 없이 소각동으로 카트를 민다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -3
+            },
+            "stats": {
+              "stat_favor": -3
+            },
+            "unlockStats": [
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_b02"
+        }
+      ],
+      "position": {
+        "x": 1400,
+        "y": 0
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b02",
+      "text": "00시 42분. 중층 통로 양쪽 끝의 방화 셔터가 동시에 내려옵니다. 소각동으로 이어지는 문만 붉은 점등 상태로 남습니다. 형광등이 한 번 꺼졌다 켜지고, 켜진 뒤의 불빛은 이전보다 노랗습니다. 카트 위 상자 하나에서 젖은 소리가 납니다.\n\n이마에 열이 오릅니다. 몇 분 전부터 피부가 이유 없이 화끈거렸는데, 이제는 무시할 수 없습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_047",
+          "text": "셔터를 두드린다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -5,
+              "stat_oxygen": 100
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_b03"
+        },
+        {
+          "id": "choice_048",
+          "text": "스피커를 향해 상황을 보고한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "money": -5,
+              "stat_oxygen": 100
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_b03"
+        },
+        {
+          "id": "choice_049",
+          "text": "카트 뒤에 몸을 숨긴다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": 5,
+              "stat_oxygen": 100
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_b03"
+        }
+      ],
+      "position": {
+        "x": 1680,
+        "y": 0
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b03",
+      "text": "셔터 옆 배관에서 톡, 톡톡 소리가 납니다. 당신도 모르게 귀를 갖다 댑니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_050",
+          "text": "배관 너머로 대답한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": 5
+            },
+            "addFlags": [
+              "flag_b_answered"
+            ]
+          },
+          "nextNodeId": "node_b04"
+        },
+        {
+          "id": "choice_051",
+          "text": "스피커로 상황을 다시 보고한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "money": -5
+            }
+          },
+          "nextNodeId": "node_b04"
+        },
+        {
+          "id": "choice_052",
+          "text": "소각동 방향으로 움직인다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": -5
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_b04"
+        }
+      ],
+      "position": {
+        "x": 1960,
+        "y": 0
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n**이든**  윤서 씨, 들려요? 소각동 게이트에서 만나요. 같이 나가요.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_promise_b"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b03_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n**이든**  ······미안해요. 각자 움직이는 쪽이 나을 것 같아요. 살아서 봐요.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_split"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b03_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n**이든**  성패 선임께 부탁해 볼게요. 조금만 기다려요.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_asked_seongpae"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b03_frag_3",
+          "priority": 3
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n돌아오는 소리는 없습니다. 배관은 이내 조용해집니다.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [
+              "flag_a_promise_b",
+              "flag_a_split",
+              "flag_a_asked_seongpae"
+            ],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b03_frag_4",
+          "priority": 4
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b04",
+      "text": "소각동 방향 복도에서 카트 상자 하나의 이음새가 벌어집니다. 안쪽에서 반투명한 결절 덩어리가 맥동합니다. 젖은 심장처럼 일정한 박자로. 결절 표면 아래에 무언가 접혀 있습니다. 손가락 마디 같은.\n\n**진성패**  결절 한 점 채취하십시오. 이송 경로는 관제 소관. ······윤서 씨, 손 떨지 말고.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_053",
+          "text": "결절 한 점을 채취한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 3
+            },
+            "stats": {
+              "mental": -5,
+              "stat_contam": 10,
+              "stat_favor": 3
+            },
+            "unlockStats": [
+              "stat_contam",
+              "stat_favor"
+            ],
+            "addItems": [
+              "item_sample"
+            ],
+            "addFlags": [
+              "flag_b_sample"
+            ]
+          },
+          "nextNodeId": "node_b05"
+        },
+        {
+          "id": "choice_054",
+          "text": "채취 전에 결절의 반응을 관찰해 기록한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 6
+            },
+            "stats": {
+              "stat_oxygen": -5,
+              "stat_insight": 1,
+              "stat_favor": 6
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_obs_nodule"
+            ]
+          },
+          "nextNodeId": "node_b05"
+        },
+        {
+          "id": "choice_055",
+          "text": "“이게 뭔지 먼저 알려 주세요.”",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -2
+            },
+            "stats": {
+              "stat_insight": 1,
+              "stat_favor": -2
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_asked"
+            ]
+          },
+          "nextNodeId": "node_b05"
+        },
+        {
+          "id": "choice_056",
+          "text": "상자째 소각로 쪽으로 밀어 던진다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -4
+            },
+            "stats": {
+              "health": -5,
+              "stat_favor": -4
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_burn"
+            ]
+          },
+          "nextNodeId": "node_b05"
+        }
+      ],
+      "position": {
+        "x": 2240,
+        "y": 0
+      },
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "라벨에는 이렇게 적혀 있습니다.\n**폐기 대상 아님 — 관측실 이송 대기 / Lot V2■-S / 공여: 비식별 (인체 유래)**\n소각 목록에는 분명 ‘폐기’로 올라 있었는데.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_lotcheck"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b04_frag_1",
+          "priority": 1
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b05",
+      "text": "무전기가 거칠게 울립니다.\n\n**김대영**  ······윤서야? 살아 있냐. 거기 폐기 통로지. 폐기 로트에 3단계 시료 섞였는지 확인했어? ······누가 내 승인 없이 로트를 돌렸어. 젠장. 아는 대로 말해.\n\n채널은 열려 있습니다. 관측실도 듣고 있을 것입니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_057",
+          "text": "라벨과 결절의 상태를 순서대로 상세히 보고한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 4
+            },
+            "stats": {
+              "money": -5,
+              "stat_insight": 1,
+              "stat_favor": 4
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_detail"
+            ]
+          },
+          "nextNodeId": "node_b06"
+        },
+        {
+          "id": "choice_058",
+          "text": "무서워서 울먹이며 제대로 답하지 못한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -3
+            },
+            "stats": {
+              "mental": -5,
+              "stat_favor": -3
+            },
+            "unlockStats": [
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_b06"
+        },
+        {
+          "id": "choice_059",
+          "text": "“성패 선임께 여쭤보세요.”",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -2
+            },
+            "stats": {
+              "stat_favor": -2
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_deflect"
+            ]
+          },
+          "nextNodeId": "node_b06"
+        }
+      ],
+      "position": {
+        "x": 1400,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b06",
+      "text": "열이 본격적으로 오릅니다. 시야 가장자리가 물에 젖은 것처럼 흔들립니다. 벽 전선 피복이 맥박에 맞춰 부풀었다 가라앉습니다. 손잡이를 잡았다 놓자 손바닥에 미지근한 점액이 묻어 있습니다. 이차 노출입니다.\n\n복도 끝 폐기 관리 단말이 아직 켜져 있습니다.\n\n**폐기 내역: 인체 유래 P-계열 조직 3건 — 소각 대상 아님 / 관측실 이송**\n**DEL-0713 — 24시간 후 실행**",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_060",
+          "text": "단말 로그를 열람하고 사진으로 남긴다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": -3
+            },
+            "stats": {
+              "mental": -5,
+              "stat_insight": 2,
+              "stat_favor": -3
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addItems": [
+              "item_log_del"
+            ],
+            "addFlags": [
+              "flag_b_log"
+            ]
+          },
+          "nextNodeId": "node_b07"
+        },
+        {
+          "id": "choice_061",
+          "text": "폐기 내역만 확인하고 넘어간다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_insight": 1
+            },
+            "unlockStats": [
+              "stat_insight"
+            ]
+          },
+          "nextNodeId": "node_b07"
+        },
+        {
+          "id": "choice_062",
+          "text": "화면을 외면하고 앞으로 간다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_b07"
+        },
+        {
+          "id": "choice_063",
+          "text": "산소 캐니스터를 찾는다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": -5
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ],
+            "addItems": [
+              "item_oxygen"
+            ]
+          },
+          "nextNodeId": "node_b07"
+        }
+      ],
+      "position": {
+        "x": 1680,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b07",
+      "text": "통로 천장 배관에 붉은 조직이 감겨 있습니다. 팔 같은 마디가 접혀 있고 얼굴 자리는 젖은 피막입니다. 당신이 다가오자, 아니, 당신의 이마에서 오르는 열이 다가오자 피막이 천천히 당신 쪽으로 기웁니다. 열이 오를수록 더 정확하게.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_064",
+          "text": "몸을 움직이지 않고 반응을 관찰한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 4
+            },
+            "stats": {
+              "stat_oxygen": -5,
+              "mental": -5,
+              "stat_insight": 1,
+              "stat_favor": 4
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_know_heat"
+            ]
+          },
+          "nextNodeId": "node_b08"
+        },
+        {
+          "id": "choice_065",
+          "text": "카트 뒤로 몸을 숙인 채 이동한다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_b08"
+        },
+        {
+          "id": "choice_066",
+          "text": "소각로 예열 스위치를 눌러 열로 쫓아본다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_b_noticed_heat"
+            ]
+          },
+          "nextNodeId": "node_b08x"
+        }
+      ],
+      "position": {
+        "x": 1960,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b08",
+      "text": "개체가 통로 한가운데로 몸을 내립니다. 이마의 열, 카트 상자의 미지근함, 멀리서 웅웅거리는 소각로 예열 소음. 개체는 그 열들 사이에서 가장 뜨거운 것을 고르고 있습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_067",
+          "text": "카트의 냉각 앰플을 체온에 눌러 열을 죽인다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_know_heat"
+            ]
+          },
+          "effects": {
+            "affection": {
+              "npc_seongpae": 3
+            },
+            "stats": {
+              "health": -5,
+              "stat_favor": 3
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_cooled"
+            ]
+          },
+          "nextNodeId": "node_b09"
+        },
+        {
+          "id": "choice_068",
+          "text": "결절 조각을 반대편으로 던져 미끼로 쓴다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_sample"
+            ]
+          },
+          "effects": {
+            "affection": {
+              "npc_seongpae": -1
+            },
+            "stats": {
+              "stat_favor": -1
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "removeItems": [
+              "item_sample"
+            ],
+            "addFlags": [
+              "flag_b_lure"
+            ]
+          },
+          "nextNodeId": "node_b09"
+        },
+        {
+          "id": "choice_069",
+          "text": "카트 뒤에서 숨죽인 채 열이 식기를 기다린다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": -15,
+              "mental": -5
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_b09"
+        },
+        {
+          "id": "choice_070",
+          "text": "전력으로 달린다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_b_noticed_run"
+            ]
+          },
+          "nextNodeId": "node_b08x"
+        }
+      ],
+      "position": {
+        "x": 2240,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b08x",
+      "text": "개체의 팔이 뻗어 이마를 짚습니다. 열을 재는 손처럼, 오래. 피막이 닿은 자리에 눌러붙었다 떨어지며 살갗에 무늬를 남깁니다. 지문이 아니라 체온을 찍어 낸 듯한 원형의 자국. 개체는 충분하다는 듯 천장으로 물러납니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_071",
+          "text": "······일어난다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 6
+            },
+            "stats": {
+              "health": -15,
+              "mental": -10,
+              "stat_contam": 15,
+              "stat_favor": 6
+            },
+            "unlockStats": [
+              "stat_contam",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_marked"
+            ]
+          },
+          "nextNodeId": "node_b09"
+        }
+      ],
+      "position": {
+        "x": 1400,
+        "y": 380
+      },
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "예열 스위치가 켜지고 소각로가 낮게 울었습니다. 열은 개체를 밀어내지 않고 오히려 불렀습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_noticed_heat"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b08x_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "달리는 등 뒤에서 이마의 열이 신호처럼 번졌습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_noticed_run"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b08x_frag_2",
+          "priority": 2
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b09",
+      "text": "통로 끝, 천장 배관에 또 다른 붉은 조직이 감겨 있습니다. 바닥에는 누군가 떨어뜨린 출입증이 놓여 있습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_072",
+          "text": "들려오는 목소리에 대답한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -10,
+              "stat_contam": 10
+            },
+            "unlockStats": [
+              "stat_contam"
+            ],
+            "addFlags": [
+              "flag_b_mimic"
+            ]
+          },
+          "nextNodeId": "node_b10"
+        },
+        {
+          "id": "choice_073",
+          "text": "귀를 막고 지나간다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -5
+            }
+          },
+          "nextNodeId": "node_b10"
+        },
+        {
+          "id": "choice_074",
+          "text": "출입증을 챙긴다.",
+          "conditions": {},
+          "effects": {
+            "addItems": [
+              "item_keycard_a"
+            ]
+          },
+          "nextNodeId": "node_b10"
+        }
+      ],
+      "position": {
+        "x": 1680,
+        "y": 380
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n발자국은 게이트 방향으로 이어져 있습니다. 누군가 이 길을 먼저 지나갔습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_survive"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b09_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n출입증에는 이든의 이름이 찍혀 있습니다. 조직이 이든의 목소리를 흉내 냅니다.\n\n**??**  ······윤서 씨, 살아서 봐요.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [
+              "flag_a_survive"
+            ],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b09_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n이마의 원형 자국이 맥박에 맞춰 욱신거립니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b09_frag_3",
+          "priority": 3
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b10",
+      "text": "스피커가 켜집니다.\n\n**진성패**  윤서 씨. 위치와 상태 보고하십시오. 결절 접촉 이후 체온 변화, 있으면 시간 단위로.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_075",
+          "text": "개체의 열 반응을 관찰한 대로 진술한다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_know_heat"
+            ]
+          },
+          "effects": {
+            "affection": {
+              "npc_seongpae": 5
+            },
+            "stats": {
+              "money": -5,
+              "stat_insight": 1,
+              "stat_favor": 5
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_b11"
+        },
+        {
+          "id": "choice_076",
+          "text": "접촉 당시의 반응을 순서대로 진술한다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_marked"
+            ]
+          },
+          "effects": {
+            "affection": {
+              "npc_seongpae": 5
+            },
+            "stats": {
+              "money": -5,
+              "stat_favor": 5
+            },
+            "unlockStats": [
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_b11"
+        },
+        {
+          "id": "choice_077",
+          "text": "폐기 단말은 상황을 이해하려고 열었다고 답한다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_log"
+            ]
+          },
+          "effects": {
+            "affection": {
+              "npc_seongpae": -2
+            },
+            "stats": {
+              "stat_favor": -2
+            },
+            "unlockStats": [
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_b11"
+        },
+        {
+          "id": "choice_078",
+          "text": "폐기 단말은 열지 않았다고 부인한다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_log"
+            ]
+          },
+          "effects": {
+            "affection": {
+              "npc_seongpae": -4
+            },
+            "stats": {
+              "stat_favor": -4
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_lied"
+            ]
+          },
+          "nextNodeId": "node_b11"
+        },
+        {
+          "id": "choice_079",
+          "text": "위치와 상태만 짧게 보고한다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_b11"
+        }
+      ],
+      "position": {
+        "x": 1960,
+        "y": 380
+      },
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "**진성패**  ······개체 접촉 기록 확인. 접촉 순서대로 진술.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b10_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n**진성패**  폐기 단말 접속 이력. 열람 목적.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_log"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b10_frag_2",
+          "priority": 2
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b11",
+      "text": "소각동으로 이어지는 마지막 복도. 벽 곳곳에서 사람만 한 형상이 돋아 있습니다. 젖은 피막이 어깨와 팔의 모양으로 굳어 가다 만 것들. 얼굴 자리는 비어 있습니다. 그중 몇몇은 당신의 걸음에 맞춰 아주 조금씩 고개를 기울입니다. 이것들은 개체가 아니라 아직 개체가 되지 못한 것들입니다. 밟는 바닥은 젖은 살처럼 미끈합니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_080",
+          "text": "형상 하나를 가까이서 관찰한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 4
+            },
+            "stats": {
+              "mental": -10,
+              "stat_oxygen": -5,
+              "stat_contam": 5,
+              "stat_insight": 1,
+              "stat_favor": 4
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_contam",
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_b_obs_forms"
+            ]
+          },
+          "nextNodeId": "node_b12"
+        },
+        {
+          "id": "choice_081",
+          "text": "시선을 피하고 곧장 걷는다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_b12"
+        },
+        {
+          "id": "choice_082",
+          "text": "형상에 대고 이름을 불러 본다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -5
+            },
+            "addFlags": [
+              "flag_b_call"
+            ]
+          },
+          "nextNodeId": "node_b12"
+        }
+      ],
+      "position": {
+        "x": 2240,
+        "y": 380
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n형상 하나가 당신의 목소리로 당신의 이름을 되풀이합니다. 윤서, 윤서, 윤서.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_call"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b11_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n귓가에서 누군가 당신의 목소리로 속삭입니다. ······열이 나잖아.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "minStats": {
+              "stat_contam": 30
+            }
+          },
+          "id": "node_b11_frag_2",
+          "priority": 2
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b12",
+      "text": "소각동 게이트. 유리창 너머에서 소각로의 불꽃이 1,100도의 색으로 일렁입니다. 게이트가 열리는 것이 살길이고, 열리지 않으면 이 통로는 그대로 소각 경로가 됩니다. 문 위 스피커에서 숨소리 같은 잡음이 들립니다. 게이트 개방은 관제 판단이라고 합니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_083",
+          "text": "스피커를 올려다본다.",
+          "conditions": {
+            "minStats": {
+              "stat_favor": 22,
+              "stat_oxygen": 20
+            }
+          },
+          "effects": {
+            "randomEffects": [
+              {
+                "chance": 80,
+                "addFlags": [
+                  "flag_b_survive"
+                ],
+                "removeFlags": [],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
+          "nextNodeId": "node_b13"
+        },
+        {
+          "id": "choice_084",
+          "text": "스피커를 올려다본다.",
+          "conditions": {
+            "minStats": {
+              "stat_favor": 9,
+              "stat_oxygen": 20
+            },
+            "maxStats": {
+              "stat_favor": 21
+            }
+          },
+          "effects": {
+            "randomEffects": [
+              {
+                "chance": 50,
+                "addFlags": [
+                  "flag_b_survive"
+                ],
+                "removeFlags": [],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
+          "nextNodeId": "node_b13"
+        },
+        {
+          "id": "choice_085",
+          "text": "스피커를 올려다본다.",
+          "conditions": {
+            "minStats": {
+              "stat_oxygen": 20
+            },
+            "maxStats": {
+              "stat_favor": 8
+            }
+          },
+          "effects": {
+            "randomEffects": [
+              {
+                "chance": 20,
+                "addFlags": [
+                  "flag_b_survive"
+                ],
+                "removeFlags": [],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
+          "nextNodeId": "node_b13"
+        },
+        {
+          "id": "choice_086",
+          "text": "숨이 끊어질 것 같다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 19
+            }
+          },
+          "effects": {},
+          "nextNodeId": "node_b13"
+        }
+      ],
+      "position": {
+        "x": 1400,
+        "y": 570
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b13",
+      "text": "뜨거운 바람이 얼굴을 훑습니다. 열이 눈을 찌릅니다. 스피커의 잡음이 문득 그칩니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_087",
+          "text": "……",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_survive"
+            ]
+          },
+          "effects": {
+            "addFlags": [
+              "flag_run2_done"
+            ]
+          },
+          "nextNodeId": "node_b14"
+        },
+        {
+          "id": "choice_088",
+          "text": "……",
+          "conditions": {
+            "excludedFlags": [
+              "flag_b_survive"
+            ]
+          },
+          "effects": {
+            "addFlags": [
+              "flag_run2_done"
+            ]
+          },
+          "nextNodeId": "node_b15"
+        }
+      ],
+      "position": {
+        "x": 1680,
+        "y": 570
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b14",
+      "text": "게이트가 열립니다. 뜨거운 바람과 함께 방호복 차림의 구조대원들이 밀려 들어옵니다. 당신은 들것에 실려 나갑니다. 열 때문에 눈앞이 희뿌옇습니다. 누군가 산소마스크를 씌우며 이름을 묻습니다. 구급차 사이렌, 그리고 응급실의 하얀 조명.\n\n**[엔딩 B-1  ‘응급실’]**",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [],
+      "position": {
+        "x": 1960,
+        "y": 570
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n복도 반대편 들것에서 누군가 힘없이 손을 흔듭니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_survive"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b14_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n이마의 원형 자국을 본 간호사가 화상 자국 같다며 고개를 갸웃합니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_b14_frag_2",
+          "priority": 2
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_b15",
+      "text": "게이트는 열리지 않습니다. 등 뒤로 바닥을 훑는 소리가 다가옵니다. 마지막으로 귀에 들려온 목소리는 당신의 것입니다.\n\n**??**  ······살려주세요.\n\n**[엔딩 B-2  ‘소각 경로’]**",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [],
+      "position": {
+        "x": 2240,
+        "y": 570
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d01",
+      "text": "00시 36분. LAB-B 통제실. 책임연구원인 당신은 야간 당직 중입니다. 화면 한쪽에서 경고창이 뜹니다. R-11 재생 신호 수치가 기준선을 넘어 스스로 올라가고 있습니다. 누군가 조건을 건드리지 않는 이상 있을 수 없는 그래프입니다.\n\n스피커에서 성패의 목소리가 들립니다.\n\n**진성패**  책임님, 국소 이상입니다. 제가 처리하겠습니다. 야간 당직 중이신데 굳이 이런 일까지 신경 쓰시게 할 수는 없지요. 위에는 아침에 올려도 늦지 않을 것 같습니다.\n\n공손하고 매끄러운 목소리입니다. 언제나 그렇습니다. 공손한데도 어딘가 아래를 향해 말하는 것처럼 들린다는 느낌이 늘 남습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_089",
+          "text": "“그래, 네가 알아서 해.”",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_favor": 0
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_d_trusted"
+            ]
+          },
+          "nextNodeId": "node_d02"
+        },
+        {
+          "id": "choice_090",
+          "text": "그래프를 직접 확인한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_favor": 0,
+              "stat_insight": 1
+            },
+            "unlockStats": [
+              "stat_favor",
+              "stat_insight"
+            ],
+            "addFlags": [
+              "flag_d_checked"
+            ]
+          },
+          "nextNodeId": "node_d02"
+        },
+        {
+          "id": "choice_091",
+          "text": "임원 핫라인에 먼저 보고한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_favor": 0
+            },
+            "unlockStats": [
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_d_hotline"
+            ]
+          },
+          "nextNodeId": "node_d02"
+        }
+      ],
+      "position": {
+        "x": 2800,
+        "y": 0
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d02",
+      "text": "00시 41분. 핫라인에 불이 들어옵니다. 발신자는 임원회입니다. 목소리는 낮고 건조합니다.\n\n**??**  봉쇄하세요. 절차는 사후에 처리합니다.\n\n인원 명단 화면에는 LAB-B 내부 인원 네 명이 모두 초록색으로 표시되어 있습니다. 전원 파악 완료. 당신의 손이 승인 버튼 위에서 멈춥니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_092",
+          "text": "“안에 사람이 있습니다.”",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -5
+            },
+            "addFlags": [
+              "flag_d_protest"
+            ]
+          },
+          "nextNodeId": "node_d03"
+        },
+        {
+          "id": "choice_093",
+          "text": "“인원 재확인 시간을 주십시오.”",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_d_delay"
+            ]
+          },
+          "nextNodeId": "node_d03"
+        },
+        {
+          "id": "choice_094",
+          "text": "“······알겠습니다.”",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -10
+            },
+            "addFlags": [
+              "flag_d_obey"
+            ]
+          },
+          "nextNodeId": "node_d03"
+        }
+      ],
+      "position": {
+        "x": 3080,
+        "y": 0
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d03",
+      "text": "승인 버튼을 누르기 직전, 화면이 먼저 바뀝니다.\n\n**LAB-B 봉쇄 개시 — 발령자: 김대영 (인증 00:41 완료)**\n\n아직 누르지 않았습니다. 그런데 이미 봉쇄가 걸립니다. 통제실 문마저 잠깁니다. 형광등이 깜빡이고, 환기구가 음압 전환음을 냅니다. 당신은 손이 떨리는 채로 무전기를 집습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_095",
+          "text": "LAB-B 전원에게 무전으로 알린다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -10,
+              "stat_oxygen": 100
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ],
+            "addItems": [
+              "item_recording"
+            ],
+            "addFlags": [
+              "flag_d_announced"
+            ]
+          },
+          "nextNodeId": "node_d04"
+        },
+        {
+          "id": "choice_096",
+          "text": "무전을 끄고 로그부터 확인한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": 100
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_d_silent"
+            ]
+          },
+          "nextNodeId": "node_d04"
+        },
+        {
+          "id": "choice_097",
+          "text": "아무 말도 하지 못한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -15,
+              "stat_oxygen": 100
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_d04"
+        }
+      ],
+      "position": {
+        "x": 3360,
+        "y": 0
+      },
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "당신이 승인할 마음을 먹었던 그 순간이 이미 기록이 되어 있습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_obey"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d03_frag_1",
+          "priority": 1
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d04",
+      "text": "통제실 안쪽 서버 단말. 내부 인증이 살아 있는 쪽은 이 단말뿐입니다. 봉쇄 이력 로그를 엽니다.\n\n**00:38 — 봉쇄 명령 예약 등록. 등록 계정: SJ-Jin (원격)**\n**00:41 — 예약 실행 조건 충족. 인증 세션: 김대영 (재사용)**\n\n당신이 승인하기도 전에, 누군가 당신의 이름으로 이미 명령을 걸어 두었습니다. 벽면 마감재 틈에서 결로가 흘러내려 단말 옆 서류를 적십니다. 물이 미지근합니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_098",
+          "text": "로그를 복사해 저장한다.",
+          "conditions": {},
+          "effects": {
+            "addItems": [
+              "item_log_copy"
+            ],
+            "addFlags": [
+              "flag_d_log"
+            ]
+          },
+          "nextNodeId": "node_d05"
+        },
+        {
+          "id": "choice_099",
+          "text": "다른 로그도 뒤져본다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -5,
+              "stat_insight": 1
+            },
+            "unlockStats": [
+              "stat_insight"
+            ],
+            "addFlags": [
+              "flag_d_del"
+            ]
+          },
+          "nextNodeId": "node_d05"
+        },
+        {
+          "id": "choice_100",
+          "text": "화면을 닫고 숨을 고른다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": 5
+            }
+          },
+          "nextNodeId": "node_d05"
+        }
+      ],
+      "position": {
+        "x": 3640,
+        "y": 0
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n삭제 예약 목록에는 DEL-0713이 걸려 있습니다. 사망자 관련 기록을 지운다는 항목입니다. 아직 사망자는 나오지 않았는데.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_del"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d04_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "\n\n스피커를 통해 당신이 방금 남긴 무전이 짧게 재생됩니다.\n**김대영**  ······제기랄. LAB-B 봉쇄한다! 안에 누가 있든 지금은—미안하다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_announced"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d04_frag_2",
+          "priority": 2
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d05",
+      "text": "무전 채널을 엽니다.\n\n**김대영**  성패. 현 상황 보고해. R-11 3단계 신호, 누가 조건을 바꿨어.\n\n**진성패**  현재 LAB-B 내부 인원은 전원 확인됩니다. 연구 상황은 신호 지속 시간이 계획 범위를 벗어난 상태입니다. 조건 변경 이력은 확인 중입니다.\n\n대답은 매끄럽습니다. 질문에 답한 것처럼 보이지만 어느 하나도 답하지 않았습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_101",
+          "text": "“조건 변경 이력에 네 계정이 있던데.”",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_log"
+            ]
+          },
+          "effects": {
+            "stats": {
+              "money": -5
+            },
+            "addFlags": [
+              "flag_d_accused"
+            ]
+          },
+          "nextNodeId": "node_d06"
+        },
+        {
+          "id": "choice_102",
+          "text": "“3단계 지시서를 누가 승인했는지 봐야겠다.”",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "money": -5,
+              "stat_insight": 1
+            },
+            "unlockStats": [
+              "stat_insight"
+            ],
+            "addFlags": [
+              "flag_d_ask_approval"
+            ]
+          },
+          "nextNodeId": "node_d06"
+        },
+        {
+          "id": "choice_103",
+          "text": "“신호 지속 시간 데이터로 조건 변경 시점을 역산해 보자.”",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 4
+            },
+            "stats": {
+              "money": -5,
+              "stat_insight": 1,
+              "stat_favor": 4
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_d_analysis"
+            ]
+          },
+          "nextNodeId": "node_d06"
+        },
+        {
+          "id": "choice_104",
+          "text": "“······알았다. 계속 확인해.”",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_d_mute"
+            ]
+          },
+          "nextNodeId": "node_d06"
+        }
+      ],
+      "position": {
+        "x": 2800,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d06",
+      "text": "잠깐의 침묵. 성패의 숨소리가 아주 미세하게 웃음처럼 흔들립니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_105",
+          "text": "CCTV 화면을 확인한다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_d07"
+        }
+      ],
+      "position": {
+        "x": 3080,
+        "y": 190
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n**진성패**  글쎄요. 그저 책임님과 제가 공연히 오래 봤다는 생각이 문득 들기는 합니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_accused"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d06_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n**진성패**  글쎄요. 승인 이력은 책임님께서 더 잘 아시지 않겠습니까.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_ask_approval"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d06_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n**진성패**  역산 방법론은 나쁘지 않습니다. ······시간 기준은 제가 맞추어 보내드리겠습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_analysis"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d06_frag_3",
+          "priority": 3
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n**진성패**  예, 책임님. 확인되는 대로 보고드리겠습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_mute"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d06_frag_4",
+          "priority": 4
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d07",
+      "text": "통제실 모니터 하단에 LAB-B 각 구역의 CCTV가 격자로 깔려 있습니다. 대부분 붉은 안개 같은 잡음입니다. 그 사이 화면 두 개만 살아 있습니다. 배양실과 중층 폐기 통로. 당신 부서 보조원들이 움직이고 있습니다.\n\n모든 화면의 우측 하단에 작은 표시가 깜빡입니다. 누군가 지금 이 순간 함께 보고 있다는 뜻의 ‘관측 중’ 표시입니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_106",
+          "text": "게이트를 원격으로 열어 본다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -5
+            }
+          },
+          "nextNodeId": "node_d08"
+        },
+        {
+          "id": "choice_107",
+          "text": "화면을 녹화한다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_d08"
+        },
+        {
+          "id": "choice_108",
+          "text": "화면에서 눈을 돌려 서버 폴더를 더 뒤진다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_insight": 1
+            },
+            "unlockStats": [
+              "stat_insight"
+            ]
+          },
+          "nextNodeId": "node_d08"
+        }
+      ],
+      "position": {
+        "x": 3360,
+        "y": 190
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n배양실의 사람은 끝내 게이트 앞에 도달합니다. 문이 열리는 순간이 화면 하단의 시간 기록과 함께 남습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_survive"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d07_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n배양실의 사람은 게이트 앞에서 멈춥니다. 문은 열리지 않고, 그 사람은 오래 그 자리에 서 있습니다.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [
+              "flag_a_survive"
+            ],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d07_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n폐기 통로의 사람은 열기가 넘치는 게이트 앞에서 마지막까지 카메라를 올려다봅니다. 문이 열립니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_survive"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d07_frag_3",
+          "priority": 3
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n폐기 통로의 사람은 게이트에 도달하기 전에 화면 밖으로 끌려갑니다.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [
+              "flag_b_survive"
+            ],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d07_frag_4",
+          "priority": 4
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n한 사람의 목소리가 낮게 갈라져 있습니다. 화면 속 입술과 스피커의 음성이 조금씩 어긋납니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d07_frag_5",
+          "priority": 5
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d08",
+      "text": "서버 단말 깊은 폴더에서 열람 권한이 낮게 걸린 채 방치된 문서 묶음이 열립니다.\n\n**A■■■ 프로젝트 계획서 (임원 전용)**\n1단계: 재생 신호 유도 (완료)\n2단계: 신호 억제 해제, 재생 지속화 (승인란: 공란)\n3단계: 자율적 조직 합성. 외부 골격 없이 조직이 스스로 구조를 구성\nγ단계: 형태 정보 부여 (ANIM 연계). 구성된 조직에 지정 형상을 각인\n병행 안건 P■■■-a: 사후 조직에서의 신호 개시 가능성\n\n연구 목적란에는 이렇게 적혀 있습니다. **‘복구’가 아닌 ‘생성’.**\n\n당신이 알던 것은 화상·괴사 조직 재생 치료제였습니다. 이 문서 어디에도 환자라는 단어가 없습니다. 있는 것은 ‘숙주’와 ‘재료’입니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_109",
+          "text": "계획서를 사본으로 저장한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_insight": 3
+            },
+            "unlockStats": [
+              "stat_insight"
+            ],
+            "addItems": [
+              "item_log_copy"
+            ],
+            "addFlags": [
+              "flag_d_read_plan",
+              "flag_d_copy_plan"
+            ]
+          },
+          "nextNodeId": "node_d09"
+        },
+        {
+          "id": "choice_110",
+          "text": "승인란이 공란인 화면을 캡처한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_insight": 2
+            },
+            "unlockStats": [
+              "stat_insight"
+            ],
+            "addFlags": [
+              "flag_d_read_plan",
+              "flag_d_approval_empty"
+            ]
+          },
+          "nextNodeId": "node_d09"
+        },
+        {
+          "id": "choice_111",
+          "text": "임원 핫라인으로 항의를 시도한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -10,
+              "stat_insight": 1
+            },
+            "unlockStats": [
+              "stat_insight"
+            ],
+            "addFlags": [
+              "flag_d_read_plan"
+            ]
+          },
+          "nextNodeId": "node_d09"
+        }
+      ],
+      "position": {
+        "x": 3640,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d09",
+      "text": "무전에서 지직 소리가 나더니 성패가 먼저 말을 겁니다.\n\n**진성패**  책임님, 3단계 승인 이력 확인 부탁드립니다. 승인자란이 비어 있는 것으로 나오는데, 마무리하시기 전에 책임님 서명이 필요해 보입니다. 공연한 말씀이면 죄송합니다.\n\n죄송하다는 말이 조금도 죄송하게 들리지 않습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_112",
+          "text": "“승인한 적 없다. 서명도 못 한다.”",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "money": -5
+            },
+            "addFlags": [
+              "flag_d_deny"
+            ]
+          },
+          "nextNodeId": "node_d10"
+        },
+        {
+          "id": "choice_113",
+          "text": "“3단계 승인 조건이 미충족이라 서명이 안 되는 거다.”",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 4
+            },
+            "stats": {
+              "money": -5,
+              "stat_insight": 1,
+              "stat_favor": 4
+            },
+            "unlockStats": [
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_d_answer"
+            ]
+          },
+          "nextNodeId": "node_d10"
+        },
+        {
+          "id": "choice_114",
+          "text": "“······나중에 하지.”",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_d10"
+        }
+      ],
+      "position": {
+        "x": 2800,
+        "y": 380
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n**진성패**  글쎄요. 책임님께서 그렇게 보신다면 그런 것이겠지요.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_deny"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d09_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n**진성패**  ······그렇군요. 참고하겠습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_answer"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d09_frag_2",
+          "priority": 2
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d10",
+      "text": "통제실 천장 통풍구 격자 너머에서 회색이 도는 붉은 조직이 밀려 내려옵니다. 팔에 마디가 다섯. 얼굴 자리는 아물지 않은 피막입니다. 그것이 격자를 비집고 나오다 멈춥니다. 당신의 숨이 들어가고 나갈 때마다 피막이 미세하게 들썩입니다. 마치 그 호흡을 세는 것처럼.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_115",
+          "text": "숨을 참고 반응을 관찰한다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 4
+            },
+            "stats": {
+              "stat_oxygen": -10,
+              "stat_insight": 1,
+              "stat_favor": 4
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_insight",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_d_know_breath"
+            ]
+          },
+          "nextNodeId": "node_d11"
+        },
+        {
+          "id": "choice_116",
+          "text": "책상 아래로 몸을 숨긴다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_d11"
+        },
+        {
+          "id": "choice_117",
+          "text": "소리를 질러 쫓아 본다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_d_noticed_shout"
+            ]
+          },
+          "nextNodeId": "node_d11x"
+        }
+      ],
+      "position": {
+        "x": 3080,
+        "y": 380
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d11",
+      "text": "미완체가 격자를 완전히 벗어나 천장에서 몸을 늘어뜨립니다. 통제실의 소리는 웅웅거리는 환기음과 당신의 숨뿐. 문까지는 열 걸음 남짓입니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_118",
+          "text": "숨을 참고 벽 쪽으로 천천히 물러난다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_know_breath"
+            ]
+          },
+          "effects": {
+            "affection": {
+              "npc_seongpae": 3
+            },
+            "stats": {
+              "stat_oxygen": -15,
+              "stat_favor": 3
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_favor"
+            ]
+          },
+          "nextNodeId": "node_d12"
+        },
+        {
+          "id": "choice_119",
+          "text": "서류철로 통풍구 틈을 막는다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": -10,
+              "mental": -5
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ]
+          },
+          "nextNodeId": "node_d12"
+        },
+        {
+          "id": "choice_120",
+          "text": "문으로 달려가 두드린다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "health": -5
+            },
+            "addFlags": [
+              "flag_d_noticed_run"
+            ]
+          },
+          "nextNodeId": "node_d11x"
+        },
+        {
+          "id": "choice_121",
+          "text": "무전기로 성패를 호출한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "money": -5
+            },
+            "addFlags": [
+              "flag_d_noticed_radio"
+            ]
+          },
+          "nextNodeId": "node_d11x"
+        }
+      ],
+      "position": {
+        "x": 3360,
+        "y": 380
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d11x",
+      "text": "천장에서 풀려 내린 조직이 당신의 얼굴을 덮습니다. 젖은 피막이 코와 입을 감싸 숨을 세듯이 들이마시고 내뱉기를 반복합니다. 당신의 호흡 박자로. 몇 번을 그러다가 놓아줍니다. 폐가 텅 빈 것처럼 아프고, 들이쉬는 숨이 자꾸 개체의 박자를 따라갑니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_122",
+          "text": "······숨을 토해낸다.",
+          "conditions": {},
+          "effects": {
+            "affection": {
+              "npc_seongpae": 4
+            },
+            "stats": {
+              "health": -15,
+              "mental": -10,
+              "stat_contam": 15,
+              "stat_favor": 4
+            },
+            "unlockStats": [
+              "stat_contam",
+              "stat_favor"
+            ],
+            "addFlags": [
+              "flag_d_marked"
+            ]
+          },
+          "nextNodeId": "node_d12"
+        }
+      ],
+      "position": {
+        "x": 3640,
+        "y": 380
+      },
+      "conditionalFragments": [
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "당신의 고함이 통제실 안에 길게 울렸습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_noticed_shout"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d11x_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "달려가는 발소리가 개체의 박자를 흐트러뜨렸습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_noticed_run"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d11x_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "prepend",
+          "anchor": "",
+          "text": "무전기에서 당신의 목소리가 지직 울렸습니다.\n\n",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_noticed_radio"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d11x_frag_3",
+          "priority": 3
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d12",
+      "text": "BIO-BUNKER 노드. 사고 데이터의 암호화 백업이 진행 중입니다. 삭제 예약 DEL-0713과 함께, 당신이 아까 남긴 무전 음성이 첫 번째 증거 파일로 분류되어 들어가 있습니다.\n\n누군가 이 순간을 위해 당신의 목소리를 모으고 있었던 것처럼.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_123",
+          "text": "로그와 무전 음성을 외부로 전송한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -5
+            },
+            "addFlags": [
+              "flag_d_leak"
+            ]
+          },
+          "nextNodeId": "node_d13"
+        },
+        {
+          "id": "choice_124",
+          "text": "삭제 예약 실행을 지연시킨다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_d_delay_del"
+            ]
+          },
+          "nextNodeId": "node_d13"
+        },
+        {
+          "id": "choice_125",
+          "text": "원본을 복원해 따로 저장한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": -10
+            },
+            "unlockStats": [
+              "stat_oxygen"
+            ],
+            "addFlags": [
+              "flag_d_restore"
+            ]
+          },
+          "nextNodeId": "node_d13"
+        }
+      ],
+      "position": {
+        "x": 2800,
+        "y": 570
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d13",
+      "text": "통제실 벽의 마감재가 안쪽에서 부풀고 모니터 화면에는 같은 문장이 반복됩니다. **SIGNAL: 유지. SIGNAL: 유지.** 책상 위의 서류에서 글자가 미끄러져 다른 순서로 정렬되고, 벽시계의 초침은 한 번 멈췄다가 두 칸을 뜁니다. 유리창에 비친 당신의 얼굴이 아주 조금 늦게 따라 움직입니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_126",
+          "text": "성패에게 문을 열어 달라고 부탁한다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "mental": -10
+            },
+            "addFlags": [
+              "flag_d_begged"
+            ]
+          },
+          "nextNodeId": "node_d14"
+        },
+        {
+          "id": "choice_127",
+          "text": "마스크를 쓰고 벽에 붙어 버틴다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": -5,
+              "stat_contam": 10
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_contam"
+            ]
+          },
+          "nextNodeId": "node_d14"
+        },
+        {
+          "id": "choice_128",
+          "text": "서류로 통풍구를 막고 문 앞에서 기다린다.",
+          "conditions": {},
+          "effects": {
+            "stats": {
+              "stat_oxygen": -10,
+              "stat_contam": 5
+            },
+            "unlockStats": [
+              "stat_oxygen",
+              "stat_contam"
+            ]
+          },
+          "nextNodeId": "node_d14"
+        }
+      ],
+      "position": {
+        "x": 3080,
+        "y": 570
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n당신의 목소리로 누군가 승인합니다. 승인합니다. 승인합니다.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": [],
+            "minStats": {
+              "stat_contam": 30
+            }
+          },
+          "id": "node_d13_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n주머니 속 녹음기가 혼자 재생됩니다. 당신의 목소리가 계속 ‘미안하다’고 말합니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_announced"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d13_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n호흡이 자꾸 남의 박자를 따라갑니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d13_frag_3",
+          "priority": 3
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d14",
+      "text": "통제실 문 앞. 문틈 너머로 방호복의 그림자가 어른거립니다. 문을 여는 것은 저편의 판단입니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_129",
+          "text": "문을 두드린다.",
+          "conditions": {
+            "minStats": {
+              "stat_favor": 16,
+              "stat_oxygen": 20
+            }
+          },
+          "effects": {
+            "randomEffects": [
+              {
+                "chance": 70,
+                "addFlags": [
+                  "flag_d_survive"
+                ],
+                "removeFlags": [],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
+          "nextNodeId": "node_d15"
+        },
+        {
+          "id": "choice_130",
+          "text": "문을 두드린다.",
+          "conditions": {
+            "minStats": {
+              "stat_favor": 7,
+              "stat_oxygen": 20
+            },
+            "maxStats": {
+              "stat_favor": 15
+            }
+          },
+          "effects": {
+            "randomEffects": [
+              {
+                "chance": 40,
+                "addFlags": [
+                  "flag_d_survive"
+                ],
+                "removeFlags": [],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
+          "nextNodeId": "node_d15"
+        },
+        {
+          "id": "choice_131",
+          "text": "문을 두드린다.",
+          "conditions": {
+            "minStats": {
+              "stat_oxygen": 20
+            },
+            "maxStats": {
+              "stat_favor": 6
+            }
+          },
+          "effects": {
+            "randomEffects": [
+              {
+                "chance": 12,
+                "addFlags": [
+                  "flag_d_survive"
+                ],
+                "removeFlags": [],
+                "unlockStats": [],
+                "stats": {}
+              }
+            ]
+          },
+          "nextNodeId": "node_d15"
+        },
+        {
+          "id": "choice_132",
+          "text": "숨이 끊어질 것 같다.",
+          "conditions": {
+            "maxStats": {
+              "stat_oxygen": 19
+            }
+          },
+          "effects": {},
+          "nextNodeId": "node_d15"
+        }
+      ],
+      "position": {
+        "x": 3360,
+        "y": 570
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d15",
+      "text": "문 너머에서 무전기가 짧게 울립니다. 당신은 숨을 멈추고 기다립니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_133",
+          "text": "……",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_survive"
+            ]
+          },
+          "effects": {
+            "addFlags": [
+              "flag_run3_done"
+            ]
+          },
+          "nextNodeId": "node_d16"
+        },
+        {
+          "id": "choice_134",
+          "text": "……",
+          "conditions": {
+            "excludedFlags": [
+              "flag_d_survive"
+            ]
+          },
+          "effects": {
+            "addFlags": [
+              "flag_run3_done"
+            ]
+          },
+          "nextNodeId": "node_d17"
+        }
+      ],
+      "position": {
+        "x": 3640,
+        "y": 570
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d16",
+      "text": "문이 열립니다. 방호복 차림의 구조대원이 당신을 부축합니다. 눈부신 조명. 산소마스크. 구급차 사이렌과 응급실의 하얀 조명. 누군가 이름을 묻습니다. 대답하려는데 목소리가 자꾸 갈라집니다.\n\n구급차 안에서 당신은 아직 모릅니다. 봉쇄 발령자 칸에 자신의 이름이 적혀 있다는 것을.\n\n**[엔딩 D-1  ‘발령자’]**",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [],
+      "position": {
+        "x": 2800,
+        "y": 760
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n외부로 보내려던 로그는 전송되지 못한 채 단말에 남아 있습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_leak"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d16_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n주머니에 넣어 둔 로그 사본만이 살아 나온 유일한 증거입니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_log"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d16_frag_2",
+          "priority": 2
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_d17",
+      "text": "문은 열리지 않습니다. 통제실 안의 온도는 서서히 올라가고, 모니터에는 SIGNAL: 유지 표시만 깜빡입니다. 책상 위에는 당신이 남긴 로그 사본이 놓여 있습니다. 누군가 읽어 줄지는 알 수 없습니다.\n\n**[엔딩 D-2  ‘묵음’]**",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [],
+      "position": {
+        "x": 3080,
+        "y": 760
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n무전 녹음에서 당신의 목소리가 끝없이 ‘미안하다’고 말합니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_announced"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_d17_frag_1",
+          "priority": 1
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_e01",
+      "text": "관측실. 벽면을 가득 메운 모니터 앞에 당신이 앉아 있습니다. 진성패. 서른세 살, 선임연구원. 열이 가라앉은 믹스커피가 손 옆에서 식어 있습니다. 세 개의 기록이 재생을 마칩니다. 당신은 그것을 무감한 눈으로 봅니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_135",
+          "text": "자극 반응 데이터부터 정리한다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_e_focus_stim"
+            ]
+          },
+          "nextNodeId": "node_e02"
+        },
+        {
+          "id": "choice_136",
+          "text": "접촉자 개체별 경과부터 정리한다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_e_focus_case"
+            ]
+          },
+          "nextNodeId": "node_e02"
+        },
+        {
+          "id": "choice_137",
+          "text": "형태 모방 사례부터 정리한다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_e_focus_mimic"
+            ]
+          },
+          "nextNodeId": "node_e02"
+        }
+      ],
+      "position": {
+        "x": 4200,
+        "y": 0
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n기록 A: 문이 열리고 구조대에 인계되는 마지막 프레임. 응급 이송 후 경과 관찰 대상에 등록되어 있습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_survive"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e01_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n기록 A: 문이 열리지 않은 마지막 프레임.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [
+              "flag_a_survive"
+            ],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e01_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n기록 B: 들것에 실려 나가는 마지막 프레임. 열은 아직 내려가지 않았습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_survive"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e01_frag_3",
+          "priority": 3
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n기록 B: 게이트 앞에서 끊긴 마지막 프레임.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [
+              "flag_b_survive"
+            ],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e01_frag_4",
+          "priority": 4
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n기록 D: 김대영은 살아서 나왔고, 봉쇄 발령자란은 이미 채워져 있습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_survive"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e01_frag_5",
+          "priority": 5
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n기록 D: 통제실 문은 끝내 열리지 않았습니다.",
+          "conditions": {
+            "requiredFlags": [],
+            "excludedFlags": [
+              "flag_d_survive"
+            ],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e01_frag_6",
+          "priority": 6
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n미완체 접촉 사례. 채이든: 음성 채집.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_a_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e01_frag_7",
+          "priority": 7
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n미완체 접촉 사례. 윤서: 체온 채집.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_b_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e01_frag_8",
+          "priority": 8
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n미완체 접촉 사례. 김대영: 호흡 채집.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_d_marked"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e01_frag_9",
+          "priority": 9
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_e02",
+      "text": "정리하고 나면 이번 밤이 남긴 문장은 하나입니다.\n\n**조직은 외부 자극을 형태의 재료로 삼는다.**\n\n소리는 음성을, 열은 체온의 윤곽을, 호흡은 박자를 채집했다. 아직 얼굴은 만들지 못했다. 그러나 만들어 가고 있다. ······충분하다. γ단계로 가기에는.\n\n형태 정보 부여 대상 파일이 화면 구석에서 깜빡입니다. 1건. 파일명은 가려져 있습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_138",
+          "text": "보고서 초안을 연다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_e03"
+        }
+      ],
+      "position": {
+        "x": 4480,
+        "y": 0
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_e03",
+      "text": "보고서 초안 창이 열립니다. 제목은 이미 채워져 있습니다.\n\n**A■■■-β 실험 이상 반응 및 통제 보고 요약**\n\n사고 원인란은 비어 있습니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_139",
+          "text": "국소적 실험 이상으로 조정하고 절차를 간소화한다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_e_conceal"
+            ]
+          },
+          "nextNodeId": "node_e04"
+        },
+        {
+          "id": "choice_140",
+          "text": "비인가 재생 지속화 조건 추가를 사실대로 기재한다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_e_confess"
+            ]
+          },
+          "nextNodeId": "node_e04"
+        },
+        {
+          "id": "choice_141",
+          "text": "전부 삭제한다.",
+          "conditions": {},
+          "effects": {
+            "addFlags": [
+              "flag_e_delete"
+            ]
+          },
+          "nextNodeId": "node_e04"
+        }
+      ],
+      "position": {
+        "x": 4760,
+        "y": 0
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_e04",
+      "text": "임원회 의장의 서명은 공개되지 않습니다. 결재 화면에는 수정 요청이 한 줄 붙어 돌아옵니다.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_142",
+          "text": "수정 요청을 받아들인다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_e05"
+        }
+      ],
+      "position": {
+        "x": 5040,
+        "y": 0
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n“통계 일관성을 유지할 것. 편차 지수 0.8 이상은 제외.”",
+          "conditions": {
+            "requiredFlags": [
+              "flag_e_conceal"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e04_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n“비인가 조건 관련 항목은 삭제. 대신 재생 지속화 조건의 연구적 가치 항목을 확대할 것.”",
+          "conditions": {
+            "requiredFlags": [
+              "flag_e_confess"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e04_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n“자료 삭제는 승인하지 않음. 원본은 이미 보관 중.”",
+          "conditions": {
+            "requiredFlags": [
+              "flag_e_delete"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e04_frag_3",
+          "priority": 3
+        }
+      ],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_e05",
+      "text": "해임 통보문이 올라옵니다. 김대영 책임연구원. 사유란에는 ‘설비 노후 및 관리 소홀’이라고 적혀 있습니다. 당신은 서명란을 오래 바라봅니다. 그리고 사적 기록 창을 엽니다.\n\n해임만으로 만족할 수 있나?\n\n키보드 위의 손가락이 다른 이름을 칩니다.\n\n지혜야, 보고 싶어.",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [
+        {
+          "id": "choice_143",
+          "text": "창을 닫는다.",
+          "conditions": {},
+          "effects": {},
+          "nextNodeId": "node_e06"
+        }
+      ],
+      "position": {
+        "x": 4200,
+        "y": 190
+      },
+      "conditionalFragments": [],
+      "conditionalRoutes": []
+    },
+    {
+      "id": "node_e06",
+      "text": "749일 뒤. 옥상 철문을 열자 있어야 할 회색 계단이 없습니다. 끔찍한 복도가 열려 있습니다. 노을이 등을 지고 길게 그림자를 늘어뜨립니다. 손목시계는 정상적으로 흐르고 있습니다. 적어도, 그렇게 보입니다.\n\n**[종장  ‘749일’]**",
+      "bgm": {
+        "youtubeUrl": ""
+      },
+      "choices": [],
+      "position": {
+        "x": 4480,
+        "y": 190
+      },
+      "conditionalFragments": [
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n은폐한 보고서의 수치는 여전히 완벽하게 맞아떨어집니다. 그래서 더 불안합니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_e_conceal"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e06_frag_1",
+          "priority": 1
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n적어 두었던 진실은 승인되지 않은 채 어딘가의 서버에서 아직 잠자고 있습니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_e_confess"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e06_frag_2",
+          "priority": 2
+        },
+        {
+          "mode": "append",
+          "anchor": "",
+          "text": "\n\n전부 지웠다고 생각했지만, 벽 어딘가에서 누군가의 목소리가 조용히 되풀이됩니다.",
+          "conditions": {
+            "requiredFlags": [
+              "flag_e_delete"
+            ],
+            "excludedFlags": [],
+            "requiredKeywords": [],
+            "excludedKeywords": [],
+            "requiredChoices": [],
+            "excludedChoices": []
+          },
+          "id": "node_e06_frag_3",
+          "priority": 3
+        }
+      ],
+      "conditionalRoutes": []
+    }
+  ],
+  "stats": [
+    {
+      "id": "health",
+      "name": "체력",
+      "description": "",
+      "min": 0,
+      "max": 100,
+      "isBase": true,
+      "initialValue": 0,
+      "unlockConditions": {
+        "requiredFlags": [],
+        "requiredKeywords": [],
+        "requiredFaction": []
+      }
+    },
+    {
+      "id": "mental",
+      "name": "멘탈",
+      "description": "",
+      "min": 0,
+      "max": 100,
+      "isBase": true,
+      "initialValue": 0,
+      "unlockConditions": {
+        "requiredFlags": [],
+        "requiredKeywords": [],
+        "requiredFaction": []
+      }
+    },
+    {
+      "id": "money",
+      "name": "무전 배터리",
+      "description": "무전기 사용 시 소모",
+      "min": 0,
+      "max": 100,
+      "isBase": true,
+      "initialValue": 0,
+      "unlockConditions": {
+        "requiredFlags": [],
+        "requiredKeywords": [],
+        "requiredFaction": []
+      }
+    },
+    {
+      "id": "stat_oxygen",
+      "name": "산소",
+      "description": "20 미만이면 게이트가 열려도 버티지 못한다",
+      "min": 0,
+      "max": 100,
+      "isBase": false,
+      "initialValue": 0,
+      "unlockConditions": {
+        "requiredFlags": [],
+        "requiredKeywords": [],
+        "requiredFaction": []
+      }
+    },
+    {
+      "id": "stat_contam",
+      "name": "오염도",
+      "description": "높을수록 텍스트가 변질된다",
+      "min": 0,
+      "max": 100,
+      "isBase": false,
+      "initialValue": 0,
+      "unlockConditions": {
+        "requiredFlags": [],
+        "requiredKeywords": [],
+        "requiredFaction": []
+      }
+    },
+    {
+      "id": "stat_insight",
+      "name": "연구 이해도",
+      "description": "연구 문서를 읽을수록 오른다",
+      "min": 0,
+      "max": 100,
+      "isBase": false,
+      "initialValue": 0,
+      "unlockConditions": {
+        "requiredFlags": [],
+        "requiredKeywords": [],
+        "requiredFaction": []
+      }
+    },
+    {
+      "id": "stat_favor",
+      "name": "성패 호감(미러)",
+      "description": "npc_seongpae 호감도의 미러. 엔딩 분기 판정용.",
+      "min": 0,
+      "max": 100,
+      "isBase": false,
+      "initialValue": 0,
+      "unlockConditions": {
+        "requiredFlags": [],
+        "requiredKeywords": [],
+        "requiredFaction": []
+      }
+    }
+  ],
+  "flags": [
+    {
+      "id": "flag_run1_done",
+      "name": "1회차 완료",
+      "description": ""
+    },
+    {
+      "id": "flag_a_reported",
+      "name": "A: 지속 시간 이상을 덧붙여 보고",
+      "description": ""
+    },
+    {
+      "id": "flag_a_called_out",
+      "name": "A: 안에 사람 있다고 외침",
+      "description": ""
+    },
+    {
+      "id": "flag_a_sample",
+      "name": "A: R-11 시료 채취",
+      "description": ""
+    },
+    {
+      "id": "flag_a_obs_culture",
+      "name": "A: 채취 전 배양체 반응 관찰",
+      "description": ""
+    },
+    {
+      "id": "flag_a_purge",
+      "name": "A: 비상 폐기 밸브 개방",
+      "description": ""
+    },
+    {
+      "id": "flag_a_defied",
+      "name": "A: 성패의 지시 무시",
+      "description": ""
+    },
+    {
+      "id": "flag_a_contact_b",
+      "name": "A: 배관으로 B와 교신",
+      "description": ""
+    },
+    {
+      "id": "flag_a_promise_b",
+      "name": "A: B와 게이트에서 만나기로 약속",
+      "description": ""
+    },
+    {
+      "id": "flag_a_split",
+      "name": "A: B와 각자 움직이기로 함",
+      "description": ""
+    },
+    {
+      "id": "flag_a_asked_seongpae",
+      "name": "A: 성패에게 도움을 청하겠다고 함",
+      "description": ""
+    },
+    {
+      "id": "flag_a_detail",
+      "name": "A: 대영에게 상세 보고",
+      "description": ""
+    },
+    {
+      "id": "flag_a_doubt",
+      "name": "A: 지시서 불일치를 말함",
+      "description": ""
+    },
+    {
+      "id": "flag_a_know_sound",
+      "name": "A: 미완체가 소리에 반응함을 알아냄",
+      "description": ""
+    },
+    {
+      "id": "flag_a_lure",
+      "name": "A: 물소리로 미완체를 유인",
+      "description": ""
+    },
+    {
+      "id": "flag_a_noticed_run",
+      "name": "A: 달리다 미완체에게 들킴",
+      "description": ""
+    },
+    {
+      "id": "flag_a_noticed_radio",
+      "name": "A: 무전 소리로 들킴",
+      "description": ""
+    },
+    {
+      "id": "flag_a_marked",
+      "name": "A: 미완체에게 음성을 채집당함",
+      "description": ""
+    },
+    {
+      "id": "flag_a_saw_protocol",
+      "name": "A: 수기 지시서 저장",
+      "description": ""
+    },
+    {
+      "id": "flag_a_hypothesis",
+      "name": "A: 형태 유도 가설 세움",
+      "description": ""
+    },
+    {
+      "id": "flag_a_honest",
+      "name": "A: 단말 열람 목적을 솔직히 답함",
+      "description": ""
+    },
+    {
+      "id": "flag_a_lied",
+      "name": "A: 단말 열람을 부인함",
+      "description": ""
+    },
+    {
+      "id": "flag_a_survive",
+      "name": "A 생환",
+      "description": ""
+    },
+    {
+      "id": "flag_run2_done",
+      "name": "2회차 완료",
+      "description": ""
+    },
+    {
+      "id": "flag_b_lotcheck",
+      "name": "B: 폐기 로트 라벨 대조",
+      "description": ""
+    },
+    {
+      "id": "flag_b_answered",
+      "name": "B: 배관 너머로 대답",
+      "description": ""
+    },
+    {
+      "id": "flag_b_sample",
+      "name": "B: 결절 채취",
+      "description": ""
+    },
+    {
+      "id": "flag_b_obs_nodule",
+      "name": "B: 결절 반응 관찰 기록",
+      "description": ""
+    },
+    {
+      "id": "flag_b_asked",
+      "name": "B: 결절 정체를 물음",
+      "description": ""
+    },
+    {
+      "id": "flag_b_burn",
+      "name": "B: 결절 상자를 소각로로 투척",
+      "description": ""
+    },
+    {
+      "id": "flag_b_detail",
+      "name": "B: 대영에게 상세 보고",
+      "description": ""
+    },
+    {
+      "id": "flag_b_deflect",
+      "name": "B: 대영에게 성패에게 물어보라고 함",
+      "description": ""
+    },
+    {
+      "id": "flag_b_log",
+      "name": "B: 폐기 단말 열람",
+      "description": ""
+    },
+    {
+      "id": "flag_b_know_heat",
+      "name": "B: 미완체가 열에 반응함을 알아냄",
+      "description": ""
+    },
+    {
+      "id": "flag_b_noticed_heat",
+      "name": "B: 예열 스위치로 미완체를 끌어들임",
+      "description": ""
+    },
+    {
+      "id": "flag_b_noticed_run",
+      "name": "B: 달리다 미완체에게 들킴",
+      "description": ""
+    },
+    {
+      "id": "flag_b_cooled",
+      "name": "B: 냉각 앰플로 열을 죽임",
+      "description": ""
+    },
+    {
+      "id": "flag_b_lure",
+      "name": "B: 결절 조각으로 유인",
+      "description": ""
+    },
+    {
+      "id": "flag_b_marked",
+      "name": "B: 미완체에게 체온을 채집당함",
+      "description": ""
+    },
+    {
+      "id": "flag_b_mimic",
+      "name": "B: 모방 목소리에 대답",
+      "description": ""
+    },
+    {
+      "id": "flag_b_obs_forms",
+      "name": "B: 미완 형상 관찰",
+      "description": ""
+    },
+    {
+      "id": "flag_b_call",
+      "name": "B: 형상에게 이름을 부름",
+      "description": ""
+    },
+    {
+      "id": "flag_b_lied",
+      "name": "B: 단말 열람을 부인함",
+      "description": ""
+    },
+    {
+      "id": "flag_b_survive",
+      "name": "B 생환",
+      "description": ""
+    },
+    {
+      "id": "flag_run3_done",
+      "name": "3회차 완료",
+      "description": ""
+    },
+    {
+      "id": "flag_d_trusted",
+      "name": "D: 성패에게 맡김",
+      "description": ""
+    },
+    {
+      "id": "flag_d_checked",
+      "name": "D: 그래프 직접 확인",
+      "description": ""
+    },
+    {
+      "id": "flag_d_hotline",
+      "name": "D: 임원에게 먼저 보고",
+      "description": ""
+    },
+    {
+      "id": "flag_d_protest",
+      "name": "D: 임원에게 항의",
+      "description": ""
+    },
+    {
+      "id": "flag_d_delay",
+      "name": "D: 인원 재확인 요청",
+      "description": ""
+    },
+    {
+      "id": "flag_d_obey",
+      "name": "D: 순응",
+      "description": ""
+    },
+    {
+      "id": "flag_d_announced",
+      "name": "D: 전원 무전 공지(녹음)",
+      "description": ""
+    },
+    {
+      "id": "flag_d_silent",
+      "name": "D: 무전 끄고 로그 확인",
+      "description": ""
+    },
+    {
+      "id": "flag_d_log",
+      "name": "D: 봉쇄 로그 복사",
+      "description": ""
+    },
+    {
+      "id": "flag_d_del",
+      "name": "D: DEL-0713 발견",
+      "description": ""
+    },
+    {
+      "id": "flag_d_accused",
+      "name": "D: 성패를 추궁",
+      "description": ""
+    },
+    {
+      "id": "flag_d_ask_approval",
+      "name": "D: 승인 이력을 물음",
+      "description": ""
+    },
+    {
+      "id": "flag_d_analysis",
+      "name": "D: 반응 데이터를 근거로 의견을 구함",
+      "description": ""
+    },
+    {
+      "id": "flag_d_mute",
+      "name": "D: 성패에게 계속 확인하라고 함",
+      "description": ""
+    },
+    {
+      "id": "flag_d_read_plan",
+      "name": "D: 임원 계획서 열람",
+      "description": ""
+    },
+    {
+      "id": "flag_d_copy_plan",
+      "name": "D: 계획서 사본 확보",
+      "description": ""
+    },
+    {
+      "id": "flag_d_approval_empty",
+      "name": "D: 승인란 공란 확인",
+      "description": ""
+    },
+    {
+      "id": "flag_d_deny",
+      "name": "D: 서명 요청을 거부",
+      "description": ""
+    },
+    {
+      "id": "flag_d_answer",
+      "name": "D: 승인 이력에 기술적으로 답함",
+      "description": ""
+    },
+    {
+      "id": "flag_d_know_breath",
+      "name": "D: 미완체가 호흡에 반응함을 알아냄",
+      "description": ""
+    },
+    {
+      "id": "flag_d_noticed_shout",
+      "name": "D: 소리로 미완체에게 들킴",
+      "description": ""
+    },
+    {
+      "id": "flag_d_noticed_run",
+      "name": "D: 달리다 미완체에게 들킴",
+      "description": ""
+    },
+    {
+      "id": "flag_d_noticed_radio",
+      "name": "D: 무전 음성으로 들킴",
+      "description": ""
+    },
+    {
+      "id": "flag_d_marked",
+      "name": "D: 미완체에게 호흡을 채집당함",
+      "description": ""
+    },
+    {
+      "id": "flag_d_leak",
+      "name": "D: 외부 전송 시도",
+      "description": ""
+    },
+    {
+      "id": "flag_d_delay_del",
+      "name": "D: 삭제 예약 지연",
+      "description": ""
+    },
+    {
+      "id": "flag_d_restore",
+      "name": "D: 원본 복원",
+      "description": ""
+    },
+    {
+      "id": "flag_d_begged",
+      "name": "D: 성패에게 문 개방 부탁",
+      "description": ""
+    },
+    {
+      "id": "flag_d_survive",
+      "name": "D 생환",
+      "description": ""
+    },
+    {
+      "id": "flag_e_focus_stim",
+      "name": "종장: 자극 반응 정리",
+      "description": ""
+    },
+    {
+      "id": "flag_e_focus_case",
+      "name": "종장: 접촉자 경과 정리",
+      "description": ""
+    },
+    {
+      "id": "flag_e_focus_mimic",
+      "name": "종장: 형태 모방 정리",
+      "description": ""
+    },
+    {
+      "id": "flag_e_conceal",
+      "name": "종장: 은폐 보고",
+      "description": ""
+    },
+    {
+      "id": "flag_e_confess",
+      "name": "종장: 사실 기재",
+      "description": ""
+    },
+    {
+      "id": "flag_e_delete",
+      "name": "종장: 전부 삭제",
+      "description": ""
+    }
+  ],
+  "keywords": []
+}
