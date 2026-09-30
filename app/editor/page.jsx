@@ -168,7 +168,9 @@ function ConditionEffectForm({choice,story,onChange}){
             <button type="button" onClick={addRandomRule}>+ 랜덤 효과 추가</button>
           </div>
           <div style={{fontSize:11,color:'#777',margin:'5px 0 8px'}}>선택지를 누르는 순간 각 규칙의 확률을 한 번 굴립니다. 여러 규칙을 넣으면 각각 독립적으로 판정됩니다.</div>
-          {(eff.randomEffects||[]).map((rule,index)=><div key={index} style={{border:'1px solid #ddd',borderRadius:9,padding:9,marginTop:8,background:'#fff'}}>
+          {(eff.randomEffects||[]).map((rule,index)=><details className="subSettingFold" key={index}>
+            <summary><span>랜덤 효과 {index+1}</span><small>확률 {rule.chance??50}%</small></summary>
+            <div className="subSettingBody">
             <div style={{display:'flex',alignItems:'center',gap:8}}>
               <b style={{fontSize:12}}>랜덤 효과 {index+1}</b>
               <label style={{fontSize:12}}>확률 <input type="number" min="0" max="100" value={rule.chance??50} onChange={e=>patchRandomRule(index,{chance:Math.max(0,Math.min(100,Number(e.target.value)))})} style={{width:65}}/> %</label>
@@ -182,7 +184,8 @@ function ConditionEffectForm({choice,story,onChange}){
             {stats.map(stat=><label key={stat.id} style={{display:'inline-flex',alignItems:'center',gap:4,fontSize:11,margin:'4px 10px 0 0'}}><span>{stat.name||stat.id}</span><input type="number" value={rule.stats?.[stat.id]??0} onChange={e=>setRandomStat(index,stat.id,e.target.value)} style={{width:65}} placeholder="±0"/></label>)}
             <div style={{fontSize:11,fontWeight:700,marginTop:7}}>스탯 해금</div>
             {stats.filter(stat=>!stat.isBase).map(stat=><label key={stat.id} style={{fontSize:11,display:'inline-block',marginRight:10,marginTop:4}}><input type="checkbox" checked={(rule.unlockStats||[]).includes(stat.id)} onChange={e=>toggleRandomArray(index,'unlockStats',stat.id,e.target.checked)}/> {stat.name||stat.id}</label>)}
-          </div>)}
+            </div>
+          </details>)}
           {!(eff.randomEffects||[]).length&&<div style={{fontSize:11,color:'#999'}}>등록된 랜덤 효과가 없습니다.</div>}
         </div>
 
@@ -195,7 +198,9 @@ function ConditionEffectForm({choice,story,onChange}){
           {(eff.randomTables||[]).map((table,tIndex)=>{
             const total=(table.outcomes||[]).reduce((sum,o)=>sum+Number(o.chance||0),0);
             const over=total>100;
-            return <div key={table.id||tIndex} style={{border:'1px solid #ddd',borderRadius:9,padding:9,marginTop:8,background:'#fff'}}>
+            return <details className="subSettingFold" key={table.id||tIndex}>
+              <summary><span>{table.name||`확률 테이블 ${tIndex+1}`}</span><small>합계 {total}%</small></summary>
+              <div className="subSettingBody">
               <div style={{display:'flex',alignItems:'center',gap:8}}>
                 <input value={table.name||''} onChange={e=>patchRandomTable(tIndex,{name:e.target.value})} style={{flex:1}} placeholder="테이블 이름"/>
                 <b style={{fontSize:11,color:over?'#c00':total===100?'#16803c':'#777'}}>합계 {total}%</b>
@@ -204,7 +209,9 @@ function ConditionEffectForm({choice,story,onChange}){
               {over&&<div style={{fontSize:11,color:'#c00',marginTop:5}}>⚠ 확률 합계가 100%를 초과했습니다. 100% 이하로 맞춰주세요.</div>}
               {(table.outcomes||[]).map((outcome,oIndex)=>{
                 const oe=outcome.effects||{};
-                return <div key={outcome.id||oIndex} style={{border:'1px solid #eee',borderRadius:8,padding:8,marginTop:8,background:'#fafafa'}}>
+                return <details className="subSettingFold" key={outcome.id||oIndex} style={{marginTop:8}}>
+                  <summary><span>{outcome.name||`결과 ${oIndex+1}`}</span><small>{outcome.chance??0}%</small></summary>
+                  <div className="subSettingBody">
                   <div style={{display:'flex',alignItems:'center',gap:6}}>
                     <input value={outcome.name||''} onChange={e=>patchTableOutcome(tIndex,oIndex,{name:e.target.value})} style={{flex:1}} placeholder="결과 이름"/>
                     <label style={{fontSize:11}}>확률 <input type="number" min="0" max="100" step="0.1" value={outcome.chance??0} onChange={e=>patchTableOutcome(tIndex,oIndex,{chance:Math.max(0,Math.min(100,Number(e.target.value)))})} style={{width:65}}/> %</label>
@@ -220,11 +227,13 @@ function ConditionEffectForm({choice,story,onChange}){
                   <div style={{fontSize:11,fontWeight:700,marginTop:7}}>스탯 해금</div>
                   {stats.filter(stat=>!stat.isBase).map(stat=><label key={stat.id} style={{fontSize:11,display:'inline-block',marginRight:10,marginTop:4}}><input type="checkbox" checked={(oe.unlockStats||[]).includes(stat.id)} onChange={e=>toggleTableOutcomeArray(tIndex,oIndex,'unlockStats',stat.id,e.target.checked)}/> {stat.name||stat.id}</label>)}
                   <div style={{fontSize:11,fontWeight:700,marginTop:7}}>아이템</div>
-                  {(story.items||[]).map(it=><span key={it.id} style={{display:'inline-flex',alignItems:'center',gap:4,fontSize:11,margin:'4px 10px 0 0'}}><button type="button" onClick={()=>toggleTableOutcomeArray(tIndex,oIndex,'addItems',it.id,true)} disabled={(oe.addItems||[]).includes(it.id)}>+{it.name}</button><button type="button" onClick={()=>toggleTableOutcomeArray(tIndex,oIndex,'removeItems',it.id,true)} disabled={(oe.removeItems||[]).includes(it.id)}>−</button></span>)}
-                </div>
+                  {(story.items||[]).map(it=><span key={it.id} style={{display:'inline-flex',alignItems:'center',gap:4,fontSize:11,margin:'4px 10px 0 0'}}><button type="button" onClick={()=>toggleTableOutcomeArray(tIndex,oIndex,'addItems',it.id,true)} disabled={(oe.addItems||[]).includes(it.id)}>+{it.name}</button><button type="button" onClick={()=>toggleTableOutcomeArray(tIndex,oIndex,'removeItems',it.id,true)}>−</button></span>)}
+                  </div>
+                </details>
               })}
               <button type="button" onClick={()=>addTableOutcome(tIndex)} style={{marginTop:8}}>+ 결과 추가</button>
-            </div>;
+              </div>
+            </details>;
           })}
           {!(eff.randomTables||[]).length&&<div style={{fontSize:11,color:'#999'}}>등록된 확률 테이블이 없습니다.</div>}
         </div>
@@ -490,39 +499,42 @@ function NodeEditor({story,setStory,npcs,factions}){
           <details className="settingFold" style={{marginTop:14}}>
             <summary><span className="settingFoldTitle">📝 조건부 지문</span><span className="settingFoldMeta" style={{display:"inline-flex",gap:6,alignItems:"center"}}><button type="button" onClick={e=>{e.preventDefault();e.stopPropagation();addConditionalText()}}>+ 조건부 지문 추가</button></span></summary><div className="settingFoldBody">
             <div style={{fontSize:11,color:'#777',margin:'5px 0 8px'}}>노드는 하나만 만들고, 플레이어 상태에 따라 다른 지문을 보여줍니다. 조건이 여러 개 맞으면 우선순위가 높은 지문이 표시됩니다.</div>
-            {(node.conditionalTexts||[]).map((row,index)=><div key={row.id||index} style={{border:'1px solid #ddd',borderRadius:9,padding:9,marginTop:8,background:'#fff'}}>
+            {(node.conditionalTexts||[]).map((row,index)=><details className="subSettingFold" key={row.id||index}>
+              <summary><span>{row.text||`조건부 지문 ${index+1}`}</span><small>우선순위 {row.priority??0}</small></summary><div className="subSettingBody">
               <div style={{display:'grid',gridTemplateColumns:'1fr 90px auto',gap:7,alignItems:'center'}}><input value={row.text||''} onChange={e=>patchNodeConditionalText(index,{text:e.target.value})} placeholder="조건이 맞을 때 보여줄 지문"/><input type="number" value={row.priority??0} onChange={e=>patchNodeConditionalText(index,{priority:Number(e.target.value)})} placeholder="우선순위"/><button type="button" onClick={()=>patchNode({conditionalTexts:(node.conditionalTexts||[]).filter((_,i)=>i!==index)})}>삭제</button></div>
               <NodeConditionChecks type="text" index={index} row={row}/>
               <div style={{fontSize:11,color:'#777',marginTop:7}}>조건 요약: {conditionSummary(row.conditions,{items:story.items,npcs:story.npcs,flags:story.flags,keywords:story.keywords,stats:story.stats,choices:story.nodes.flatMap(n=>(n.choices||[]).map(c=>({id:c.id,label:c.text||c.id})))}).join(' · ')||'조건 없음'}</div>
-            </div>)}
+              </div></details>)}
             {!(node.conditionalTexts||[]).length&&<div style={{fontSize:11,color:'#999'}}>등록된 조건부 지문이 없습니다. 기본 본문이 표시됩니다.</div>}
             </div></details>
 
           <details className="settingFold" style={{marginTop:14}}>
             <summary><span className="settingFoldTitle">✂ 조건부 부분 지문</span><span className="settingFoldMeta" style={{display:"inline-flex",gap:6,alignItems:"center"}}><button type="button" onClick={e=>{e.preventDefault();e.stopPropagation();addConditionalFragment()}}>+ 부분 지문 추가</button></span></summary><div className="settingFoldBody">
             <div style={{fontSize:11,color:'#777',margin:'5px 0 8px'}}>본문 전체를 복제하지 않고, 조건이 맞을 때 문장 일부만 앞/뒤에 붙이거나 특정 문구를 교체·삭제합니다.</div>
-            {(node.conditionalFragments||[]).map((row,index)=><div key={row.id||index} style={{border:'1px solid #ddd',borderRadius:9,padding:9,marginTop:8,background:'#fff'}}>
+            {(node.conditionalFragments||[]).map((row,index)=><details className="subSettingFold" key={row.id||index}>
+              <summary><span>{row.text||`부분 지문 ${index+1}`}</span><small>{row.mode||'before'} · 우선순위 {row.priority??0}</small></summary><div className="subSettingBody">
               <div style={{display:'grid',gridTemplateColumns:'100px 1fr 90px auto',gap:7,alignItems:'center'}}><select value={row.mode||'before'} onChange={e=>patchNodeConditionalFragment(index,{mode:e.target.value})}><option value="prepend">맨 앞에 추가</option><option value="append">맨 뒤에 추가</option><option value="before">특정 문구 앞</option><option value="after">특정 문구 뒤</option><option value="replace">특정 문구 교체</option><option value="remove">특정 문구 삭제</option></select><input value={row.anchor||''} onChange={e=>patchNodeConditionalFragment(index,{anchor:e.target.value})} placeholder="기준 문구 (앞/뒤/교체/삭제에 필요)"/><input type="number" value={row.priority??0} onChange={e=>patchNodeConditionalFragment(index,{priority:Number(e.target.value)})} placeholder="우선순위"/><button type="button" onClick={()=>patchNode({conditionalFragments:(node.conditionalFragments||[]).filter((_,i)=>i!==index)})}>삭제</button></div>
               {row.mode!=='remove'&&<textarea rows={2} style={{...input,marginTop:7}} value={row.text||''} onChange={e=>patchNodeConditionalFragment(index,{text:e.target.value})} placeholder="추가/교체할 문장"/>}
               <NodeConditionChecks type="fragment" index={index} row={row}/>
               <div style={{fontSize:11,color:'#777',marginTop:7}}>조건 요약: {conditionSummary(row.conditions,{items:story.items,npcs:story.npcs,stats:story.stats,flags:story.flags,keywords:story.keywords,choices:story.nodes.flatMap(n=>(n.choices||[]).map(c=>({id:c.id,label:c.text||c.id})))}).join(' · ')||'조건 없음'}</div>
-            </div>)}
+              </div></details>)}
             {!(node.conditionalFragments||[]).length&&<div style={{fontSize:11,color:'#999'}}>등록된 부분 지문이 없습니다.</div>}
             </div></details>
 
           <details className="settingFold" style={{marginTop:14}}>
             <summary><span className="settingFoldTitle">↪ 조건부 노드 이동</span><span className="settingFoldMeta" style={{display:"inline-flex",gap:6,alignItems:"center"}}><button type="button" onClick={e=>{e.preventDefault();e.stopPropagation();addConditionalRoute()}}>+ 조건부 이동 추가</button></span></summary><div className="settingFoldBody">
             <div style={{fontSize:11,color:'#777',margin:'5px 0 8px'}}>이 노드에 들어왔을 때 조건을 만족하면 지정한 노드로 자동 이동합니다. 우선순위가 높은 규칙부터 검사하며, 여러 규칙을 연쇄적으로 적용할 수도 있습니다.</div>
-            {(node.conditionalRoutes||[]).map((row,index)=><div key={row.id||index} style={{border:'1px solid #ddd',borderRadius:9,padding:9,marginTop:8,background:'#fff'}}>
+            {(node.conditionalRoutes||[]).map((row,index)=><details className="subSettingFold" key={row.id||index}>
+              <summary><span>조건부 이동 {index+1} → {row.nextNodeId||'미지정'}</span><small>우선순위 {row.priority??0}</small></summary><div className="subSettingBody">
               <div style={{display:'grid',gridTemplateColumns:'90px 1fr auto',gap:7,alignItems:'center'}}><input type="number" value={row.priority??0} onChange={e=>patchNodeConditionalRoute(index,{priority:Number(e.target.value)})} placeholder="우선순위"/><select value={row.nextNodeId||''} onChange={e=>patchNodeConditionalRoute(index,{nextNodeId:e.target.value})}><option value="">이동할 노드 선택</option>{story.nodes.filter(n=>n.id!==node.id).map(n=><option key={n.id} value={n.id}>{n.id}</option>)}</select><button type="button" onClick={()=>patchNode({conditionalRoutes:(node.conditionalRoutes||[]).filter((_,i)=>i!==index)})}>삭제</button></div>
               <NodeConditionChecks type="route" index={index} row={row}/>
               <div style={{fontSize:11,color:'#777',marginTop:7}}>조건 요약: {conditionSummary(row.conditions,{items:story.items,npcs:story.npcs,flags:story.flags,keywords:story.keywords,stats:story.stats,choices:story.nodes.flatMap(n=>(n.choices||[]).map(c=>({id:c.id,label:c.text||c.id})))}).join(' · ')||'조건 없음'} → {row.nextNodeId||'미지정'}</div>
-            </div>)}
+              </div></details>)}
             {!(node.conditionalRoutes||[]).length&&<div style={{fontSize:11,color:'#999'}}>등록된 조건부 이동이 없습니다. 기존처럼 선택지의 다음 노드로 진행합니다.</div>}
             </div></details>
 
           <label style={{...label,marginTop:12}}>노드 BGM</label><input style={input} value={node.bgm?.youtubeUrl||""} onChange={e=>patchNode({bgm:{youtubeUrl:e.target.value}})}/></div>
-        <div style={{marginTop:14}}>{node.choices.map(c=>{const passes=sim?checkCondition(c.conditions,sim):true;return <div key={c.id} style={{...card,marginBottom:10,borderColor:passes?"#cfdccf":"#ddd"}}><div style={{display:"grid",gridTemplateColumns:"minmax(0,1fr) 180px auto",gap:8}}><input value={c.text} onChange={e=>patchChoice(c.id,{text:e.target.value})}/><select value={c.nextNodeId||""} onChange={e=>patchChoice(c.id,{nextNodeId:e.target.value})}><option value="">다음 노드</option>{story.nodes.map(n=><option key={n.id} value={n.id}>{n.id}</option>)}</select><button onClick={()=>patchNode({choices:node.choices.filter(x=>x.id!==c.id)})}>삭제</button></div><div style={{fontSize:12,color:"#777",marginTop:8}}>조건 요약: {conditionSummary(c.conditions,{items:story.items,npcs:story.npcs,stats:story.stats,flags:story.flags,keywords:story.keywords,choices:story.nodes.flatMap(n=>(n.choices||[]).map(x=>({id:x.id,label:x.text||x.id})))}).join(" · ")||"없음"}</div><ConditionEffectForm choice={c} story={story} onChange={p=>patchChoice(c.id,p)}/><div style={{fontSize:12,marginTop:8,color:passes?"#217a39":"#999"}}>{passes?"현재 상태에서 선택 가능":"현재 상태에서는 조건 불충족"}</div></div>})}</div><button onClick={addChoice}>+ 선택지 추가</button>
+        <div style={{marginTop:14}}>{node.choices.map(c=>{const passes=sim?checkCondition(c.conditions,sim):true;return <details className="settingFold" key={c.id} style={{borderColor:passes?"#cfdccf":"#ddd"}}><summary><span className="settingFoldTitle">{c.text||"이름 없는 선택지"}</span><span className="settingFoldMeta">{passes?"선택 가능":"조건 불충족"}</span></summary><div className="settingFoldBody"><div style={{display:"grid",gridTemplateColumns:"minmax(0,1fr) 180px auto",gap:8}}><input value={c.text} onChange={e=>patchChoice(c.id,{text:e.target.value})}/><select value={c.nextNodeId||""} onChange={e=>patchChoice(c.id,{nextNodeId:e.target.value})}><option value="">다음 노드</option>{story.nodes.map(n=><option key={n.id} value={n.id}>{n.id}</option>)}</select><button onClick={()=>patchNode({choices:node.choices.filter(x=>x.id!==c.id)})}>삭제</button></div><div style={{fontSize:12,color:"#777",marginTop:8}}>조건 요약: {conditionSummary(c.conditions,{items:story.items,npcs:story.npcs,stats:story.stats,flags:story.flags,keywords:story.keywords,choices:story.nodes.flatMap(n=>(n.choices||[]).map(x=>({id:x.id,label:x.text||x.id})))}).join(" · ")||"없음"}</div><ConditionEffectForm choice={c} story={story} onChange={p=>patchChoice(c.id,p)}/><div style={{fontSize:12,marginTop:8,color:passes?"#217a39":"#999"}}>{passes?"현재 상태에서 선택 가능":"현재 상태에서는 조건 불충족"}</div></div></details>})}</div><button onClick={addChoice}>+ 선택지 추가</button>
       </section>
       <aside><div style={card}><label style={label}>시뮬레이션 진영</label><select style={input} value={simFaction} onChange={e=>setSimFaction(e.target.value)}>{factions.map(f=><option key={f.id} value={f.id}>{f.name}</option>)}</select>{computed?<><div className="statePanelNote">현재 노드까지 연결된 경로를 기준으로 계산한 플레이어 상태입니다. 본문/조건/효과를 수정하면 즉시 갱신됩니다.</div><div className="statGrid">{(story.stats||[]).map(stat=><div key={stat.id}><small>{stat.name||stat.id}</small><strong>{computed.stats?.[stat.id]??0}</strong></div>)}</div><label style={{...label,marginTop:12}}>획득 플래그</label><div className="chipList">{(computed.flags||[]).map(id=><span key={id}>⚑ {idName(story.flags,id)}</span>)}{!computed.flags?.length&&<em>없음</em>}</div><label style={{...label,marginTop:12}}>획득 키워드</label><div className="chipList">{(computed.keywords||[]).map(id=><span key={id}>🔎 {idName(story.keywords,id)}</span>)}{!computed.keywords?.length&&<em>없음</em>}</div><label style={{...label,marginTop:12}}>보유 아이템</label><div className="chipList">{computed.inventory.map(id=><span key={id}>{idName(story.items,id)}</span>)}{!computed.inventory.length&&<em>없음</em>}</div><label style={{...label,marginTop:12}}>NPC 호감도</label><div style={{fontSize:12}}>{Object.entries(computed.affection).map(([id,v])=><div key={id} style={{display:"flex",justifyContent:"space-between",padding:"4px 0"}}><span>{idName(story.npcs,id)}</span><b>{v}</b></div>)}</div></>:<p style={{fontSize:12,color:"#888"}}>이 진영의 시작점에서 현재 노드까지 연결된 경로가 없습니다.</p>}</div>
         <div style={{...card,marginTop:12}}><strong style={{fontSize:13}}>현재 플레이어 상태</strong>{livePlayer?<><div className="statePanelNote">같은 브라우저에서 실제로 플레이 중인 이 스토리의 저장 상태를 0.5초마다 확인합니다.</div><label style={{...label,marginTop:10}}>현재 노드</label><div style={{fontSize:12,marginBottom:8}}>{livePlayer.currentNodeId}</div><label style={label}>현재 플래그</label><div className="chipList">{(livePlayer.flags||[]).map(id=><span key={id}>⚑ {idName(story.flags,id)}</span>)}{!livePlayer.flags?.length&&<em>없음</em>}</div><label style={{...label,marginTop:10}}>현재 키워드</label><div className="chipList">{(livePlayer.keywords||[]).map(id=><span key={id}>🔎 {idName(story.keywords,id)}</span>)}{!livePlayer.keywords?.length&&<em>없음</em>}</div></>:<p style={{fontSize:12,color:"#888",lineHeight:1.6,marginBottom:0}}>현재 이 스토리의 플레이 저장 데이터가 없습니다. 플레이 화면에서 실제로 선택지를 진행하면 여기에 표시됩니다.</p>}</div>
