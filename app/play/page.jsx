@@ -26,21 +26,26 @@ function renderRichText(text) {
 function effectMessages(before, after, story) {
   const messages = [];
   const nameStat = id => story.stats?.find(x => x.id === id)?.name || id;
+  const isAffectionStat = id => {
+    const name = nameStat(id);
+    return id === "stat_favor" || String(id).toLowerCase().includes("favor") || String(name).includes("호감");
+  };
   const nameItem = id => story.items?.find(x => x.id === id)?.name || id;
   const nameFlag = id => story.flags?.find(x => x.id === id)?.name || id;
+  const isHiddenFlag = id => !!story.flags?.find(x => x.id === id)?.hidden;
   const nameKeyword = id => story.keywords?.find(x => x.id === id)?.name || id;
 
   for (const [id, value] of Object.entries(after.stats || {})) {
     const delta = Number(value || 0) - Number(before.stats?.[id] || 0);
-    if (!delta) continue;
+    if (!delta || isAffectionStat(id)) continue;
     messages.push(`[${nameStat(id)} ${delta > 0 ? "상승" : "감소"}!]`);
   }
   for (const id of after.inventory || []) if (!(before.inventory || []).includes(id)) messages.push(`[아이템: '${nameItem(id)}' 획득!]`);
   for (const id of before.inventory || []) if (!(after.inventory || []).includes(id)) messages.push(`[아이템: '${nameItem(id)}' 제거!]`);
   for (const id of after.keywords || []) if (!(before.keywords || []).includes(id)) messages.push(`[키워드: '${nameKeyword(id)}' 획득!]`);
   for (const id of before.keywords || []) if (!(after.keywords || []).includes(id)) messages.push(`[키워드: '${nameKeyword(id)}' 삭제!]`);
-  for (const id of after.flags || []) if (!(before.flags || []).includes(id)) messages.push(`[기록: '${nameFlag(id)}' 확인!]`);
-  for (const id of before.flags || []) if (!(after.flags || []).includes(id)) messages.push(`[기록: '${nameFlag(id)}' 해제!]`);
+  for (const id of after.flags || []) if (!(before.flags || []).includes(id) && !isHiddenFlag(id)) messages.push(`[기록: '${nameFlag(id)}' 확인!]`);
+  for (const id of before.flags || []) if (!(after.flags || []).includes(id) && !isHiddenFlag(id)) messages.push(`[기록: '${nameFlag(id)}' 해제!]`);
   const unlockedBefore = before.unlockedStats || [];
   for (const id of after.unlockedStats || []) if (!unlockedBefore.includes(id)) messages.push(`[새 스탯: '${nameStat(id)}' 해금!]`);
   return messages;
@@ -78,7 +83,7 @@ export default function PlayPage() {
 
   useEffect(() => {
     if (!notice.length) return;
-    const timer = setTimeout(() => setNotice([]), 3000);
+    const timer = setTimeout(() => setNotice([]), 5000);
     return () => clearTimeout(timer);
   }, [notice]);
 
@@ -128,7 +133,7 @@ export default function PlayPage() {
 
       <div className="notebookBar">
         <div style={{display:'flex',gap:8}}>
-          <button className="notebookButton" onClick={() => {setNotebookTab("keywords");setNotebookOpen(true)}}>📖 조사 노트 <b>{discovered.length}</b></button><button className="notebookButton" onClick={() => {setNotebookTab("items");setNotebookOpen(true)}}>🎒 소지품 <b>{playerState.inventory.length}</b></button><button className="notebookButton" onClick={() => {setNotebookTab("flags");setNotebookOpen(true)}}>⚑ 활성 플래그 <b>{(playerState.flags||[]).length}</b></button>
+          <button className="notebookButton" onClick={() => {setNotebookTab("keywords");setNotebookOpen(true)}}>📖 조사 노트 <b>{discovered.length}</b></button><button className="notebookButton" onClick={() => {setNotebookTab("items");setNotebookOpen(true)}}>🎒 소지품 <b>{playerState.inventory.length}</b></button><button className="notebookButton" onClick={() => {setNotebookTab("flags");setNotebookOpen(true)}}>⚑ 활성 플래그 <b>{(playerState.flags||[]).filter(id => !story.flags?.find(f => f.id === id)?.hidden).length}</b></button>
 
         </div>
       </div>
@@ -147,10 +152,10 @@ export default function PlayPage() {
     {notebookOpen && <div className="notebookOverlay" onClick={() => setNotebookOpen(false)}>
       <div className="notebookPanel" onClick={e => e.stopPropagation()}>
         <div className="notebookHeader"><div><strong>{notebookTab === "keywords" ? "조사 노트" : notebookTab === "items" ? "소지품" : "활성 플래그"}</strong></div><button onClick={() => setNotebookOpen(false)}>닫기</button></div>
-        <div className="notebookTabs"><button className={notebookTab === "keywords" ? "active" : ""} onClick={() => setNotebookTab("keywords")}>🔎 조사 노트 {discovered.length}</button><button className={notebookTab === "items" ? "active" : ""} onClick={() => setNotebookTab("items")}>🎒 소지품 {playerState.inventory.length}</button><button className={notebookTab === "flags" ? "active" : ""} onClick={() => setNotebookTab("flags")}>⚑ 플래그 {(playerState.flags||[]).length}</button></div>
+        <div className="notebookTabs"><button className={notebookTab === "keywords" ? "active" : ""} onClick={() => setNotebookTab("keywords")}>🔎 조사 노트 {discovered.length}</button><button className={notebookTab === "items" ? "active" : ""} onClick={() => setNotebookTab("items")}>🎒 소지품 {playerState.inventory.length}</button><button className={notebookTab === "flags" ? "active" : ""} onClick={() => setNotebookTab("flags")}>⚑ 플래그 {(playerState.flags||[]).filter(id => !story.flags?.find(f => f.id === id)?.hidden).length}</button></div>
         {notebookTab === "keywords" && <>{!discovered.length && <div className="notebookEmpty">아직 기록된 키워드가 없습니다.</div>}<div className="notebookList">{discovered.map(k => <article className="notebookEntry" key={k.id}><h3>{k.name}</h3>{k.description?.trim() ? <p>{k.description}</p> : null}</article>)}</div></>}
         {notebookTab === "items" && <div className="notebookList">{!playerState.inventory.length && <div className="notebookEmpty">소지한 아이템이 없습니다.</div>}{playerState.inventory.map(id => {const item=story.items.find(i=>i.id===id); return <article className="notebookEntry" key={id}><h3>{item?.name || id}</h3>{item?.description?.trim() ? <p>{item.description}</p> : null}</article>})}</div>}
-        {notebookTab === "flags" && <div className="notebookList">{!(playerState.flags||[]).length && <div className="notebookEmpty">활성화된 플래그가 없습니다.</div>}{(playerState.flags||[]).map(id => {const flag=story.flags?.find(f=>f.id===id); return <article className="notebookEntry" key={id}><h3>⚑ {flag?.name || id}</h3>{flag?.description?.trim() ? <p>{flag.description}</p> : null}</article>})}</div>}
+        {notebookTab === "flags" && <div className="notebookList">{!(playerState.flags||[]).some(id => !story.flags?.find(f => f.id === id)?.hidden) && <div className="notebookEmpty">활성화된 플래그가 없습니다.</div>}{(playerState.flags||[]).filter(id => !story.flags?.find(f => f.id === id)?.hidden).map(id => {const flag=story.flags?.find(f=>f.id===id); return <article className="notebookEntry" key={id}><h3>⚑ {flag?.name || id}</h3>{flag?.description?.trim() ? <p>{flag.description}</p> : null}</article>})}</div>}
       </div>
     </div>}
   </main>;
