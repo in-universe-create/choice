@@ -41,7 +41,8 @@
         "money": 100
       },
       "startingItems": [
-        "item_keycard_b"
+        "item_keycard_b",
+        "item_radio"
       ],
       "startingAffection": {},
       "npcIds": [
