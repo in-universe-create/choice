@@ -747,7 +747,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n배양실 안은 유난히 차갑습니다. 온도계는 정상인데도 그렇습니다.",
+          "text": "\n\n배양실 안은 유난히 차갑습니다. 온도계는 정상인데도 그렇습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_a_temp"
@@ -759,7 +759,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n벽시계의 초침이 한 번 멈췄다가 다시 움직입니다. 배양기 로그의 빈 한 줄이 떠오릅니다.",
+          "text": "\n\n벽시계의 초침이 한 번 멈췄다가 다시 움직입니다. 배양기 로그의 빈 한 줄이 떠오릅니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_a_clock"
@@ -771,7 +771,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n당신이 조금 전 확인해 둔 기록 한 줄이 머릿속에 남아 있습니다. 지금 보니 그 빈 시간이 이상하게 신경 쓰입니다.",
+          "text": "\n\n당신이 조금 전 확인해 둔 기록 한 줄이 머릿속에 남아 있습니다. 지금 보니 그 빈 시간이 이상하게 신경 쓰입니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_a_second"
@@ -900,7 +900,7 @@
         {
           "id": "radio_dead_notice",
           "position": "append",
-          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "text": "\n\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
           "conditions": {
             "maxStats": {
               "money": 0
@@ -1258,7 +1258,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -1271,7 +1271,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -1344,7 +1344,7 @@
       "conditionalFragments": [
         {
           "position": "prepend",
-          "text": "캐비닛을 뒤진 뒤 숨이 더 가빠집니다. 손에 잡힌 휴대 산소 캐니스터는 아직 밀봉되어 있습니다.\\n\\n",
+          "text": "캐비닛을 뒤진 뒤 숨이 더 가빠집니다. 손에 잡힌 휴대 산소 캐니스터는 아직 밀봉되어 있습니다.\n\n",
           "conditions": {
             "requiredFlags": [
               "flag_a_canister"
@@ -1353,7 +1353,7 @@
         },
         {
           "position": "prepend",
-          "text": "환기구 쪽으로 몸을 옮긴 뒤, 배관 너머의 목소리가 조금 더 선명하게 들립니다. 환기음이 바뀌었습니다.\\n\\n",
+          "text": "환기구 쪽으로 몸을 옮긴 뒤, 배관 너머의 목소리가 조금 더 선명하게 들립니다. 환기음이 바뀌었습니다.\n\n",
           "conditions": {
             "requiredFlags": [
               "flag_a_vent"
@@ -1362,7 +1362,7 @@
         },
         {
           "position": "prepend",
-          "text": "배관을 두드려 답한 뒤 한동안 아무 대답도 없습니다. 그리고 윤서의 목소리가 들립니다.\\n\\n",
+          "text": "배관을 두드려 답한 뒤 한동안 아무 대답도 없습니다. 그리고 윤서의 목소리가 들립니다.\n\n",
           "conditions": {
             "requiredFlags": [
               "flag_a_contact_b"
@@ -1374,7 +1374,7 @@
         },
         {
           "position": "prepend",
-          "text": "배관을 두드려 답한 적이 없습니다. 그런데 당신이 멈춰 선 직후, 안쪽에서 같은 박자가 한 번 더 울립니다. 톡, 톡톡.\\n\\n",
+          "text": "배관을 두드려 답한 적이 없습니다. 그런데 당신이 멈춰 선 직후, 안쪽에서 같은 박자가 한 번 더 울립니다. 톡, 톡톡.\n\n",
           "conditions": {
             "requiredFlags": [
               "flag_a_second_contact"
@@ -1383,7 +1383,7 @@
         },
         {
           "position": "append",
-          "text": "\\n\\n무전기를 쥐고 있다면 윤서의 마지막 문장이 끝나자 채널 표시등이 한 번 깜빡입니다.",
+          "text": "\n\n무전기를 쥐고 있다면 윤서의 마지막 문장이 끝나자 채널 표시등이 한 번 깜빡입니다.",
           "conditions": {
             "requiredItems": [
               "item_radio"
@@ -1392,7 +1392,7 @@
         },
         {
           "position": "append",
-          "text": "\\n\\n무전기를 찾으려 손을 더듬지만, 손목에 걸린 장치가 없습니다. 배관 너머의 목소리만 남습니다.",
+          "text": "\n\n무전기를 찾으려 손을 더듬지만, 손목에 걸린 장치가 없습니다. 배관 너머의 목소리만 남습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_a_radio_lost"
@@ -1402,7 +1402,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -1415,7 +1415,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -1601,7 +1601,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -1614,7 +1614,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -1627,7 +1627,7 @@
         {
           "id": "radio_missing_notice",
           "position": "append",
-          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "text": "\n\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
           "conditions": {
             "excludedItems": [
               "item_radio"
@@ -1722,7 +1722,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -1735,7 +1735,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -1748,7 +1748,7 @@
         {
           "id": "radio_dead_notice",
           "position": "append",
-          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "text": "\n\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
           "conditions": {
             "maxStats": {
               "money": 0
@@ -1758,7 +1758,7 @@
         {
           "id": "radio_missing_notice",
           "position": "append",
-          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "text": "\n\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
           "conditions": {
             "excludedItems": [
               "item_radio"
@@ -1882,7 +1882,7 @@
         },
         {
           "position": "append",
-          "text": "\\n\\n손목에 걸어 두었던 무전기의 무게가 느껴지지 않습니다. 끈이 끊어진 모양입니다. 바닥을 내려다보지만, 어둠 속에서는 아무것도 보이지 않습니다.",
+          "text": "\n\n손목에 걸어 두었던 무전기의 무게가 느껴지지 않습니다. 끈이 끊어진 모양입니다. 바닥을 내려다보지만, 어둠 속에서는 아무것도 보이지 않습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_a_radio_lost"
@@ -1892,7 +1892,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -1905,7 +1905,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -1918,7 +1918,7 @@
         {
           "id": "radio_dead_notice",
           "position": "append",
-          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "text": "\n\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
           "conditions": {
             "maxStats": {
               "money": 0
@@ -1928,7 +1928,7 @@
         {
           "id": "radio_missing_notice",
           "position": "append",
-          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "text": "\n\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
           "conditions": {
             "excludedItems": [
               "item_radio"
@@ -2080,7 +2080,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -2093,7 +2093,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -2214,7 +2214,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -2227,7 +2227,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -2325,7 +2325,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -2338,7 +2338,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -2493,7 +2493,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -2506,7 +2506,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -2724,7 +2724,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n스캐너 화면이 다시 한 번 깜빡입니다. 이번에는 숫자를 세지 않았는데도 12가 찍혔다가 11로 돌아옵니다.",
+          "text": "\n\n스캐너 화면이 다시 한 번 깜빡입니다. 이번에는 숫자를 세지 않았는데도 12가 찍혔다가 11로 돌아옵니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_scan"
@@ -2736,7 +2736,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n카트 위 밀폐 상자 중 하나에서 미세한 온기가 느껴집니다. 폐기물실의 온도는 평소와 같습니다.",
+          "text": "\n\n카트 위 밀폐 상자 중 하나에서 미세한 온기가 느껴집니다. 폐기물실의 온도는 평소와 같습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_box"
@@ -2748,7 +2748,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n복도 끝 자동문이 닫힌 뒤에도 센서등 하나가 한동안 켜져 있습니다.",
+          "text": "\n\n복도 끝 자동문이 닫힌 뒤에도 센서등 하나가 한동안 켜져 있습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_light"
@@ -2760,7 +2760,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n조금 전 저장해 둔 화면 캡처가 떠오릅니다. 다시 생각해 보면, 단순한 스캐너 오류치고는 이상합니다.",
+          "text": "\n\n조금 전 저장해 둔 화면 캡처가 떠오릅니다. 다시 생각해 보면, 단순한 스캐너 오류치고는 이상합니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_b_second"
@@ -3242,7 +3242,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -3255,7 +3255,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -3333,7 +3333,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -3346,7 +3346,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -3448,7 +3448,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -3461,7 +3461,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -3613,7 +3613,7 @@
         },
         {
           "position": "append",
-          "text": "\\n\\n허리 쪽에서 무전기가 부딪히는 소리가 한 번 납니다. 그 뒤로 아무 소리도 나지 않습니다.",
+          "text": "\n\n허리 쪽에서 무전기가 부딪히는 소리가 한 번 납니다. 그 뒤로 아무 소리도 나지 않습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_b_radio_lost"
@@ -3623,7 +3623,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -3636,7 +3636,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -3733,7 +3733,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -3746,7 +3746,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -3951,7 +3951,7 @@
         },
         {
           "position": "append",
-          "text": "\\n\\n무전기를 확인하려 손을 가져가지만, 손에 잡히는 것은 끊어진 끈뿐입니다.",
+          "text": "\n\n무전기를 확인하려 손을 가져가지만, 손에 잡히는 것은 끊어진 끈뿐입니다.",
           "conditions": {
             "requiredFlags": [
               "flag_b_radio_lost"
@@ -3961,7 +3961,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -3974,7 +3974,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -4117,7 +4117,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -4130,7 +4130,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -4143,7 +4143,7 @@
         {
           "id": "radio_missing_notice",
           "position": "append",
-          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "text": "\n\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
           "conditions": {
             "excludedItems": [
               "item_radio"
@@ -4250,7 +4250,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -4263,7 +4263,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -4435,7 +4435,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -4448,7 +4448,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -4647,7 +4647,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n서버 시각이 다시 한 번 11초 정도 늦어졌다가 정상으로 돌아옵니다. 통제실 시계는 움직이지 않았습니다.",
+          "text": "\n\n서버 시각이 다시 한 번 11초 정도 늦어졌다가 정상으로 돌아옵니다. 통제실 시계는 움직이지 않았습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_d_clock"
@@ -4659,7 +4659,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n그래프가 갱신되는 순간, 아주 짧게 기준선 아래로 내려갔다가 돌아오는 흔적이 보입니다. 오류일 수도 있습니다.",
+          "text": "\n\n그래프가 갱신되는 순간, 아주 짧게 기준선 아래로 내려갔다가 돌아오는 흔적이 보입니다. 오류일 수도 있습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_d_graph"
@@ -4671,7 +4671,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n스피커에서 아까 들었던 것과 같은 전기 잡음이 한 번 더 납니다. 이번에도 방송은 없습니다.",
+          "text": "\n\n스피커에서 아까 들었던 것과 같은 전기 잡음이 한 번 더 납니다. 이번에도 방송은 없습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_d_audio"
@@ -4683,7 +4683,7 @@
         {
           "mode": "append",
           "anchor": "",
-          "text": "\\n\\n당직 인수인계서의 시간 오차 메모가 신경 쓰입니다. 지워 버릴 정도는 아니지만, 그냥 넘기기에도 찜찜합니다.",
+          "text": "\n\n당직 인수인계서의 시간 오차 메모가 신경 쓰입니다. 지워 버릴 정도는 아니지만, 그냥 넘기기에도 찜찜합니다.",
           "conditions": {
             "requiredFlags": [
               "flag_pre_d_second"
@@ -5096,7 +5096,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -5109,7 +5109,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -5257,7 +5257,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -5270,7 +5270,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -5374,7 +5374,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -5387,7 +5387,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -5543,7 +5543,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -5556,7 +5556,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -5693,7 +5693,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -5706,7 +5706,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -5811,7 +5811,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -5824,7 +5824,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -5893,7 +5893,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -5906,7 +5906,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -6020,7 +6020,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -6033,7 +6033,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -6046,7 +6046,7 @@
         {
           "id": "radio_dead_notice",
           "position": "append",
-          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "text": "\n\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
           "conditions": {
             "maxStats": {
               "money": 0
@@ -6056,7 +6056,7 @@
         {
           "id": "radio_missing_notice",
           "position": "append",
-          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "text": "\n\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
           "conditions": {
             "excludedItems": [
               "item_radio"
@@ -6223,7 +6223,7 @@
       "conditionalFragments": [
         {
           "position": "append",
-          "text": "\\n\\n무전기를 확인하려는 순간, 손에 잡히는 것은 빈 고리뿐입니다. 언제 떨어뜨렸는지 기억나지 않습니다.",
+          "text": "\n\n무전기를 확인하려는 순간, 손에 잡히는 것은 빈 고리뿐입니다. 언제 떨어뜨렸는지 기억나지 않습니다.",
           "conditions": {
             "requiredFlags": [
               "flag_d_radio_lost"
@@ -6233,7 +6233,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -6246,7 +6246,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -6259,7 +6259,7 @@
         {
           "id": "radio_dead_notice",
           "position": "append",
-          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "text": "\n\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
           "conditions": {
             "maxStats": {
               "money": 0
@@ -6269,7 +6269,7 @@
         {
           "id": "radio_missing_notice",
           "position": "append",
-          "text": "\\n\\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
+          "text": "\n\n무전기를 찾으려 손을 가져가지만, 손에 잡히는 것이 없습니다.",
           "conditions": {
             "excludedItems": [
               "item_radio"
@@ -6463,7 +6463,7 @@
         },
         {
           "position": "append",
-          "text": "\\n\\n무전기가 사라졌다는 사실이 뒤늦게 실감납니다.",
+          "text": "\n\n무전기가 사라졌다는 사실이 뒤늦게 실감납니다.",
           "conditions": {
             "requiredFlags": [
               "flag_d_radio_lost"
@@ -6473,7 +6473,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -6486,7 +6486,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -6668,7 +6668,7 @@
         {
           "id": "oxygen_low",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
+          "text": "\n\n산소 표시가 **20 이하**로 떨어져 있습니다. 숨을 깊게 들이쉴수록 가슴이 더 무겁게 조여 옵니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 20
@@ -6681,7 +6681,7 @@
         {
           "id": "oxygen_critical",
           "position": "append",
-          "text": "\\n\\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
+          "text": "\n\n산소 표시가 **10 이하**입니다. 이제 몇 번의 행동만으로도 버티기 어렵습니다.",
           "conditions": {
             "maxStats": {
               "stat_oxygen": 10
@@ -6844,7 +6844,7 @@
         {
           "id": "radio_dead_notice",
           "position": "append",
-          "text": "\\n\\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
+          "text": "\n\n무전기의 배터리 표시가 0을 가리킵니다. 버튼을 눌러도 짧은 잡음만 흘러나옵니다.",
           "conditions": {
             "maxStats": {
               "money": 0
@@ -7553,7 +7553,7 @@
     },
     {
       "id": "node_oxygen_death",
-      "text": "산소 표시가 0으로 떨어집니다.\\n\\n숨을 들이쉬려 하지만 공기가 들어오지 않습니다. 시야 가장자리가 빠르게 어두워지고, 무전기의 잡음도 멀어집니다.\\n\\n더 이상 움직일 수 없습니다.\\n\\n**[END · 산소 고갈]**",
+      "text": "산소 표시가 0으로 떨어집니다.\n\n숨을 들이쉬려 하지만 공기가 들어오지 않습니다. 시야 가장자리가 빠르게 어두워지고, 무전기의 잡음도 멀어집니다.\n\n더 이상 움직일 수 없습니다.\n\n**[END · 산소 고갈]**",
       "bgm": {
         "youtubeUrl": ""
       },
