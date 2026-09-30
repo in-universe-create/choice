@@ -24,7 +24,8 @@ export default function FactionPage() {
 
     const validateEntry = () => {
       const isNewGame = sessionStorage.getItem('new-game') === '1';
-      const fromPlay = sessionStorage.getItem('faction-selection-return') === 'play';
+      const returnMode = sessionStorage.getItem('faction-selection-return');
+      const fromPlay = returnMode === 'play' || returnMode === 'new-player';
       allowed = isNewGame || fromPlay;
 
       if (!allowed) {
@@ -38,12 +39,17 @@ export default function FactionPage() {
     if (!validateEntry()) return;
 
     const isNewGame = sessionStorage.getItem('new-game') === '1';
+    const returnMode = sessionStorage.getItem('faction-selection-return');
+    const isNewPlayerReturn = returnMode === 'new-player';
     const saved = isNewGame ? null : loadPlayerState();
-    const name = sessionStorage.getItem('draft-player-name');
+    const name = sessionStorage.getItem('draft-player-name') || saved?.playerName || '플레이어';
     const id = saved?.storyId || sessionStorage.getItem('play-story-id');
     if (!id || (!name && !saved)) { router.replace('/'); return; }
-    setPlayer(saved || null);
-    setRevisit(!isNewGame && !!saved?.storyId);
+    // 엔딩에서 돌아온 경우에는 기존 상태를 진영 해금/선택에 재사용하지 않고,
+    // 이름과 스토리 ID만 가져온 뒤 진영 선택 시 createInitialState()로 새 플레이어를 만든다.
+    setPlayer(isNewPlayerReturn ? null : (isNewGame ? null : saved || null));
+    setRevisit(!isNewGame && !isNewPlayerReturn && !!saved?.storyId);
+    if (isNewPlayerReturn) sessionStorage.setItem('draft-player-name', name);
     loadStory(id).then(setStory);
 
     // 브라우저 뒤로가기/앞으로가기로 bfcache에서 복원될 때도 진입 권한을 다시 검사한다.
